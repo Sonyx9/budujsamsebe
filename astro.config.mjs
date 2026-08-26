@@ -7,6 +7,7 @@ export default defineConfig({
   site: 'https://budujsamsebe.cz',
   redirects: {
     '/plany/75-hard/': '/plany/75-dni/',
+    '/tracker/dekujeme/': '/dekujeme/',
   },
   integrations: [
     sitemap({

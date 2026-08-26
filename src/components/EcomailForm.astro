@@ -1,0 +1,73 @@
+---
+/**
+ * Formulář lead magnetu — posílá přímo na webhook Ecomailu (vlastní formulář), vzhled je náš.
+ * Skryté pole custom_fields[MAGNET] říká automatizaci, co poslat. Po odeslání Ecomail přesměruje
+ * na URL nastavenou u seznamu (/dekujeme/), děkovačka si z localStorage přečte, o který magnet šlo.
+ */
+import { ECOMAIL_FORM_URL, ECOMAIL_MAGNET_FIELD, type Magnet } from '../lib/ecomail';
+
+interface Props {
+  magnet: Magnet;
+  cta?: string;
+}
+const { magnet, cta = 'POSLAT PDF →' } = Astro.props;
+const action = ECOMAIL_FORM_URL ? `${ECOMAIL_FORM_URL}?source=${magnet}` : '#';
+---
+
+<form
+  class="flex flex-col gap-3 sm:flex-row"
+  action={action}
+  method="post"
+  data-ecomail-form
+  data-magnet={magnet}
+  data-ready={ECOMAIL_FORM_URL ? 'true' : 'false'}
+>
+  <input type="hidden" name={`custom_fields[${ECOMAIL_MAGNET_FIELD}]`} value={magnet} />
+  <input type="hidden" name="updateExisting" value="1" />
+  <input
+    type="text"
+    name="name"
+    autocomplete="given-name"
+    placeholder="Jméno"
+    class="w-full border-[3px] border-ink bg-paper px-4 py-3.5 font-mono text-sm placeholder:text-muted focus:border-accent focus:outline-none sm:w-40"
+  />
+  <input
+    type="email"
+    name="email"
+    required
+    autocomplete="email"
+    placeholder="tvuj@email.cz"
+    class="w-full border-[3px] border-ink bg-paper px-4 py-3.5 font-mono text-sm placeholder:text-muted focus:border-accent focus:outline-none"
+  />
+  <button
+    type="submit"
+    class="whitespace-nowrap bg-ink px-6 py-4 font-mono text-sm font-semibold tracking-[0.04em] text-paper hover:bg-accent"
+    >{cta}</button
+  >
+</form>
+{
+  !ECOMAIL_FORM_URL && import.meta.env.DEV && (
+    <p class="mt-2 font-mono text-[11px] text-accent">
+      DEV: ECOMAIL_FORM_URL v src/lib/ecomail.ts je prázdná — formulář nic neodešle.
+    </p>
+  )
+}
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('form[data-ecomail-form]').forEach((form) => {
+    form.addEventListener('submit', (e) => {
+      if (form.dataset.ready !== 'true') {
+        e.preventDefault();
+        return;
+      }
+      try {
+        localStorage.setItem('bss-magnet', form.dataset.magnet ?? '');
+      } catch {}
+      const btn = form.querySelector<HTMLButtonElement>('button[type=submit]');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'POSÍLÁM…';
+      }
+    });
+  });
+</script>

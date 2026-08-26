@@ -38,6 +38,17 @@ npm run build    # výstup do dist/
 - Meta, canonical, OG a Twitter tagy a JSON-LD (Organization + WebSite) jsou v `src/layouts/Base.astro`.
 - Stránkové schema se vkládá přes pojmenovaný slot: `<script type="application/ld+json" is:inline set:html={...} slot="head" />` (homepage takhle přidává `FAQPage`).
 
+## Logo a ikony
+
+Zdroj: `src/assets/budujsamsebelogo.svg` — pozor, není to pravý vektor, ale rastr 1024×1024
+zabalený v SVG (barvy v jednom `<image>`, průhlednost v druhém jako maska). Hotové odvozeniny
+leží v `public/`: `logo.png` (256, průhledné pozadí — značka v hlavičce), `favicon.ico`
+(48/32/16), `favicon-32.png`, `apple-touch-icon.png` a `icon-192/512.png` (iOS a Android alfu
+zahazují, proto mají podloženo barvou paper) a `site.webmanifest`.
+
+Když se logo změní, je potřeba všechny odvozeniny přegenerovat — složit RGB z prvního `<image>`
+s maskou z druhého, oříznout na obsah, doplnit ~6 % vzduchu a zmenšit.
+
 ## Design tokeny (Tailwind theme, `src/styles/global.css`)
 
 paper `#f4f2ec` · paper-dark `#edeae0` · ink `#141412` · muted `#6b6a64` · line `#c9c5b8` · accent `#d43518` — fonty Space Grotesk (sans) + IBM Plex Mono (mono). Vizuální předloha: https://claude.ai/code/artifact/20617497-2129-44a7-8de8-d74ecfabdc20

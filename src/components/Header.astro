@@ -6,11 +6,78 @@ const nav = [
 ];
 ---
 
-<header class="border-b-[3px] border-ink">
+<header class="relative border-b-[3px] border-ink">
   <div class="mx-auto flex max-w-5xl items-center justify-between px-5 py-5 sm:px-8">
-    <a href="/" class="font-mono text-base font-semibold tracking-[0.08em]">BUDUJ SÁM SEBE</a>
-    <nav class="flex gap-5 font-mono text-[13px] tracking-[0.06em] sm:gap-7">
+    <a
+      href="/"
+      class="flex items-center gap-2.5 font-mono text-base font-semibold tracking-[0.08em]"
+    >
+      <img
+        src="/logo.png"
+        alt=""
+        width="256"
+        height="256"
+        class="size-7 shrink-0"
+        aria-hidden="true"
+      />
+      <span>BUDUJ SÁM SEBE</span>
+    </a>
+
+    <!-- Desktop -->
+    <nav class="hidden font-mono text-[13px] tracking-[0.06em] sm:flex sm:gap-7">
       {nav.map((item) => <a href={item.href} class="hover:text-accent">{item.label}</a>)}
     </nav>
+
+    <!-- Mobil: <details> = nativní přepínání i bez JS, ovladatelné z klávesnice -->
+    <details id="mobilni-menu" class="group sm:hidden">
+      <summary
+        class="flex cursor-pointer list-none items-center justify-center border-[3px] border-ink p-2 hover:text-accent"
+        aria-label="Menu"
+      >
+        <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" class="group-open:hidden">
+          <rect y="2.5" width="22" height="3" fill="currentColor"></rect>
+          <rect y="9.5" width="22" height="3" fill="currentColor"></rect>
+          <rect y="16.5" width="22" height="3" fill="currentColor"></rect>
+        </svg>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 22 22"
+          aria-hidden="true"
+          class="hidden group-open:block"
+        >
+          <path d="M3 3L19 19M19 3L3 19" stroke="currentColor" stroke-width="3"></path>
+        </svg>
+      </summary>
+
+      <nav
+        class="absolute inset-x-0 top-full z-40 flex flex-col divide-y divide-line border-b-[3px] border-ink bg-paper"
+      >
+        {
+          nav.map((item) => (
+            <a
+              href={item.href}
+              class="px-5 py-4 font-mono text-[15px] tracking-[0.06em] hover:bg-paper-dark hover:text-accent"
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+    </details>
   </div>
 </header>
+
+<script is:inline>
+  // Zavření menu Escapem a klikem mimo. Bez JS funguje otevírání i zavírání tlačítkem.
+  (function () {
+    var menu = document.getElementById('mobilni-menu');
+    if (!menu) return;
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') menu.open = false;
+    });
+    document.addEventListener('click', function (e) {
+      if (menu.open && !menu.contains(e.target)) menu.open = false;
+    });
+  })();
+</script>

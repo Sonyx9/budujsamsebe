@@ -69,7 +69,7 @@ const faq = [
   },
   {
     q: 'Je 75 Hard zdarma?',
-    a: 'Ano, pravidla jsou veřejná a náš tracker dostaneš zdarma. Platí se jen náš kompletní plán s jídelníčky a rozpisem (299 Kč) — a ten k dokončení nutně nepotřebuješ.',
+    a: 'Ano, pravidla jsou veřejná a náš tracker dostaneš zdarma. Kompletní plán s jídelníčky a rozpisem teprve píšeme — až vyjde, bude placený, ale k dokončení výzvy ho nepotřebuješ.',
   },
   {
     q: 'Co když jeden den vynechám?',
@@ -124,7 +124,7 @@ const faqSchema = {
           <a
             href="/tracker/"
             class="self-start bg-ink px-6 py-4 font-mono text-sm font-semibold tracking-[0.04em] text-paper hover:bg-accent"
-            >STÁHNOUT 75 HARD TRACKER →</a
+            >STÁHNOUT TRACKER NA 75 DNÍ →</a
           >
           <div class="font-mono text-[12px] text-muted">PDF zdarma za e-mail. Žádný spam.</div>
         </div>
@@ -293,27 +293,9 @@ const faqSchema = {
       </div>
     </section>
 
-    <!-- 8 · NEWSLETTER -->
-    <section>
-      <div class="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-12 sm:px-8">
-        <div class="font-mono text-[12px] tracking-[0.12em] text-muted">DENÍK DO E-MAILU</div>
-        <h2 class="max-w-2xl text-2xl font-bold leading-tight sm:text-[32px]">
-          Jednou týdně, co začíná trendovat
-        </h2>
-        <p class="max-w-xl font-mono text-sm leading-relaxed text-ink-soft">
-          Krátký přehled: jaká výzva se právě rozjíždí ve světě a jaký plán na ni chystáme. Bez
-          vaty, odhlášení jedním klikem.
-        </p>
-        <!--
-          AŽ PO PRVNÍM VYDÁNÍ: sem přidej box „Z POSLEDNÍHO VYDÁNÍ" — 2–3 řádky
-          z reálně odeslaného newsletteru. Dokud žádné vydání není, box nevkládej.
-        -->
-        <a
-          href="/tracker/"
-          class="mt-1 self-start bg-ink px-6 py-4 font-mono text-sm font-semibold tracking-[0.04em] text-paper hover:bg-accent"
-          >PŘIHLÁSIT SE →</a
-        >
-      </div>
-    </section>
+    <!--
+      8 · NEWSLETTER — zatím vypnutý. Newsletter „jednou týdně, co začíná trendovat“ neexistuje,
+      tak ho neslibujeme. Až bude první vydání (Ecomail, viz postup-ecomail.md), sekci vrať.
+    -->
   </main>
 </Base>

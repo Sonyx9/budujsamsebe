@@ -1,0 +1,93 @@
+---
+/**
+ * Společná děkovačka po objednání produktu zdarma (SimpleShop: Stránka po objednání → vlastní URL
+ * /dekujeme/?m=tracker-75 nebo /dekujeme/?m=ukazka-detox). Nadpis se přepne podle ?m=,
+ * záložně podle localStorage `bss-magnet` (varianta s Ecomail formulářem).
+ */
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="PDF je na cestě — Buduj sám sebe" description="Děkujeme. PDF máš za chvíli v e-mailu." noindex>
+  <main>
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-3xl flex-col gap-4 px-5 py-12 sm:px-8">
+        <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">HOTOVO</div>
+        <h1 class="text-3xl font-bold leading-[1.1] sm:text-[44px]" data-nadpis>PDF je na cestě.</h1>
+        <p class="max-w-lg font-mono text-sm leading-relaxed">
+          Za pár minut ho máš v e-mailu od plan@budujsamsebe.cz. Zkontroluj i hromadné a promo
+          záložky a přidej si nás do kontaktů, ať příště nespadneme do spamu.
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-3xl px-5 py-10 sm:px-8">
+      <div class="grid grid-cols-1 border-[3px] border-ink sm:grid-cols-[200px_1fr]">
+        <div class="border-b-[3px] border-ink bg-paper-dark p-5 sm:border-b-0 sm:border-r-[3px]">
+          <img
+            src="/plany/dopaminovy-detox/obalka.png"
+            alt="Obálka ebooku Dopaminový detox: 7denní plán"
+            width="900"
+            height="1278"
+            loading="eager"
+            class="w-full border-2 border-ink"
+          />
+        </div>
+        <div class="flex flex-col gap-4 p-6 sm:p-8">
+          <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent" data-eyebrow>
+            NEŽ ZAČNEŠ 75 DNÍ
+          </div>
+          <h2 class="text-2xl font-bold leading-[1.1] sm:text-[30px]">
+            Sedm dní, po kterých tě přestane ovládat telefon.
+          </h2>
+          <p class="text-[15px] leading-relaxed text-ink-soft" data-text>
+            75 dní bez scrollování v posteli zvládneš líp, když nejdřív přestavíš telefon.
+            Sedmidenní plán s trackerem, kartou na ledničku a 30 náhradami po česku — v ceně, bez
+            přikupování.
+          </p>
+          <!--
+            SIMPLESHOP EMBED: sem vlož tlačítko produktu „Dopaminový detox: 7denní plán“.
+            Odkaz níže vede na LP, dokud tlačítko nemáme.
+          -->
+          <a
+            href="/plany/dopaminovy-detox/"
+            class="bg-ink py-4 text-center font-mono text-sm font-semibold tracking-[0.04em] text-paper hover:bg-accent"
+            >CHCI PLÁN ZA 149 KČ</a
+          >
+          <div class="font-mono text-[11px] leading-relaxed text-muted">
+            Garance 14 dnů · tracker a přílohy v ceně
+          </div>
+          <a href="/vyzvy/" class="font-mono text-[12px] text-muted underline hover:text-accent"
+            >Ne, díky — zpět na výzvy</a
+          >
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<script>
+  const texty: Record<string, { nadpis: string; eyebrow: string; text: string }> = {
+    'tracker-75': {
+      nadpis: 'Tracker je na cestě.',
+      eyebrow: 'NEŽ ZAČNEŠ 75 DNÍ',
+      text: '75 dní bez scrollování v posteli zvládneš líp, když nejdřív přestavíš telefon. Sedmidenní plán s trackerem, kartou na ledničku a 30 náhradami po česku — v ceně, bez přikupování.',
+    },
+    'ukazka-detox': {
+      nadpis: 'Den 0 je na cestě.',
+      eyebrow: 'AŽ DOČTEŠ DEN 0',
+      text: 'Den 0 je audit a příprava. Dalších sedm dní — pravidla, úkoly, tracker, karta na ledničku a 30 náhrad — je v celém plánu. Bez přikupování, hned po zaplacení do e-mailu.',
+    },
+  };
+  let magnet = new URLSearchParams(location.search).get('m') ?? '';
+  if (!magnet) {
+    try {
+      magnet = localStorage.getItem('bss-magnet') ?? '';
+    } catch {}
+  }
+  const t = texty[magnet];
+  if (t) {
+    document.querySelector('[data-nadpis]')!.textContent = t.nadpis;
+    document.querySelector('[data-eyebrow]')!.textContent = t.eyebrow;
+    document.querySelector('[data-text]')!.textContent = t.text;
+  }
+</script>

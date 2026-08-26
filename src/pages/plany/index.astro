@@ -7,12 +7,14 @@ const plany = [
     desc: 'Sedm dní, sedm pravidel, jeden tracker. Přestaň sahat po telefonu automaticky.',
     href: '/plany/dopaminovy-detox/',
     stav: '149 Kč',
+    pripravujeme: false,
   },
   {
     title: '75 DNÍ po česku',
-    desc: 'Kompletní plán na 75 dní: pravidla, jídelníčky, tréninky a tracker.',
+    desc: 'Kompletní plán na 75 dní: pravidla, jídelníčky, tréninky a tracker. Zatím ho píšeme.',
     href: '/plany/75-dni/',
-    stav: '299 Kč',
+    stav: 'PŘIPRAVUJEME',
+    pripravujeme: true,
   },
 ];
 ---
@@ -28,7 +30,7 @@ const plany = [
         <h1 class="text-3xl font-bold sm:text-[40px]">Plány</h1>
         <p class="max-w-xl font-mono text-sm leading-relaxed text-muted">
           Kompletní plány den po dni. Každý má tisknutelný tracker a 14denní garanci vrácení
-          peněz.
+          peněz. Hotový je zatím jeden — u druhého říkáme dopředu, co v něm bude.
         </p>
       </div>
     </section>
@@ -40,10 +42,24 @@ const plany = [
             class="group flex flex-col gap-1.5 border-b border-line py-6 hover:bg-paper-dark sm:flex-row sm:items-center sm:justify-between"
           >
             <div class="flex flex-col gap-1.5">
-              <div class="text-xl font-bold group-hover:text-accent">{e.title}</div>
+              <div
+                class:list={[
+                  'text-xl font-bold group-hover:text-accent',
+                  e.pripravujeme && 'text-ink-soft',
+                ]}
+              >
+                {e.title}
+              </div>
               <div class="font-mono text-[13px] text-muted">{e.desc}</div>
             </div>
-            <div class="font-mono text-sm font-semibold text-accent">{e.stav} →</div>
+            <div
+              class:list={[
+                'font-mono text-sm font-semibold',
+                e.pripravujeme ? 'tracking-[0.1em] text-muted' : 'text-accent',
+              ]}
+            >
+              {e.stav} →
+            </div>
           </a>
         ))
       }

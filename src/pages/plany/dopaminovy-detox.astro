@@ -110,7 +110,13 @@ const schema = {
   description="Sedm dní, sedm pravidel, jeden tracker. Přestaň sahat po telefonu automaticky. Tvrdá i Měkká verze, PDF ihned do e-mailu, 149 Kč."
   image="/plany/dopaminovy-detox/og.png"
 >
-  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} slot="head" />
+  <Fragment slot="head">
+    <!-- Předehřátí spojení na SimpleShop: ušetří DNS + TCP + TLS (~130 ms) před načtením formuláře. -->
+    <link rel="preconnect" href="https://form.simpleshop.cz" />
+    <link rel="dns-prefetch" href="https://form.simpleshop.cz" />
+    <link rel="preload" as="script" href="https://form.simpleshop.cz/prj/js/SimpleShopService.js" />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  </Fragment>
 
   <main>
     <!-- HERO + CENA -->
@@ -278,9 +284,23 @@ const schema = {
           >).
         </p>
 
-        <div class="overflow-x-auto border-[3px] border-ink bg-paper p-5 sm:p-6">
+        <div class="relative overflow-x-auto border-[3px] border-ink bg-paper p-5 sm:p-6">
+          <!-- Překryv na dobu, než se načte iframe SimpleShopu. Skript ho sundá. -->
+          <div
+            id="ss-loader"
+            class="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-paper px-5 text-center"
+          >
+            <div
+              class="size-7 animate-spin border-[3px] border-line border-t-accent motion-reduce:animate-none"
+              aria-hidden="true"
+            >
+            </div>
+            <div class="font-mono text-[12px] tracking-[0.1em] text-muted">
+              NAČÍTÁM OBJEDNÁVKOVÝ FORMULÁŘ…
+            </div>
+          </div>
           <!-- www.SimpleShop.cz form#154814 start -->
-          <div data-SimpleShopForm="0MYKV">
+          <div data-SimpleShopForm="0MYKV" class="min-h-[380px]">
             <div>
               Prodejní formulář je vytvořen v systému <a
                 href="https://www.simpleshop.cz/?utm_source=simpleshop&utm_medium=form&utm_campaign=103788"
@@ -306,6 +326,54 @@ const schema = {
             sss('createForm', '0MYKV');
           </script>
           <!-- www.SimpleShop.cz form#154814 end -->
+          <script is:inline>
+            (function () {
+              var box = document.querySelector('[data-SimpleShopForm]');
+              var loader = document.getElementById('ss-loader');
+              if (!box || !loader) return;
+
+              var hotovo = false;
+              function schovej() {
+                if (hotovo) return;
+                hotovo = true;
+                clearTimeout(zaloha);
+                loader.remove();
+              }
+
+              // SimpleShop vkládá iframe s loading="lazy" — ten by se začal stahovat
+              // až po doscrollování. Přepneme ho na eager, ať načítání běží hned.
+              function popozeni(iframe) {
+                if (iframe.loading === 'lazy') iframe.loading = 'eager';
+                iframe.setAttribute('fetchpriority', 'high');
+                iframe.addEventListener('load', schovej, { once: true });
+              }
+
+              var uz = box.querySelector('iframe');
+              if (uz) popozeni(uz);
+
+              var pozorovatel = new MutationObserver(function () {
+                var iframe = box.querySelector('iframe');
+                if (iframe) {
+                  pozorovatel.disconnect();
+                  popozeni(iframe);
+                }
+              });
+              pozorovatel.observe(box, { childList: true, subtree: true });
+
+              // Formulář hlásí svou výšku, jakmile se uvnitř vykreslí — druhý signál, že je hotovo.
+              window.addEventListener('message', function (e) {
+                if (e.data && e.data.action === 'SimpleShop-setHeight') schovej();
+              });
+
+              // Když se do 12 s nenačte, nabídneme formulář přímo u SimpleShopu.
+              var zaloha = setTimeout(function () {
+                if (hotovo) return;
+                loader.innerHTML =
+                  '<div class="font-mono text-[12px] leading-relaxed text-muted">Formulář se nenačetl.<br />Objednat jde i přímo u SimpleShopu:</div>' +
+                  '<a href="https://form.simpleshop.cz/0MYKV/" class="bg-ink px-5 py-3 font-mono text-[12px] font-semibold tracking-[0.04em] text-paper hover:bg-accent">OTEVŘÍT OBJEDNÁVKU →</a>';
+              }, 12000);
+            })();
+          </script>
         </div>
 
         <div class="font-mono text-[11px] leading-relaxed text-muted">
