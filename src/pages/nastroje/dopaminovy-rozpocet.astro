@@ -1,0 +1,499 @@
+---
+import Base from '../../layouts/Base.astro';
+import TrackerCta from '../../components/TrackerCta.astro';
+
+const cinnosti = [
+  'Instagram, TikTok, Reels, Shorts',
+  'Facebook a jeho komentáře',
+  'YouTube (ne návody, které jsi šel hledat)',
+  'Zprávy: Seznam, iDnes, Novinky a diskuse pod nimi',
+  'Chaty a skupiny: WhatsApp, Messenger, Discord',
+  'Seriály a Netflix po 22:00',
+  'Mobilní hry',
+  'E-shopy a bazary „jen se podívám“: Alza, Vinted, Bazoš, Temu',
+  'Kontrola e-mailu mimo práci',
+  'Porno',
+  'Chůze, běh, kolo, plavání',
+  'Kniha nebo papírové noviny',
+  'Vaření od nuly, ne ohřívání',
+  'Rozhovor s někým bez telefonu na stole',
+  'Hospoda, káva, oběd s lidmi',
+  'Ruční práce: dílna, zahrada, kutění, opravy',
+  'Hudba nebo podcast při chůzi (ne při scrollování)',
+  'Spánek navíc, šlofík',
+  'Nic. Koukání z okna, čekání bez telefonu',
+];
+
+const faq = [
+  {
+    q: 'Počítá se i práce?',
+    a: 'Ne. Do rozpočtu patří jen volný čas — to, co děláš, když nemusíš. Práce na telefonu je práce, ne zloděj.',
+  },
+  {
+    q: 'Jsou 2 hodiny denně hodně?',
+    a: 'Dvě hodiny denně je 730 hodin za rok, tedy 30 dní. Jestli je to hodně, rozhodni sám — proto je tu to číslo, ne hodnocení.',
+  },
+  {
+    q: 'Ukládáte moje data?',
+    a: 'Ne. Všechno se počítá ve tvém prohlížeči a nic neopouští tvůj počítač. Hodnoty se pamatují jen lokálně, aby se neztratily při obnovení stránky; tlačítko Vymazat je smaže.',
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      name: 'Dopaminový rozpočet — kalkulačka',
+      url: 'https://budujsamsebe.cz/nastroje/dopaminovy-rozpocet/',
+      applicationCategory: 'UtilityApplication',
+      operatingSystem: 'Web',
+      inLanguage: 'cs',
+      offers: { '@type': 'Offer', price: 0, priceCurrency: 'CZK' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faq.map((polozka) => ({
+        '@type': 'Question',
+        name: polozka.q,
+        acceptedAnswer: { '@type': 'Answer', text: polozka.a },
+      })),
+    },
+  ],
+};
+---
+
+<Base
+  title="Dopaminový rozpočet: kolik dní v roce ti vezme telefon — kalkulačka"
+  description="Zadej minuty denně u 20 činností, zaškrtni, které ti čas kradou, a zjisti, kolik dní v roce pro-scrolluješ. Zdarma, bez registrace."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} slot="head" />
+
+  <main>
+    <section class="border-b-[3px] border-ink print:hidden">
+      <div class="mx-auto flex max-w-3xl flex-col gap-5 px-5 py-12 sm:px-8">
+        <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">
+          NÁSTROJ ZDARMA
+        </div>
+        <h1 class="text-3xl font-bold leading-[1.1] sm:text-[44px]">Dopaminový rozpočet</h1>
+        <p class="max-w-lg text-base leading-relaxed text-ink-soft">
+          Dvacet činností. Ke každé napiš, kolik minut denně jí dáváš — poctivě. Zaškrtni ty, po
+          kterých ti není líp a přesto se vracíš. Dole uvidíš, kolik dní v roce to dělá.
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-3xl px-5 py-8 sm:px-8" id="rozpocet">
+      <div class="mb-3 hidden font-mono text-[12px] tracking-[0.1em] text-muted print:block">
+        DOPAMINOVÝ ROZPOČET · budujsamsebe.cz · minuty denně × 365 ÷ 60 = hodiny za rok
+      </div>
+
+      <table class="dr-tabulka w-full border-[3px] border-ink text-[15px]">
+        <thead>
+          <tr>
+            <th class="border-b-[3px] border-ink bg-ink px-3 py-2 text-left font-mono text-[12px] tracking-widest text-paper">
+              ČINNOST
+            </th>
+            <th class="w-[110px] border-b-[3px] border-ink bg-ink px-3 py-2 text-right font-mono text-[12px] tracking-widest text-paper">
+              MIN/DEN
+            </th>
+            <th class="w-[70px] border-b-[3px] border-ink bg-ink px-3 py-2 text-center font-mono text-[12px] tracking-widest text-paper">
+              KRADE
+            </th>
+            <th class="w-[90px] border-b-[3px] border-ink bg-ink px-3 py-2 text-right font-mono text-[12px] tracking-widest text-paper">
+              H/ROK
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            cinnosti.map((c, i) => (
+              <tr class="dr-radek">
+                <td class="border-b border-line px-3 py-2" data-label="Činnost">
+                  {c}
+                </td>
+                <td class="border-b border-line px-3 py-2 text-right" data-label="Minuty denně">
+                  <input
+                    type="number"
+                    min="0"
+                    max="720"
+                    step="5"
+                    inputmode="numeric"
+                    placeholder="0"
+                    aria-label={`Minuty denně: ${c}`}
+                    class="dr-min w-full border-2 border-ink bg-paper px-2 py-1.5 text-right font-mono text-sm focus:border-accent focus:outline-none"
+                    data-i={i}
+                  />
+                </td>
+                <td class="border-b border-line px-3 py-2 text-center" data-label="Krade">
+                  <input
+                    type="checkbox"
+                    aria-label={`Krade čas: ${c}`}
+                    class="dr-krade h-5 w-5 cursor-pointer appearance-none border-2 border-ink bg-paper align-middle checked:border-accent checked:bg-accent"
+                    data-i={i}
+                  />
+                </td>
+                <td
+                  class="dr-h border-b border-line px-3 py-2 text-right font-mono tabular-nums text-muted"
+                  data-label="Hodin za rok"
+                  data-i={i}
+                >
+                  —
+                </td>
+              </tr>
+            ))
+          }
+          <tr class="dr-radek">
+            <td class="border-b border-line px-3 py-2" data-label="Činnost">
+              <input
+                type="text"
+                placeholder="Tvoje vlastní…"
+                aria-label="Vlastní činnost"
+                class="dr-vlastni w-full border-b-2 border-line bg-paper px-1 py-1 text-[15px] placeholder:text-muted focus:border-accent focus:outline-none"
+              />
+            </td>
+            <td class="border-b border-line px-3 py-2 text-right" data-label="Minuty denně">
+              <input
+                type="number"
+                min="0"
+                max="720"
+                step="5"
+                inputmode="numeric"
+                placeholder="0"
+                aria-label="Minuty denně: vlastní činnost"
+                class="dr-min w-full border-2 border-ink bg-paper px-2 py-1.5 text-right font-mono text-sm focus:border-accent focus:outline-none"
+                data-i="19"
+              />
+            </td>
+            <td class="border-b border-line px-3 py-2 text-center" data-label="Krade">
+              <input
+                type="checkbox"
+                aria-label="Krade čas: vlastní činnost"
+                class="dr-krade h-5 w-5 cursor-pointer appearance-none border-2 border-ink bg-paper align-middle checked:border-accent checked:bg-accent"
+                data-i="19"
+              />
+            </td>
+            <td
+              class="dr-h border-b border-line px-3 py-2 text-right font-mono tabular-nums text-muted"
+              data-label="Hodin za rok"
+              data-i="19"
+            >
+              —
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div
+        id="dr-vysledek"
+        class="mt-6 flex flex-col gap-3 border-[3px] border-ink bg-paper-dark p-6 sm:flex-row sm:items-end sm:justify-between"
+        aria-live="polite"
+      >
+        <div>
+          <div class="font-mono text-[12px] tracking-[0.1em] text-muted">UKRADENO ZA ROK</div>
+          <div class="mt-1 flex items-baseline gap-3">
+            <span id="dr-hodiny" class="text-[44px] font-bold leading-none tabular-nums text-accent">0 h</span>
+            <span id="dr-dni" class="font-mono text-base text-ink-soft">= 0 dní v roce</span>
+          </div>
+        </div>
+        <div id="dr-veta" class="max-w-xs font-mono text-[13px] leading-relaxed text-ink-soft">
+          Vyplň minuty a zaškrtni, co ti čas krade.
+        </div>
+      </div>
+
+      <div class="mt-4 flex flex-wrap gap-3 print:hidden">
+        <button
+          id="dr-png"
+          type="button"
+          class="border-2 border-ink px-4 py-2.5 font-mono text-[12px] font-semibold tracking-[0.04em] hover:border-accent hover:text-accent"
+        >
+          ULOŽIT VÝSLEDEK JAKO PNG
+        </button>
+        <button
+          id="dr-tisk"
+          type="button"
+          class="border-2 border-ink px-4 py-2.5 font-mono text-[12px] font-semibold tracking-[0.04em] hover:border-accent hover:text-accent"
+        >
+          VYTISKNOUT PRÁZDNOU TABULKU
+        </button>
+        <button
+          id="dr-vymazat"
+          type="button"
+          class="px-3 py-2.5 font-mono text-[12px] text-muted underline hover:text-accent"
+        >
+          Vymazat
+        </button>
+      </div>
+      <div class="mt-3 font-mono text-[11px] leading-relaxed text-muted print:hidden">
+        Nic se neodesílá. Počítá se v prohlížeči, hodnoty zůstávají jen u tebe.
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-3xl px-5 py-4 sm:px-8 print:hidden">
+      <TrackerCta
+        label="7DENNÍ PLÁN · 149 KČ"
+        title="Dopaminový detox: sedm dní, po kterých přestaneš sahat po telefonu automaticky"
+        href="/plany/dopaminovy-detox/"
+        cta="KOUPIT PLÁN →"
+      />
+    </section>
+
+    <article class="mx-auto max-w-3xl px-5 py-8 sm:px-8 print:hidden">
+      <div class="clanek">
+        <h2>Jak číst výsledek</h2>
+        <p>
+          Číslo nahoře není hodnocení. Je to součet řádků, které jsi sám zaškrtl jako „krade“, a to
+          je důležitý rozdíl. Rozpočet neříká, že Instagram je špatný a knížka dobrá. Ptá se na
+          jednu věc: je ti po tom líp, nebo se k tomu jen vracíš? Hodina seriálu, na kterou se
+          těšíš, je odpočinek. Hodina seriálu, který pouštíš, protože ruka jela sama, je
+          zloděj. Stejná činnost, jiný řádek. Proto si zaškrtávání nenech vzít nikým, ani touhle
+          stránkou.
+        </p>
+        <p>
+          Vyděl hodiny čtyřiadvaceti a dostaneš dny. Většině lidí, kteří tuhle tabulku vyplní
+          poctivě, vyjde mezi třiceti a šedesáti dny v roce. To není důvod k panice, ale je to
+          důvod se na to číslo podívat dvakrát: tolik dní jsi letos strávil něčím, po čem ti podle
+          tebe samého nebylo líp.
+        </p>
+
+        <h2>Proč to podstřeluješ</h2>
+        <p>
+          Odhad času u obrazovky bývá podstřelený. Na iPhonu si otevři <strong>Nastavení → Čas u
+          obrazovky</strong>, na Androidu <strong>Nastavení → Digitální rovnováha</strong> a srovnej
+          průměr za poslední týden s tím, co jsi napsal do tabulky. Telefon má lepší paměť než ty.
+          Pokud se čísla liší, oprav tabulku podle telefonu, ne naopak.
+        </p>
+        <p>
+          Jedna věc, na kterou telefon nestačí: neřekne ti, které minuty kradou a které dávají.
+          Hodina navigace v autě a hodina scrollování v posteli jsou pro Screen Time totéž. Proto
+          je tu ten třetí sloupec.
+        </p>
+
+        <h2>Co s tím za týden</h2>
+        <p>
+          Rozpočet je Den 0 sedmidenního plánu, který na téhle stránce prodáváme. Neříkáme to,
+          abychom tě k něčemu tlačili; říkáme to, protože samotné číslo ti nic nezmění. Změní ti
+          to telefon, který se ráno neozve, večer, který nekončí obrazovkou, a pět náhrad, které
+          máš po ruce, když ruka jede sama. Na to jsou ty pravidla. Když si chceš nejdřív jen
+          přestavět telefon, stačí ti k tomu <a href="/plany/dopaminovy-detox/ukazka/">Den 0
+          zdarma</a>.
+        </p>
+
+        <h2>Časté otázky</h2>
+        {
+          faq.map((polozka) => (
+            <>
+              <h3>{polozka.q}</h3>
+              <p>{polozka.a}</p>
+            </>
+          ))
+        }
+      </div>
+
+      <div class="mt-6 border-t border-line pt-4 font-mono text-[11px] leading-relaxed text-muted">
+        Obsah má informační charakter a není lékařskou ani psychologickou radou. Pokud ti
+        obrazovky dlouhodobě berou spánek, práci nebo vztahy, obrať se na odborníka.
+      </div>
+    </article>
+  </main>
+</Base>
+
+<style>
+  /* Mobil: řádek tabulky jako karta */
+  @media (max-width: 639px) {
+    .dr-tabulka thead {
+      display: none;
+    }
+    .dr-tabulka,
+    .dr-tabulka tbody,
+    .dr-tabulka tr,
+    .dr-tabulka td {
+      display: block;
+      width: 100%;
+    }
+    .dr-tabulka tr {
+      border-bottom: 3px solid var(--color-ink);
+      padding: 10px 0;
+    }
+    .dr-tabulka td {
+      border: 0;
+      padding: 4px 12px;
+    }
+    .dr-tabulka td[data-label='Činnost'] {
+      font-weight: 700;
+    }
+    .dr-tabulka td[data-label]:not([data-label='Činnost'])::before {
+      content: attr(data-label);
+      display: inline-block;
+      width: 46%;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+    }
+    .dr-tabulka td[data-label]:not([data-label='Činnost']) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .dr-tabulka td[data-label='Minuty denně'] input {
+      width: 46%;
+    }
+  }
+  /* Tisk: prázdná tabulka s linkami */
+  @media print {
+    header,
+    footer {
+      display: none !important;
+    }
+    .dr-tabulka input[type='number'],
+    .dr-tabulka input[type='text'] {
+      border: 0;
+      border-bottom: 1px solid #141412;
+      background: transparent;
+      color: transparent;
+    }
+    .dr-tabulka input[type='checkbox'] {
+      appearance: none;
+      border: 2px solid #141412;
+      background: transparent;
+    }
+    .dr-h {
+      color: transparent !important;
+    }
+    #dr-vysledek {
+      background: transparent;
+    }
+    #dr-hodiny,
+    #dr-dni {
+      color: transparent !important;
+    }
+    #dr-veta {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const KLIC = 'dr-rozpocet-v1';
+  const N = 20;
+  const miny = Array.from(document.querySelectorAll<HTMLInputElement>('.dr-min'));
+  const krade = Array.from(document.querySelectorAll<HTMLInputElement>('.dr-krade'));
+  const hRok = Array.from(document.querySelectorAll<HTMLElement>('.dr-h'));
+  const vlastni = document.querySelector<HTMLInputElement>('.dr-vlastni');
+  const elHodiny = document.getElementById('dr-hodiny')!;
+  const elDni = document.getElementById('dr-dni')!;
+  const elVeta = document.getElementById('dr-veta')!;
+
+  const fmt = (n: number) => n.toLocaleString('cs-CZ');
+
+  function veta(h: number): string {
+    if (h === 0) return 'Vyplň minuty a zaškrtni, co ti čas krade.';
+    if (h < 200) return 'Míň než většina. Tenhle nástroj tě moc nepotřebuje — ale zkus ho za měsíc znovu.';
+    if (h <= 730) return 'Zhruba měsíc v roce. Tolik jsi letos pro-scrolloval. Dá se s tím něco dělat za týden.';
+    return 'Přes měsíc v roce. Nejsi výjimka, jsi průměr — a přesně pro tenhle průměr je sedmidenní plán.';
+  }
+
+  function prepocitej() {
+    let soucet = 0;
+    for (let i = 0; i < N; i++) {
+      const m = Math.max(0, Math.min(720, Number(miny[i]?.value) || 0));
+      const h = Math.round((m * 365) / 60);
+      if (hRok[i]) {
+        hRok[i].textContent = m > 0 ? fmt(h) : '—';
+        hRok[i].classList.toggle('text-accent', !!krade[i]?.checked && m > 0);
+        hRok[i].classList.toggle('text-muted', !(krade[i]?.checked && m > 0));
+      }
+      if (krade[i]?.checked) soucet += h;
+    }
+    const dni = Math.round((soucet / 24) * 10) / 10;
+    elHodiny.textContent = `${fmt(soucet)} h`;
+    elDni.textContent = `= ${fmt(dni)} dní v roce`;
+    elVeta.textContent = veta(soucet);
+    uloz();
+    return { soucet, dni };
+  }
+
+  function uloz() {
+    try {
+      const data = {
+        m: miny.map((x) => x.value),
+        k: krade.map((x) => x.checked),
+        v: vlastni?.value ?? '',
+      };
+      localStorage.setItem(KLIC, JSON.stringify(data));
+    } catch {
+      /* soukromý režim apod. — nevadí */
+    }
+  }
+
+  function nacti() {
+    try {
+      const raw = localStorage.getItem(KLIC);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      (data.m ?? []).forEach((v: string, i: number) => miny[i] && (miny[i].value = v));
+      (data.k ?? []).forEach((v: boolean, i: number) => krade[i] && (krade[i].checked = !!v));
+      if (vlastni && typeof data.v === 'string') vlastni.value = data.v;
+    } catch {
+      /* poškozená data — ignoruj */
+    }
+  }
+
+  [...miny, ...krade].forEach((el) => el.addEventListener('input', prepocitej));
+  vlastni?.addEventListener('input', uloz);
+
+  document.getElementById('dr-vymazat')?.addEventListener('click', () => {
+    miny.forEach((x) => (x.value = ''));
+    krade.forEach((x) => (x.checked = false));
+    if (vlastni) vlastni.value = '';
+    try {
+      localStorage.removeItem(KLIC);
+    } catch {
+      /* nevadí */
+    }
+    prepocitej();
+  });
+
+  document.getElementById('dr-tisk')?.addEventListener('click', () => window.print());
+
+  document.getElementById('dr-png')?.addEventListener('click', () => {
+    const { soucet, dni } = prepocitej();
+    const W = 1200;
+    const H = 630;
+    const c = document.createElement('canvas');
+    c.width = W;
+    c.height = H;
+    const ctx = c.getContext('2d');
+    if (!ctx) return;
+    ctx.fillStyle = '#f4f2ec';
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#141412';
+    ctx.fillRect(60, 60, W - 120, 4);
+    ctx.font = '600 22px "IBM Plex Mono", Menlo, monospace';
+    ctx.fillStyle = '#6b6a64';
+    ctx.fillText('DOPAMINOVÝ ROZPOČET · UKRADENO ZA ROK', 60, 120);
+    ctx.font = '700 180px "Space Grotesk", Arial, sans-serif';
+    ctx.fillStyle = '#d43518';
+    ctx.fillText(`${fmt(soucet)} h`, 52, 330);
+    ctx.font = '700 56px "Space Grotesk", Arial, sans-serif';
+    ctx.fillStyle = '#141412';
+    ctx.fillText(`= ${fmt(dni)} dní v roce`, 60, 420);
+    ctx.font = '400 24px "IBM Plex Mono", Menlo, monospace';
+    ctx.fillStyle = '#33322e';
+    ctx.fillText(veta(soucet).slice(0, 78), 60, 490);
+    ctx.fillStyle = '#141412';
+    ctx.fillRect(60, 540, W - 120, 2);
+    ctx.font = '600 20px "IBM Plex Mono", Menlo, monospace';
+    ctx.fillStyle = '#6b6a64';
+    ctx.fillText('budujsamsebe.cz/nastroje/dopaminovy-rozpocet', 60, 585);
+    const a = document.createElement('a');
+    a.download = 'dopaminovy-rozpocet.png';
+    a.href = c.toDataURL('image/png');
+    a.click();
+  });
+
+  nacti();
+  prepocitej();
+</script>

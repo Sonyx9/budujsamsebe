@@ -1,0 +1,147 @@
+---
+import Base from '../layouts/Base.astro';
+
+/**
+ * Identifikace správce — doplň jednou tady, propíše se všude na stránce.
+ * Stejné údaje jsou i v src/pages/obchodni-podminky.astro (konstanta `prodavajici`).
+ */
+const spravce = {
+  jmeno: 'Digitance CZ s. r. o.',
+  sidlo: 'Uralská 689/7, 160 00 Praha 6',
+  ico: '24892581',
+  email: 'plan@budujsamsebe.cz',
+};
+const ucinnost = '1. 9. 2026';
+---
+
+<Base
+  title="Ochrana osobních údajů — Buduj sám sebe"
+  description="Jak nakládáme s osobními údaji: kdo je správce, jaké nástroje používáme, jak dlouho údaje držíme a jaká máš práva."
+>
+  <main>
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-3xl flex-col gap-3 px-5 py-10 sm:px-8">
+        <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">
+          PRÁVNÍ INFORMACE
+        </div>
+        <h1 class="text-3xl font-bold sm:text-[40px]">Ochrana osobních údajů</h1>
+        <p class="font-mono text-[12px] leading-relaxed text-muted">
+          Verze 1.0 · účinné od {ucinnost} · Napsané lidsky, ne právnicky. Když něčemu nerozumíš,
+          napiš na {spravce.email}.
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-3xl px-5 py-8 sm:px-8">
+      <div class="clanek">
+        <h2>Kdo je správce</h2>
+        <p>
+          Správcem osobních údajů je {spravce.jmeno}, se sídlem {spravce.sidlo}, IČO {spravce.ico}
+          (dál „my“). Provozujeme web budujsamsebe.cz. Kontakt ve věcech osobních údajů:
+          <a href={`mailto:${spravce.email}`}>{spravce.email}</a>.
+        </p>
+
+        <h2>Jaké údaje zpracováváme a proč</h2>
+        <ul>
+          <li>
+            <strong>E-mail</strong>, když si necháš poslat tracker, ukázkovou kapitolu nebo se
+            přihlásíš k newsletteru. Právní základ: tvůj souhlas (čl. 6 odst. 1 písm. a GDPR).
+            Souhlas odvoláš odkazem „odhlásit“ v každém e-mailu nebo zprávou na náš e-mail.
+          </li>
+          <li>
+            <strong>E-mail, jméno a fakturační údaje</strong> (adresa, případně IČO a DIČ), když si
+            koupíš placený plán. Právní základ: plnění smlouvy (čl. 6 odst. 1 písm. b) a zákonná
+            povinnost vést účetnictví (čl. 6 odst. 1 písm. c).
+          </li>
+          <li>
+            <strong>E-mail zákazníka pro sdělení související s nákupem</strong> — po koupi ti
+            můžeme poslat aktualizovanou verzi plánu, opravu chyby nebo prosbu o jednu větu
+            zpětné vazby. Právní základ: oprávněný zájem (čl. 6 odst. 1 písm. f) na péči o
+            zákazníka; kdykoliv to můžeš odmítnout.
+          </li>
+          <li>
+            <strong>Technické údaje o návštěvě</strong> (přibližná poloha podle IP, typ zařízení a
+            prohlížeče, navštívené stránky) měříme nástrojem Google Analytics 4 — jen pokud v
+            cookie liště souhlasíš. Právní základ: souhlas. IP adresy Google Analytics 4
+            neukládá v plné podobě.
+          </li>
+        </ul>
+        <p>
+          Kalkulačka „Dopaminový rozpočet“ počítá všechno v tvém prohlížeči; hodnoty se ukládají
+          jen lokálně na tvém zařízení a k nám se nedostanou.
+        </p>
+
+        <h2>Komu údaje předáváme</h2>
+        <p>Nikomu je neprodáváme. Pomáhají nám s nimi jen tito zpracovatelé:</p>
+        <ul>
+          <li>
+            <strong>Ecomail.cz, s.r.o.</strong> (Na Zderaze 1275/15, Praha 2) — rozesílání e-mailů
+            a správa kontaktů. Servery v EU.
+          </li>
+          <li>
+            <strong>Redbit s.r.o. — SimpleShop</strong> (Antonína Dvořáka 1216, Roudnice nad Labem)
+            — prodejní formulář, platby a fakturace. Platby zpracovává platební brána, kterou
+            SimpleShop používá; číslo tvé karty k nám nikdy nedorazí.
+          </li>
+          <li>
+            <strong>GitHub, Inc.</strong> (USA) — hosting statického webu. Při načtení stránky
+            zpracuje tvou IP adresu jako každý webový server. Předání do USA se opírá o rámec
+            EU-US Data Privacy Framework a standardní smluvní doložky.
+          </li>
+          <li>
+            <strong>Google Ireland Ltd.</strong> — Google Analytics 4 (jen po souhlasu) a Google
+            Fonts načítané z Google serverů.
+          </li>
+          <li>
+            <strong>Účetní / daňový poradce</strong> — přístup k fakturám v rozsahu nutném pro
+            vedení účetnictví.
+          </li>
+        </ul>
+
+        <h2>Jak dlouho údaje držíme</h2>
+        <ul>
+          <li>
+            <strong>Newsletter a lead magnety:</strong> do odhlášení, nejdéle 3 roky od tvé
+            poslední interakce (otevření nebo kliknutí). Pak kontakt smažeme.
+          </li>
+          <li>
+            <strong>Objednávky a faktury:</strong> 10 let od konce roku, ve kterém byla faktura
+            vystavena — tolik vyžaduje zákon o DPH.
+          </li>
+          <li><strong>Data z Google Analytics 4:</strong> 14 měsíců, pak se automaticky mažou.</li>
+        </ul>
+
+        <h2>Tvá práva</h2>
+        <p>
+          Máš právo vědět, co o tobě máme (přístup), nechat údaje opravit nebo smazat, omezit
+          jejich zpracování, dostat je v přenositelné podobě, vznést námitku proti zpracování z
+          oprávněného zájmu a kdykoliv odvolat souhlas. Stačí napsat na
+          <a href={`mailto:${spravce.email}`}>{spravce.email}</a>; odpovíme do 30 dnů. Když
+          budeš mít pocit, že s údaji nakládáme špatně, můžeš se obrátit na Úřad pro ochranu
+          osobních údajů, Pplk. Sochora 27, 170 00 Praha 7, <a href="https://uoou.gov.cz">uoou.gov.cz</a>.
+        </p>
+
+        <h2>Cookies</h2>
+        <p>
+          Bez tvého souhlasu web ukládá jen to, co je nutné pro fungování: volbu v cookie liště a
+          hodnoty kalkulačky (lokální úložiště prohlížeče). Prodejní formulář SimpleShopu používá
+          vlastní technické cookies nutné k dokončení objednávky.
+        </p>
+        <p>
+          Měřicí cookies Google Analytics 4 (<code>_ga</code>, <code>_ga_*</code>, platnost až 2
+          roky) se ukládají jen po kliknutí na „Souhlasím“ v liště. Souhlas můžeš kdykoliv změnit
+          odkazem „Nastavení cookies“ v patičce webu. Bez souhlasu se nic neměří a web funguje
+          stejně.
+        </p>
+
+        <h2>Změny tohoto dokumentu</h2>
+        <p>
+          Když přidáme nový nástroj nebo změníme způsob zpracování, upravíme tuhle stránku a
+          změníme datum účinnosti. Zásadní změny oznámíme e-mailem těm, kterých se týkají.
+        </p>
+
+        <p class="font-mono text-[12px] text-muted">Účinné od {ucinnost}.</p>
+      </div>
+    </section>
+  </main>
+</Base>

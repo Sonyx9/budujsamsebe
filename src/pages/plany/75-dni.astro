@@ -1,0 +1,106 @@
+---
+import Base from '../../layouts/Base.astro';
+
+/** Reálné recenze zákazníků — nikdy vymyšlené. Sekce se zobrazí až s první recenzí. */
+const recenze: { text: string; jmeno: string }[] = [];
+
+const obsah = [
+  '75denní plán den po dni',
+  'Jídelníčky z českých potravin',
+  'Krizový plán pro dny 10–20',
+  'Tisknutelný tracker deluxe',
+];
+---
+
+<Base
+  title="75 DNÍ po česku — kompletní plán — Buduj sám sebe"
+  description="Kompletní plán na 75 dní: pravidla, jídelníčky z běžných českých potravin, tréninky a krizový plán. PDF ihned do e-mailu."
+>
+  <main>
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto grid max-w-5xl grid-cols-1 sm:grid-cols-[1fr_280px]">
+        <div class="flex flex-col gap-4 border-b-[3px] border-ink p-6 sm:border-b-0 sm:border-r-[3px] sm:p-10">
+          <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">
+            PLÁN Č. 1
+          </div>
+          <h1 class="text-4xl font-bold leading-[1.05] sm:text-[44px]">75 DNÍ<br />po česku</h1>
+          <p class="max-w-md text-base leading-relaxed text-ink-soft">
+            Česká adaptace výzvy známé jako 75 Hard. Kompletní plán na 75 dní: pravidla bez
+            nejasností, jídelníčky z běžných českých potravin, tréninky na 2× 45 minut i plán pro
+            dny, kdy to chceš vzdát.
+          </p>
+          <ul class="mt-1 flex flex-col gap-2">
+            {
+              obsah.map((item) => (
+                <li class="flex items-center gap-3">
+                  <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M4 10.5L8 14.5L16 5.5" stroke="#d43518" stroke-width="3" />
+                  </svg>
+                  <span class="text-[15px] font-medium">{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="flex flex-col gap-4 bg-paper-dark p-6 sm:p-8">
+          <div class="flex flex-col items-center gap-1 border-[3px] border-ink bg-paper p-5">
+            <div class="font-mono text-[12px] tracking-[0.08em] text-muted">CENA</div>
+            <div class="text-[40px] font-bold">299 Kč</div>
+            <div class="font-mono text-[11px] text-muted">PDF · ihned do e-mailu</div>
+          </div>
+          <!--
+            SIMPLESHOP EMBED: sem vlož prodejní formulář / tlačítko ze SimpleShopu
+            (Produkt → vložení do webu). Tlačítko níže je vizuální předloha.
+          -->
+          <a
+            href="#"
+            class="bg-ink py-4 text-center font-mono text-sm font-semibold tracking-[0.04em] text-paper hover:bg-accent"
+            >KOUPIT PLÁN</a
+          >
+          <div class="flex flex-col gap-2 font-mono text-[11px] leading-relaxed text-ink-soft">
+            <div>+ Sada trackerů a plánovačů za 99 Kč přímo v objednávce</div>
+            <div class="border-t border-line pt-2">
+              Garance: do 14 dnů vrátíme peníze bez ptaní. <a href="/obchodni-podminky/" class="underline hover:text-accent">Podmínky</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {
+      recenze.length > 0 && (
+        <section class="border-b-[3px] border-ink">
+          <div class="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-8 sm:px-8">
+            <div class="font-mono text-[12px] tracking-[0.12em] text-muted">
+              CO ŘÍKAJÍ TI, CO DOŠLI DO DNE 75
+            </div>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {recenze.map((r) => (
+                <div class="border-2 border-ink p-4 text-sm leading-relaxed text-ink-soft">
+                  „{r.text}“
+                  <div class="mt-2 font-mono text-[11px] text-muted">— {r.jmeno}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )
+    }
+
+    <section>
+      <div
+        class="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-7 sm:flex-row sm:items-center sm:justify-between sm:px-8"
+      >
+        <div class="max-w-md font-mono text-[12px] leading-relaxed text-muted">
+          Nejsi si jistý? Stáhni si nejdřív tracker zdarma a přečti si pravidla — plán počká.
+        </div>
+        <a
+          href="/tracker/"
+          class="inline-block whitespace-nowrap border-2 border-ink px-5 py-3 font-mono text-[12px] font-semibold tracking-[0.04em] hover:border-accent hover:text-accent"
+          >UKÁZKOVÁ KAPITOLA ZDARMA</a
+        >
+      </div>
+    </section>
+  </main>
+</Base>

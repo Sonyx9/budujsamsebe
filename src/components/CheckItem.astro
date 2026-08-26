@@ -1,0 +1,14 @@
+---
+interface Props {
+  checked?: boolean;
+}
+const { checked = false } = Astro.props;
+---
+
+<div class="flex items-center gap-3.5">
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" class="shrink-0">
+    <rect x="1.5" y="1.5" width="17" height="17" stroke="#141412" stroke-width="3"></rect>
+    {checked && <path d="M5 10.5L8.5 14L15 6.5" stroke="#d43518" stroke-width="3" />}
+  </svg>
+  <div class="text-[17px] font-medium"><slot /></div>
+</div>

@@ -1,0 +1,319 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import CheckItem from '../components/CheckItem.astro';
+import { serazenePodleData } from '../lib/vyzvy';
+
+const clanky = await getCollection('vyzvy');
+const existujici = new Set(clanky.map((post) => post.id));
+const nejnovejsi = serazenePodleData(clanky).slice(0, 6);
+
+/** Mini-huby. Odkazy se filtrují proti kolekci — nevypsaný slug = ještě nenapsaný článek. */
+const huby = [
+  {
+    num: '01',
+    title: 'Výzva 75 Hard',
+    desc: 'Nejtvrdší výzva současnosti: 5 pravidel, 75 dní, žádné výjimky.',
+    odkazy: [
+      { slug: '75-hard-pravidla', label: 'Pravidla 75 Hard přehledně' },
+      { slug: '75-hard-jidelnicek', label: 'Jídelníček z českých potravin' },
+      { slug: '75-hard-chyby', label: 'Proč 80 % lidí nedokončí: 7 chyb' },
+      { slug: '75-soft', label: '75 Soft: měkčí verze' },
+    ],
+  },
+  {
+    num: '02',
+    title: 'Dopaminový detox',
+    desc: '7 dní bez bezmyšlenkovitého scrollování. Restart pozornosti.',
+    odkazy: [
+      { slug: 'dopaminovy-detox', label: 'Co je dopaminový detox' },
+      { slug: 'dopaminovy-detox-plan', label: '7denní rozpis den po dni' },
+    ],
+  },
+  {
+    num: '03',
+    title: 'Rucking',
+    desc: 'Vezmi batoh, přidej zátěž, jdi. Síla z chůze.',
+    odkazy: [
+      { slug: 'rucking', label: 'Co je rucking a jak začít' },
+      { slug: 'rucking-plan', label: '12týdenní plán od nuly' },
+    ],
+  },
+].map((hub) => ({
+  ...hub,
+  odkazy: hub.odkazy.filter((odkaz) => existujici.has(odkaz.slug)),
+}));
+
+const kroky = [
+  {
+    num: '01',
+    title: 'VYBER',
+    desc: 'Výzvu, která dává smysl tvému životu. Ne tu, co frčí na internetu — tu, kterou dokážeš dokončit.',
+  },
+  {
+    num: '02',
+    title: 'VYTISKNI',
+    desc: 'Stáhni tracker, vytiskni ho a dej na lednici. Co visí na zdi, to se plní.',
+  },
+  {
+    num: '03',
+    title: 'ODŠKRTÁVEJ',
+    desc: 'Den za dnem. Čárka je čárka — a sedmdesátá pátá čárka je jiný člověk, než co dělal tu první.',
+  },
+];
+
+const faq = [
+  {
+    q: 'Co je výzva 75 Hard?',
+    a: '75denní výzva mentální odolnosti od Andyho Friselly: pět pravidel, která plníš každý den 75 dní v kuse — jídelníček, 2× 45 minut pohybu, 4 litry vody, 10 stran knihy a progresová fotka. Není to fitness program, ale trénink disciplíny.',
+  },
+  {
+    q: 'Je 75 Hard zdarma?',
+    a: 'Ano, pravidla jsou veřejná a náš tracker dostaneš zdarma. Platí se jen náš kompletní plán s jídelníčky a rozpisem (299 Kč) — a ten k dokončení nutně nepotřebuješ.',
+  },
+  {
+    q: 'Co když jeden den vynechám?',
+    a: 'Podle pravidel začínáš od dne 1. Žádné výjimky — právě proto výzva funguje. Jestli ti to přijde moc, začni s 75 Soft.',
+  },
+  {
+    q: 'Co je 75 Soft?',
+    a: 'Měkčí verze: jídelníček s možností jedné volnější porce, jeden trénink denně, 3 litry vody. Pro lidi s rodinou, směnami nebo prvním pokusem.',
+  },
+  {
+    q: 'Potřebuju nějaké vybavení?',
+    a: 'Na 75 Hard ne — stačí boty a kniha. Na rucking batoh a zátěž (klidně pytle rýže). Vše ostatní je marketing.',
+  },
+  {
+    q: 'Je to bezpečné?',
+    a: 'Záleží na tvém zdraví. Čtyři litry vody ani dva tréninky denně nemusí sedět každému — pokud máš zdravotní omezení, projdi to s lékařem, než začneš. Nejsme lékaři a naše obsahy nejsou lékařská rada.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((polozka) => ({
+    '@type': 'Question',
+    name: polozka.q,
+    acceptedAnswer: { '@type': 'Answer', text: polozka.a },
+  })),
+};
+---
+
+<Base
+  title="Buduj sám sebe — výzvy a plány česky: 75 Hard, dopaminový detox, rucking"
+  description="Motivace vydrží tři dny, plán tě dovede do konce. Pravidla výzev bez nejasností, rozpis na každý den a tracker k vytištění. Česky a zdarma."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} slot="head" />
+
+  <main>
+    <!-- 1 · HERO -->
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-5xl flex-col gap-5 px-5 py-12 sm:px-8">
+        <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">
+          ZÁZNAM 001 — ZAČNI DNES
+        </div>
+        <h1 class="text-4xl font-bold leading-[1.05] tracking-tight sm:text-[52px]">
+          Vyber si výzvu.<br />Dostaneš plán na každý den.
+        </h1>
+        <p class="max-w-xl font-mono text-sm leading-relaxed">
+          Motivace vydrží tři dny. Plán tě dovede do konce. Pravidla bez nejasností, rozpis na
+          každý den a tracker, který si vytiskneš a odškrtáváš.
+        </p>
+        <div class="mt-2 flex flex-col gap-2">
+          <a
+            href="/tracker/"
+            class="self-start bg-ink px-6 py-4 font-mono text-sm font-semibold tracking-[0.04em] text-paper hover:bg-accent"
+            >STÁHNOUT 75 HARD TRACKER →</a
+          >
+          <div class="font-mono text-[12px] text-muted">PDF zdarma za e-mail. Žádný spam.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · CHECKLIST -->
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-8 sm:px-8">
+        <div class="font-mono text-[12px] tracking-[0.12em] text-muted">
+          TAKHLE VYPADÁ DEN 1. A DEN 75.
+        </div>
+        <div class="flex flex-col gap-2.5">
+          <CheckItem checked>Drž zvolený jídelníček, bez alkoholu</CheckItem>
+          <CheckItem checked>2× 45 minut pohybu, jednou venku</CheckItem>
+          <CheckItem>Vypij 4 litry vody</CheckItem>
+          <CheckItem>Přečti 10 stran knihy</CheckItem>
+          <CheckItem>Vyfoť progresovku</CheckItem>
+        </div>
+        <div class="mt-1 font-mono text-[13px] leading-relaxed text-muted">
+          Pět úkolů. Když jeden vynecháš, jedeš od dne 1. Proto funguje.
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · MINI-HUBY -->
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-5xl flex-col gap-2 px-5 pt-10 sm:px-8">
+        <div class="font-mono text-[12px] tracking-[0.12em] text-muted">REJSTŘÍK VÝZEV</div>
+        <h2 class="text-2xl font-bold leading-tight sm:text-[32px]">Výzvy, které právě vedeme</h2>
+      </div>
+      <div class="mx-auto grid max-w-5xl grid-cols-1 pt-6 sm:grid-cols-3">
+        {
+          huby.map((hub, i) => (
+            <div
+              class:list={[
+                'flex flex-col gap-3 border-t border-line p-6 sm:border-t-0',
+                i < huby.length - 1 && 'sm:border-r-[3px] sm:border-r-ink',
+              ]}
+            >
+              <div class="font-mono text-[28px] font-semibold text-accent">{hub.num}</div>
+              <div class="text-[19px] font-bold">{hub.title}</div>
+              <div class="font-mono text-[12px] leading-relaxed text-ink-soft">{hub.desc}</div>
+              {hub.odkazy.length > 0 ? (
+                <ul class="mt-1 flex flex-col gap-2 border-t border-line pt-3">
+                  {hub.odkazy.map((odkaz) => (
+                    <li>
+                      <a
+                        href={`/vyzvy/${odkaz.slug}/`}
+                        class="font-mono text-[13px] leading-snug underline decoration-line decoration-2 underline-offset-4 hover:text-accent hover:decoration-accent"
+                      >
+                        {odkaz.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <div class="mt-1 border-t border-line pt-3 font-mono text-[13px] text-muted">
+                  Články připravujeme.
+                </div>
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- 4 · JAK TO FUNGUJE -->
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-5xl flex-col gap-2 px-5 pt-10 sm:px-8">
+        <div class="font-mono text-[12px] tracking-[0.12em] text-muted">JAK TO FUNGUJE</div>
+        <h2 class="text-2xl font-bold leading-tight sm:text-[32px]">Od rozhodnutí k čárce č. 75</h2>
+      </div>
+      <div class="mx-auto grid max-w-5xl grid-cols-1 gap-6 px-5 pb-10 pt-6 sm:grid-cols-3 sm:gap-8 sm:px-8">
+        {
+          kroky.map((krok) => (
+            <div class="flex flex-col gap-2">
+              <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">
+                {krok.num}
+              </div>
+              <div class="font-mono text-[15px] font-semibold tracking-[0.08em]">{krok.title}</div>
+              <div class="font-mono text-[13px] leading-relaxed text-ink-soft">{krok.desc}</div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- 5 · MANIFEST -->
+    <section class="border-b-[3px] border-ink bg-ink text-paper">
+      <div class="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-12 sm:px-8">
+        <div class="font-mono text-[12px] tracking-[0.12em] text-accent-soft">PROČ TENHLE WEB</div>
+        <h2 class="max-w-2xl text-2xl font-bold leading-tight sm:text-[32px]">
+          Tady nenajdeš citáty se západem slunce.
+        </h2>
+        <p class="max-w-2xl font-mono text-sm leading-relaxed text-paper-dark">
+          Najdeš tu pravidla, checklisty a plány, které drží, i když se ti nechce. Nejsme trenéři
+          ani kouči — jsme malá redakce, která překládá světové výzvy do češtiny a dává jim tvar,
+          který se dá vytisknout a plnit. Zdroje uvádíme pod každým článkem a placené plány mají
+          garanci vrácení peněz.
+        </p>
+        <a
+          href="/o-webu/"
+          class="mt-1 self-start font-mono text-[13px] font-semibold tracking-[0.06em] underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-soft"
+          >JAK PRACUJEME A S JAKÝMI ZDROJI →</a
+        >
+      </div>
+    </section>
+
+    <!-- 6 · NEJNOVĚJŠÍ ZÁZNAMY -->
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-5xl flex-col gap-2 px-5 pt-10 sm:px-8">
+        <div class="font-mono text-[12px] tracking-[0.12em] text-muted">
+          POSLEDNÍ ZÁPISY V DENÍKU
+        </div>
+        <h2 class="text-2xl font-bold leading-tight sm:text-[32px]">Nejnovější články</h2>
+      </div>
+      <div class="mx-auto flex max-w-5xl flex-col px-5 pb-8 pt-4 sm:px-8">
+        {
+          nejnovejsi.map((post) => (
+            <a
+              href={`/vyzvy/${post.id}/`}
+              class="group flex flex-col gap-1.5 border-b border-line py-5 hover:bg-paper-dark sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+            >
+              <div class="text-[17px] font-bold leading-snug group-hover:text-accent">
+                {post.data.title}
+              </div>
+              <div class="shrink-0 font-mono text-[12px] tracking-[0.08em] text-muted">
+                {post.data.kategorie.toUpperCase()} · {post.data.datum}
+              </div>
+            </a>
+          ))
+        }
+        <a
+          href="/vyzvy/"
+          class="mt-5 self-start font-mono text-[13px] font-semibold tracking-[0.06em] underline decoration-accent decoration-2 underline-offset-4 hover:text-accent"
+          >VŠECHNY VÝZVY →</a
+        >
+      </div>
+    </section>
+
+    <!-- 7 · FAQ -->
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-3xl flex-col gap-4 px-5 py-10 sm:px-8">
+        <h2 class="text-2xl font-bold leading-tight sm:text-[32px]">Časté otázky</h2>
+        <div class="flex flex-col">
+          {
+            faq.map((polozka) => (
+              <details class="group border-b border-line py-4">
+                <summary class="flex cursor-pointer list-none items-start justify-between gap-4 text-[17px] font-bold leading-snug marker:content-none group-open:text-accent">
+                  {polozka.q}
+                  <span class="mt-0.5 shrink-0 font-mono text-[15px] text-accent group-open:hidden">
+                    +
+                  </span>
+                  <span class="mt-0.5 hidden shrink-0 font-mono text-[15px] text-accent group-open:inline">
+                    −
+                  </span>
+                </summary>
+                <p class="mt-3 max-w-2xl font-mono text-[13px] leading-relaxed text-ink-soft">
+                  {polozka.a}
+                </p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 · NEWSLETTER -->
+    <section>
+      <div class="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-12 sm:px-8">
+        <div class="font-mono text-[12px] tracking-[0.12em] text-muted">DENÍK DO E-MAILU</div>
+        <h2 class="max-w-2xl text-2xl font-bold leading-tight sm:text-[32px]">
+          Jednou týdně, co začíná trendovat
+        </h2>
+        <p class="max-w-xl font-mono text-sm leading-relaxed text-ink-soft">
+          Krátký přehled: jaká výzva se právě rozjíždí ve světě a jaký plán na ni chystáme. Bez
+          vaty, odhlášení jedním klikem.
+        </p>
+        <!--
+          AŽ PO PRVNÍM VYDÁNÍ: sem přidej box „Z POSLEDNÍHO VYDÁNÍ" — 2–3 řádky
+          z reálně odeslaného newsletteru. Dokud žádné vydání není, box nevkládej.
+        -->
+        <a
+          href="/tracker/"
+          class="mt-1 self-start bg-ink px-6 py-4 font-mono text-sm font-semibold tracking-[0.04em] text-paper hover:bg-accent"
+          >PŘIHLÁSIT SE →</a
+        >
+      </div>
+    </section>
+  </main>
+</Base>

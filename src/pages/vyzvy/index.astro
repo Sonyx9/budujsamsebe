@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const posts = await getCollection('vyzvy');
+---
+
+<Base title="Výzvy — Buduj sám sebe" description="Všechny výzvy a plány: 75 Hard, dopaminový detox, rucking a další.">
+  <main>
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-5xl flex-col gap-3 px-5 py-10 sm:px-8">
+        <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">REJSTŘÍK</div>
+        <h1 class="text-3xl font-bold sm:text-[40px]">Výzvy</h1>
+      </div>
+    </section>
+    <section class="mx-auto flex max-w-5xl flex-col px-5 sm:px-8">
+      {
+        posts.map((post) => (
+          <a
+            href={`/vyzvy/${post.id}/`}
+            class="group flex flex-col gap-1.5 border-b border-line py-6 hover:bg-paper-dark"
+          >
+            <div class="text-xl font-bold group-hover:text-accent">{post.data.title}</div>
+            <div class="font-mono text-[13px] text-muted">{post.data.description}</div>
+          </a>
+        ))
+      }
+    </section>
+  </main>
+</Base>

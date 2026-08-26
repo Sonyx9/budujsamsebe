@@ -1,0 +1,83 @@
+---
+import Base from '../../../layouts/Base.astro';
+---
+
+<Base
+  title="Den 0 zdarma — Dopaminový detox: 7denní plán — Buduj sám sebe"
+  description="Ukázková kapitola Den 0 z ebooku Dopaminový detox: audit pěti čísel, dopaminový rozpočet a příprava telefonu. PDF zdarma do e-mailu."
+  image="/plany/dopaminovy-detox/og.png"
+>
+  <main>
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-3xl flex-col gap-5 px-5 py-12 sm:px-8">
+        <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">
+          UKÁZKOVÁ KAPITOLA ZDARMA
+        </div>
+        <h1 class="text-3xl font-bold leading-[1.1] sm:text-[44px]">
+          Den 0:<br />než začneš, změř to
+        </h1>
+        <p class="max-w-lg font-mono text-sm leading-relaxed">
+          Celá první kapitola ebooku jako PDF: poctivě o tom, co „detox“ je a není, audit pěti
+          čísel z telefonu, dopaminový rozpočet a příprava prostředí za 20 minut. Pošleme na
+          e-mail — a jednou týdně přidáme, co v Česku začíná trendovat.
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-3xl px-5 py-10 sm:px-8">
+      <div class="border-[3px] border-ink p-6">
+        <div class="mb-4 font-mono text-[12px] tracking-[0.1em] text-muted">
+          E-MAIL PRO ZASLÁNÍ PDF
+        </div>
+        <!--
+          ECOMAIL EMBED: sem vlož embed kód webového formuláře z Ecomailu
+          (Formuláře → vytvořit → vložit HTML), tag kontaktu `ukazka-detox`,
+          po odeslání přesměrovat na /tracker/dekujeme/. Formulář níže je vizuální
+          předloha — po vložení Ecomail embedu ho smaž.
+        -->
+        <form class="flex flex-col gap-3 sm:flex-row" action="#" method="post">
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="tvuj@email.cz"
+            class="w-full border-[3px] border-ink bg-paper px-4 py-3.5 font-mono text-sm placeholder:text-muted focus:border-accent focus:outline-none"
+          />
+          <button
+            type="submit"
+            class="whitespace-nowrap bg-ink px-6 py-4 font-mono text-sm font-semibold tracking-[0.04em] text-paper hover:bg-accent"
+            >POSLAT DEN 0 →</button
+          >
+        </form>
+        <div class="mt-3 font-mono text-[11px] leading-relaxed text-muted">
+          Žádný spam. Odhlášení jedním klikem, kdykoliv.
+        </div>
+      </div>
+
+      <div class="mt-8 grid grid-cols-2 gap-4">
+        <img
+          src="/plany/dopaminovy-detox/strana-plan.png"
+          alt="Ukázka levé strany dne: plán"
+          width="900"
+          height="1278"
+          loading="lazy"
+          class="w-full border-2 border-ink"
+        />
+        <img
+          src="/plany/dopaminovy-detox/strana-tracker.png"
+          alt="Ukázka pravé strany dne: tracker"
+          width="900"
+          height="1278"
+          loading="lazy"
+          class="w-full border-2 border-ink"
+        />
+      </div>
+      <div class="mt-3 font-mono text-[11px] leading-relaxed text-muted">
+        Takhle vypadá každý den v knize: vlevo plán, vpravo tracker. Celý plán za 149 Kč:
+        <a href="/plany/dopaminovy-detox/" class="text-ink underline decoration-accent decoration-2 hover:text-accent"
+          >Dopaminový detox: 7denní plán</a
+        >.
+      </div>
+    </section>
+  </main>
+</Base>

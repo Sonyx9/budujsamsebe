@@ -1,0 +1,287 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const cena = 149;
+
+/** Reálné recenze zákaznic a zákazníků — nikdy vymyšlené. Sekce se zobrazí až s první recenzí. */
+const recenze: { text: string; jmeno: string }[] = [];
+
+const obsah = [
+  '7 dní, 7 pravidel — každé v Tvrdé a Měkké verzi',
+  'Dopaminový rozpočet: spočítáš si, kolik dní v roce ti telefon vezme',
+  'Tracker, karta na ledničku a 30 náhrad po česku — v ceně',
+  'Poctivě o „detoxu“: co funguje a co je marketing',
+];
+
+const dny = [
+  {
+    num: 'DEN 0',
+    title: 'Před startem',
+    text: 'Audit pěti čísel, dopaminový rozpočet, výběr Tvrdé nebo Měkké verze, příprava telefonu za 20 minut.',
+  },
+  {
+    num: 'DEN 1',
+    title: 'Vypni šum',
+    text: 'Notifikace pryč, šedý displej, den bez sítí — a čárka za každé sáhnutí bez důvodu.',
+  },
+  { num: 'DEN 2', title: 'Ranní hodina', text: 'Telefon spí v kuchyni. První hodina dne bez obrazovky.' },
+  { num: 'DEN 3', title: 'Nahraď, nezakazuj', text: 'Pět náhrad ze třiceti, dvě dnes uděláš.' },
+  {
+    num: 'DEN 4',
+    title: 'Jedna hluboká věc',
+    text: '90 minut bez přerušení. A kapitola o tom, proč je čtvrtý den nejhorší.',
+  },
+  { num: 'DEN 5', title: 'Večer a spánek', text: 'Obrazovky končí hodinu před spaním.' },
+  { num: 'DEN 6', title: 'Lidi naživo', text: 'Dvě hodiny s někým, telefon doma. Jak to vysvětlit okolí.' },
+  {
+    num: 'DEN 7',
+    title: 'Pravidla napořád',
+    text: 'Tři pravidla, která si necháš, a plán pro den, kdy spadneš.',
+  },
+];
+
+const faq = [
+  {
+    q: 'Je to opravdu „detox“?',
+    a: 'Ne. Dopamin se nedá vydetoxovat a v knize to říkáme hned na druhé straně. Slovo v názvu je, protože ho lidé hledají. Uvnitř je to plán kontroly prostředí a tréninku nudy — technika z kognitivně-behaviorální terapie, ne neurověda.',
+  },
+  {
+    q: 'Kolik času to denně zabere?',
+    a: 'Den 0 půl hodiny (příprava telefonu). Každý další den 5 minut čtení ráno a 3 minuty trackeru večer. Zbytek je to, co neděláš.',
+  },
+  {
+    q: 'Mám malé děti nebo práci na telefonu. Dá se to?',
+    a: 'Ano, na to je Měkká verze. Stejná pravidla, menší dávky: 30 minut místo hodiny, 45 minut místo 90. Vybíráš si na Dnu 0 a jedeš celý týden jednu verzi.',
+  },
+  {
+    q: 'Co když to čtvrtý den vzdám?',
+    a: 'Většina lidí to vzdá právě ve čtvrtek, proto má Den 4 vlastní kapitolu. A pravidlo pro pád je jednoduché: opakuješ jeden den, ne sedm.',
+  },
+  {
+    q: 'Je to pro lidi se závislostí?',
+    a: 'Ne. Je to pro lidi, kterým telefon vadí, ne pro lidi, které ničí. Kniha má sekci „Kdy vyhledat pomoc“ a bere ji vážně.',
+  },
+  {
+    q: 'V jakém formátu to dostanu?',
+    a: 'PDF na A5 (na mobilu čitelné, na A4 se tisknou dvě strany vedle sebe) a přílohy zvlášť jako tisknutelné PDF. Přijde e-mailem hned po zaplacení.',
+  },
+  {
+    q: 'Co když mi to nesedne?',
+    a: 'Do 14 dnů vrátíme peníze, bez ptaní. Napíšeš jeden e-mail.',
+  },
+  {
+    q: 'Navazuje to na 75 DNÍ?',
+    a: 'Ano, sedmidenní plán je nejlepší rozjezd před 75 dny — Den 8 v knize je most. Ale funguje i sám o sobě.',
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Product',
+      name: 'Dopaminový detox: 7denní plán',
+      description:
+        'Sedm dní, sedm pravidel, jeden tracker. Praktický plán (PDF, A5), po kterém přestaneš sahat po telefonu automaticky. Tvrdá i Měkká verze.',
+      image: 'https://budujsamsebe.cz/plany/dopaminovy-detox/obalka.png',
+      brand: { '@type': 'Brand', name: 'Buduj sám sebe' },
+      offers: {
+        '@type': 'Offer',
+        price: cena,
+        priceCurrency: 'CZK',
+        availability: 'https://schema.org/InStock',
+        url: 'https://budujsamsebe.cz/plany/dopaminovy-detox/',
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faq.map((polozka) => ({
+        '@type': 'Question',
+        name: polozka.q,
+        acceptedAnswer: { '@type': 'Answer', text: polozka.a },
+      })),
+    },
+  ],
+};
+---
+
+<Base
+  title="Dopaminový detox: 7denní plán — Buduj sám sebe"
+  description="Sedm dní, sedm pravidel, jeden tracker. Přestaň sahat po telefonu automaticky. Tvrdá i Měkká verze, PDF ihned do e-mailu, 149 Kč."
+  image="/plany/dopaminovy-detox/og.png"
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} slot="head" />
+
+  <main>
+    <!-- HERO + CENA -->
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto grid max-w-5xl grid-cols-1 sm:grid-cols-[1fr_280px]">
+        <div class="flex flex-col gap-4 border-b-[3px] border-ink p-6 sm:border-b-0 sm:border-r-[3px] sm:p-10">
+          <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">
+            PLÁN Č. 2 · 7 DNÍ
+          </div>
+          <h1 class="text-4xl font-bold leading-[1.05] sm:text-[44px]">
+            Dopaminový detox:<br />7denní plán
+          </h1>
+          <p class="max-w-md text-base leading-relaxed text-ink-soft">
+            Sedm dní, sedm pravidel, jeden tracker. Každý den jedno pravidlo a jeden úkol, večer tři
+            políčka a tři řádky. Bez motivačních řečí — jen plán, který přestaneš potřebovat za
+            týden.
+          </p>
+          <ul class="mt-1 flex flex-col gap-2">
+            {
+              obsah.map((item) => (
+                <li class="flex items-start gap-3">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    aria-hidden="true"
+                    class="mt-1 shrink-0"
+                  >
+                    <path d="M4 10.5L8 14.5L16 5.5" stroke="#d43518" stroke-width="3" />
+                  </svg>
+                  <span class="text-[15px] font-medium">{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="flex flex-col gap-4 bg-paper-dark p-6 sm:p-8">
+          <div class="flex flex-col items-center gap-1 border-[3px] border-ink bg-paper p-5">
+            <div class="font-mono text-[12px] tracking-[0.08em] text-muted">CENA</div>
+            <div class="text-[40px] font-bold">{cena} Kč</div>
+            <div class="text-center font-mono text-[11px] text-muted">
+              PDF · 30+ stran A5 · ihned do e-mailu
+            </div>
+          </div>
+          <!--
+            SIMPLESHOP EMBED: sem vlož prodejní formulář / tlačítko ze SimpleShopu
+            (Produkt „Dopaminový detox: 7denní plán“ → vložení do webu). Tlačítko níže je vizuální předloha.
+          -->
+          <a
+            href="#"
+            class="bg-ink py-4 text-center font-mono text-sm font-semibold tracking-[0.04em] text-paper hover:bg-accent"
+            >KOUPIT PLÁN</a
+          >
+          <div class="flex flex-col gap-2 font-mono text-[11px] leading-relaxed text-ink-soft">
+            <div>Tracker a přílohy jsou v ceně. Žádné přikupování.</div>
+            <div class="border-t border-line pt-2">
+              Garance: do 14 dnů vrátíme peníze bez ptaní. <a href="/obchodni-podminky/" class="underline hover:text-accent">Podmínky</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UKÁZKA DVOUSTRANY -->
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-5 py-10 sm:grid-cols-[1.3fr_1fr] sm:items-center sm:px-8">
+        <img
+          src="/plany/dopaminovy-detox/mockup.png"
+          alt="Obálka ebooku a otevřená dvoustrana Den 2 — vlevo plán dne, vpravo tracker"
+          width="1600"
+          height="1200"
+          loading="eager"
+          class="w-full border-[3px] border-ink"
+        />
+        <div class="flex flex-col gap-4">
+          <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">
+            KAŽDÝ DEN JE DVOUSTRANA
+          </div>
+          <p class="text-base leading-relaxed text-ink-soft">
+            Vlevo plán dne: proč, pravidlo, úkol, co tě čeká. Vpravo tracker: tři políčka, jedno
+            číslo, tři otázky. Ebook je zároveň sešit — proto si ho lidi tisknou.
+          </p>
+          <a
+            href="/plany/dopaminovy-detox/ukazka/"
+            class="inline-block self-start border-2 border-ink px-5 py-3 font-mono text-[12px] font-semibold tracking-[0.04em] hover:border-accent hover:text-accent"
+            >DEN 0 ZDARMA (PDF) →</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- CO JE UVNITŘ -->
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-5xl flex-col gap-2 px-5 py-10 sm:px-8">
+        <h2 class="mb-4 text-2xl font-bold sm:text-[32px]">Co je uvnitř</h2>
+        <div class="border-t-[3px] border-ink">
+          {
+            dny.map((d) => (
+              <div class="grid grid-cols-[72px_1fr] gap-4 border-b border-line py-4 sm:grid-cols-[88px_220px_1fr]">
+                <div class="font-mono text-[12px] font-semibold tracking-[0.1em] text-accent">{d.num}</div>
+                <div class="text-[17px] font-bold">{d.title}</div>
+                <div class="col-span-2 text-[15px] leading-relaxed text-ink-soft sm:col-span-1">
+                  {d.text}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <div class="pt-4 font-mono text-[12px] leading-relaxed text-muted">
+          + Den 8: co dál · Přílohy: tracker 7 dní (A4), karta 7 pravidel (A6), prázdný rozpočet, 30
+          náhrad po česku, zdroje.
+        </div>
+      </div>
+    </section>
+
+    <!-- RECENZE — jen reálné -->
+    {
+      recenze.length > 0 && (
+        <section class="border-b-[3px] border-ink">
+          <div class="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-8 sm:px-8">
+            <div class="font-mono text-[12px] tracking-[0.12em] text-muted">CO ŘÍKAJÍ TI, CO DOŠLI DO DNE 7</div>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {recenze.map((r) => (
+                <div class="border-2 border-ink p-4 text-sm leading-relaxed text-ink-soft">
+                  „{r.text}“
+                  <div class="mt-2 font-mono text-[11px] text-muted">— {r.jmeno}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )
+    }
+
+    <!-- FAQ -->
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-3xl flex-col gap-2 px-5 py-10 sm:px-8">
+        <h2 class="mb-4 text-2xl font-bold sm:text-[32px]">Otázky před nákupem</h2>
+        <div class="border-t-[3px] border-ink">
+          {
+            faq.map((polozka) => (
+              <details class="group border-b border-line">
+                <summary class="flex cursor-pointer list-none items-start justify-between gap-4 py-4 text-[17px] font-bold hover:text-accent">
+                  <span>{polozka.q}</span>
+                  <span class="font-mono text-xl leading-none text-accent group-open:hidden">+</span>
+                  <span class="hidden font-mono text-xl leading-none text-accent group-open:inline">−</span>
+                </summary>
+                <p class="pb-5 text-[15px] leading-relaxed text-ink-soft">{polozka.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- SPODNÍ LIŠTA -->
+    <section>
+      <div
+        class="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-7 sm:flex-row sm:items-center sm:justify-between sm:px-8"
+      >
+        <div class="max-w-md font-mono text-[12px] leading-relaxed text-muted">
+          Nejsi si jistý? Stáhni si Den 0 zdarma — audit a rozpočet uděláš i bez knihy.
+        </div>
+        <a
+          href="/plany/dopaminovy-detox/ukazka/"
+          class="inline-block whitespace-nowrap border-2 border-ink px-5 py-3 font-mono text-[12px] font-semibold tracking-[0.04em] hover:border-accent hover:text-accent"
+          >DEN 0 ZDARMA →</a
+        >
+      </div>
+    </section>
+  </main>
+</Base>

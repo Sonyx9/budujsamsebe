@@ -1,0 +1,52 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const plany = [
+  {
+    title: 'Dopaminový detox: 7denní plán',
+    desc: 'Sedm dní, sedm pravidel, jeden tracker. Přestaň sahat po telefonu automaticky.',
+    href: '/plany/dopaminovy-detox/',
+    stav: '149 Kč',
+  },
+  {
+    title: '75 DNÍ po česku',
+    desc: 'Kompletní plán na 75 dní: pravidla, jídelníčky, tréninky a tracker.',
+    href: '/plany/75-dni/',
+    stav: '299 Kč',
+  },
+];
+---
+
+<Base
+  title="Plány — Buduj sám sebe"
+  description="Placené plány: rozpis na každý den, tisknutelné trackery a garance vrácení peněz."
+>
+  <main>
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-5xl flex-col gap-3 px-5 py-10 sm:px-8">
+        <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">OBCHOD</div>
+        <h1 class="text-3xl font-bold sm:text-[40px]">Plány</h1>
+        <p class="max-w-xl font-mono text-sm leading-relaxed text-muted">
+          Kompletní plány den po dni. Každý má tisknutelný tracker a 14denní garanci vrácení
+          peněz.
+        </p>
+      </div>
+    </section>
+    <section class="mx-auto flex max-w-5xl flex-col px-5 sm:px-8">
+      {
+        plany.map((e) => (
+          <a
+            href={e.href}
+            class="group flex flex-col gap-1.5 border-b border-line py-6 hover:bg-paper-dark sm:flex-row sm:items-center sm:justify-between"
+          >
+            <div class="flex flex-col gap-1.5">
+              <div class="text-xl font-bold group-hover:text-accent">{e.title}</div>
+              <div class="font-mono text-[13px] text-muted">{e.desc}</div>
+            </div>
+            <div class="font-mono text-sm font-semibold text-accent">{e.stav} →</div>
+          </a>
+        ))
+      }
+    </section>
+  </main>
+</Base>

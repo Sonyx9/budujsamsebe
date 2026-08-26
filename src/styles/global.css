@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f4f2ec;
+  --color-paper-dark: #edeae0;
+  --color-ink: #141412;
+  --color-ink-soft: #33322e;
+  --color-muted: #6b6a64;
+  --color-line: #c9c5b8;
+  --color-accent: #d43518;
+  --color-accent-soft: #f4a08e;
+
+  --font-sans: "Space Grotesk", "Arial Narrow", ui-sans-serif, sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", ui-monospace, monospace;
+}
+
+/* Článek — typografie obsahu z Markdownu */
+.clanek {
+  @apply text-[17px] leading-[1.65] text-ink-soft;
+}
+.clanek h2 {
+  @apply mt-10 mb-4 font-sans text-[26px] font-bold leading-tight text-ink;
+}
+.clanek h3 {
+  @apply mt-8 mb-3 font-sans text-[20px] font-bold text-ink;
+}
+.clanek p {
+  @apply mb-5;
+}
+.clanek ul,
+.clanek ol {
+  @apply mb-5 pl-6;
+}
+.clanek ul {
+  list-style-type: square;
+}
+.clanek ol {
+  @apply list-decimal;
+}
+.clanek li {
+  @apply mb-2;
+}
+.clanek a {
+  @apply text-ink underline decoration-accent decoration-2 underline-offset-2 hover:text-accent;
+}
+.clanek strong {
+  @apply font-bold text-ink;
+}
+.clanek blockquote {
+  @apply my-6 border-l-[3px] border-ink pl-5 font-mono text-[15px] text-muted;
+}
+.clanek table {
+  @apply my-6 w-full border-[3px] border-ink text-[15px];
+}
+.clanek th {
+  @apply border-b-[3px] border-ink bg-ink px-3 py-2 text-left font-mono text-[12px] tracking-widest text-paper;
+}
+.clanek td {
+  @apply border-b border-line px-3 py-2;
+}
+
+/* Šipku u <details> řešíme vlastním +/− znakem */
+summary::-webkit-details-marker {
+  display: none;
+}

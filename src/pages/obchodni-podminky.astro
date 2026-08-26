@@ -1,0 +1,128 @@
+---
+import Base from '../layouts/Base.astro';
+
+/** Identifikace prodávajícího — stejné údaje jako `spravce` v ochrana-osobnich-udaju.astro. */
+const prodavajici = {
+  jmeno: 'Digitance CZ s. r. o.',
+  sidlo: 'Uralská 689/7, 160 00 Praha 6',
+  ico: '24892581',
+  dic: 'neplátce DPH',
+  datovka: 'e6xac7t',
+  email: 'plan@budujsamsebe.cz',
+};
+const ucinnost = '1. 9. 2026';
+---
+
+<Base
+  title="Obchodní podmínky — Buduj sám sebe"
+  description="Podmínky nákupu digitálních plánů (PDF) na budujsamsebe.cz: cena, platba, dodání, garance vrácení peněz, reklamace."
+>
+  <main>
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-3xl flex-col gap-3 px-5 py-10 sm:px-8">
+        <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">
+          PRÁVNÍ INFORMACE
+        </div>
+        <h1 class="text-3xl font-bold sm:text-[40px]">Obchodní podmínky</h1>
+        <p class="font-mono text-[12px] leading-relaxed text-muted">
+          Verze 1.0 · účinné od {ucinnost} · Platí pro nákup digitálních plánů (PDF) na
+          budujsamsebe.cz.
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-3xl px-5 py-8 sm:px-8">
+      <div class="clanek">
+        <h2>1. Kdo prodává</h2>
+        <p>
+          {prodavajici.jmeno}, se sídlem {prodavajici.sidlo}, IČO {prodavajici.ico},
+          {prodavajici.dic}, datová schránka {prodavajici.datovka} (dál „my“). E-mail:
+          <a href={`mailto:${prodavajici.email}`}>{prodavajici.email}</a>. Nejsme kamenný obchod;
+          všechno vyřídíme e-mailem, obvykle do dvou pracovních dnů.
+        </p>
+
+        <h2>2. Co prodáváme</h2>
+        <p>
+          Digitální obsah: plány ve formátu PDF (dál „plán“), případně jejich přílohy. Plán je
+          praktický návod pro osobní použití. Není zdravotní, psychologickou ani jinou odbornou
+          radou a nenahrazuje péči lékaře nebo terapeuta — to je napsané i v každém plánu. Popis,
+          rozsah a cena jsou uvedené na stránce daného plánu.
+        </p>
+
+        <h2>3. Objednávka a smlouva</h2>
+        <p>
+          Objednáváš přes prodejní formulář (SimpleShop). Smlouva vzniká ve chvíli, kdy odešleš
+          objednávku a my ti e-mailem potvrdíme její přijetí. Před odesláním vidíš cenu, obsah a
+          tyhle podmínky; odesláním s nimi souhlasíš. Objednávku ti pošleme e-mailem spolu s
+          daňovým dokladem.
+        </p>
+
+        <h2>4. Cena a platba</h2>
+        <p>
+          Ceny jsou konečné, v korunách českých{' '}
+          {prodavajici.dic.includes('neplátce') ? '(nejsme plátci DPH)' : '(včetně DPH)'}. Platíš
+          předem — kartou nebo bankovním převodem přes platební bránu SimpleShopu. Údaje o kartě
+          k nám nikdy nedorazí. Plán dodáme až po připsání platby.
+        </p>
+
+        <h2>5. Dodání</h2>
+        <p>
+          Plán dostaneš e-mailem jako odkaz ke stažení, obvykle do několika minut po zaplacení,
+          nejpozději do 24 hodin. Odkaz je platný nejméně 30 dnů; když ti soubor později
+          chybí, napiš nám a pošleme ho znovu. Nic fyzického neposíláme, poštovné neexistuje.
+        </p>
+
+        <h2>6. Co s plánem smíš</h2>
+        <p>
+          Plán je pro tvoje osobní použití: můžeš si ho vytisknout, přečíst na kolika zařízeních
+          chceš a půjčit jako knížku kamarádovi. Nesmíš ho prodávat, dávat volně ke stažení, dávat
+          na sdílená úložiště ani z něj dělat vlastní produkt. Autorská práva zůstávají nám.
+        </p>
+
+        <h2>7. Vrácení peněz — naše garance</h2>
+        <p>
+          Podle zákona (§ 1837 písm. l občanského zákoníku) u digitálního obsahu, který ti
+          dodáme hned po zaplacení s tvým souhlasem, zaniká právo odstoupit od smlouvy do 14 dnů.
+          Odesláním objednávky s tímhle souhlasíš.
+        </p>
+        <p>
+          <strong>Nad rámec zákona ti dáváme vlastní garanci:</strong> když ti plán do 14 dnů od
+          nákupu nesedne, napiš na {prodavajici.email} a vrátíme ti celou částku, bez udání
+          důvodu a bez ptaní. Peníze pošleme do 14 dnů od tvé zprávy stejným způsobem, jakým jsi
+          platil. Garance platí pro první nákup každého plánu.
+        </p>
+
+        <h2>8. Reklamace</h2>
+        <p>
+          Když soubor nejde otevřít, chybí v něm stránky nebo neodpovídá popisu, napiš nám do
+          dvou let od nákupu. Opravený soubor pošleme obratem; když to nejde, vrátíme peníze.
+          O reklamaci rozhodneme do 30 dnů.
+        </p>
+
+        <h2>9. Když se neshodneme</h2>
+        <p>
+          Nejdřív to zkusíme vyřešit spolu e-mailem. Když to nepůjde, můžeš se jako spotřebitel
+          obrátit na Českou obchodní inspekci (Štěpánská 567/15, 120 00 Praha 2,
+          <a href="https://www.coi.cz">coi.cz</a>) pro mimosoudní řešení sporu, nebo použít
+          evropskou platformu pro řešení sporů online na
+          <a href="https://ec.europa.eu/consumers/odr">ec.europa.eu/consumers/odr</a>. Smlouva se
+          řídí právem České republiky.
+        </p>
+
+        <h2>10. Osobní údaje</h2>
+        <p>
+          Jak s údaji nakládáme, je na stránce
+          <a href="/ochrana-osobnich-udaju/">Ochrana osobních údajů</a>.
+        </p>
+
+        <h2>11. Změny podmínek</h2>
+        <p>
+          Podmínky můžeme upravit; pro tvou objednávku platí vždy verze účinná v den, kdy jsi
+          objednal. Starší verze pošleme na vyžádání.
+        </p>
+
+        <p class="font-mono text-[12px] text-muted">Účinné od {ucinnost}.</p>
+      </div>
+    </section>
+  </main>
+</Base>

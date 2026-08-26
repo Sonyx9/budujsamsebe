@@ -1,0 +1,16 @@
+---
+const nav = [
+  { href: '/vyzvy/', label: 'VÝZVY' },
+  { href: '/plany/', label: 'PLÁNY' },
+  { href: '/o-webu/', label: 'O WEBU' },
+];
+---
+
+<header class="border-b-[3px] border-ink">
+  <div class="mx-auto flex max-w-5xl items-center justify-between px-5 py-5 sm:px-8">
+    <a href="/" class="font-mono text-base font-semibold tracking-[0.08em]">BUDUJ SÁM SEBE</a>
+    <nav class="flex gap-5 font-mono text-[13px] tracking-[0.06em] sm:gap-7">
+      {nav.map((item) => <a href={item.href} class="hover:text-accent">{item.label}</a>)}
+    </nav>
+  </div>
+</header>

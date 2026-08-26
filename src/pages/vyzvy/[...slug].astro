@@ -1,0 +1,63 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import TrackerCta from '../../components/TrackerCta.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('vyzvy');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'vyzvy'>;
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Base title={`${post.data.title} — Buduj sám sebe`} description={post.data.description}>
+  <main>
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-3xl flex-col gap-4 px-5 py-10 sm:px-8">
+        <div class="font-mono text-[12px] tracking-[0.1em] text-muted">
+          <a href="/vyzvy/" class="hover:text-accent">VÝZVY</a> / {post.data.kategorie.toUpperCase()}
+        </div>
+        <h1 class="text-3xl font-bold leading-[1.1] sm:text-[40px]">{post.data.title}</h1>
+        <div class="flex flex-wrap gap-5 font-mono text-[12px] text-muted">
+          <div>AKTUALIZOVÁNO {post.data.datum}</div>
+          {post.data.cteni && <div>ČTENÍ {post.data.cteni.toUpperCase()}</div>}
+          {post.data.zdroje.length > 0 && <div class="text-accent">OVĚŘENÉ ZDROJE ↓</div>}
+        </div>
+      </div>
+    </section>
+
+    <article class="mx-auto max-w-3xl px-5 py-8 sm:px-8">
+      <div class="clanek">
+        <Content />
+      </div>
+
+      <div class="mt-10">
+        <TrackerCta />
+      </div>
+
+      {
+        post.data.zdroje.length > 0 && (
+          <div class="mt-8 flex flex-col gap-1.5 border-t border-line pt-4">
+            <div class="font-mono text-[11px] tracking-[0.1em] text-muted">ZDROJE</div>
+            <div class="font-mono text-[12px] leading-relaxed text-muted">
+              {post.data.zdroje.join(' · ')}
+            </div>
+          </div>
+        )
+      }
+
+      <div class="mt-6 border-t border-line pt-4 font-mono text-[11px] leading-relaxed text-muted">
+        Obsah má informační charakter a není lékařskou radou. Před zásadní změnou jídelníčku nebo
+        tréninku se poraď s lékařem.
+      </div>
+    </article>
+  </main>
+</Base>

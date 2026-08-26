@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="75 Hard tracker PDF zdarma — Buduj sám sebe"
+  description="Tisknutelný tracker na 75 dní: checklist 5 úkolů denně, týdenní přehled a milníky. Zdarma do e-mailu."
+>
+  <main>
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-3xl flex-col gap-5 px-5 py-12 sm:px-8">
+        <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">
+          KE STAŽENÍ ZDARMA
+        </div>
+        <h1 class="text-3xl font-bold leading-[1.1] sm:text-[44px]">
+          75 Hard tracker:<br />odškrtej všech 75 dní
+        </h1>
+        <p class="max-w-lg font-mono text-sm leading-relaxed">
+          Tisknutelné PDF: checklist 5 úkolů na každý den, týdenní přehled a milníky. Pošleme ho
+          na e-mail — a jednou týdně přidáme, co v Česku začíná trendovat.
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-3xl px-5 py-10 sm:px-8">
+      <div class="border-[3px] border-ink p-6">
+        <div class="mb-4 font-mono text-[12px] tracking-[0.1em] text-muted">
+          E-MAIL PRO ZASLÁNÍ PDF
+        </div>
+        <!--
+          ECOMAIL EMBED: sem vlož embed kód webového formuláře z Ecomailu
+          (Formuláře → vytvořit → vložit HTML). Formulář níže je vizuální
+          předloha — po vložení Ecomail embedu ho smaž.
+        -->
+        <form class="flex flex-col gap-3 sm:flex-row" action="#" method="post">
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="tvuj@email.cz"
+            class="w-full border-[3px] border-ink bg-paper px-4 py-3.5 font-mono text-sm placeholder:text-muted focus:outline-none focus:border-accent"
+          />
+          <button
+            type="submit"
+            class="whitespace-nowrap bg-ink px-6 py-4 font-mono text-sm font-semibold tracking-[0.04em] text-paper hover:bg-accent"
+            >POSLAT TRACKER →</button
+          >
+        </form>
+        <div class="mt-3 font-mono text-[11px] leading-relaxed text-muted">
+          Žádný spam. Odhlášení jedním klikem, kdykoliv.
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>
