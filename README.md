@@ -22,7 +22,7 @@ npm run build    # výstup do dist/
 ## Kam co doplnit
 
 - **Ecomail formulář** (tracker za e-mail): `src/pages/tracker.astro` — komentář `ECOMAIL EMBED`.
-- **SimpleShop prodejní formulář**: `src/pages/plany/75-dni.astro` a `src/pages/plany/dopaminovy-detox.astro` (+ děkovačka `src/pages/tracker/dekujeme.astro`) — komentář `SIMPLESHOP EMBED`.
+- **SimpleShop prodejní formulář**: dopaminový detox je hotový — formulář `0MYKV` (form#154814) je v sekci `#objednavka` v `src/pages/plany/dopaminovy-detox.astro`. Zbývá 75 dní: `src/pages/plany/75-dni.astro`, komentář `SIMPLESHOP EMBED`. Skript SimpleShopu musí mít `is:inline`, jinak ho Astro zabundluje a formulář se nevykreslí.
 - **Nový článek**: přidej `.md` do `src/content/vyzvy/` s frontmatter `title, description, kategorie, datum (MM/RRRR), cteni, zdroje[]`. URL vznikne z názvu souboru (`/vyzvy/<soubor>/`).
 - **Recenze na LP**: pole `recenze` nahoře v `src/pages/plany/*.astro` — sekce se zobrazí až s první reálnou recenzí (nikdy vymyšlenou).
 - **GA4**: ID měření do `src/components/CookieLista.astro` (`GA4_ID`); načítá se až po souhlasu v liště.

@@ -157,14 +157,10 @@ const schema = {
               PDF · 30+ stran A5 · ihned do e-mailu
             </div>
           </div>
-          <!--
-            SIMPLESHOP EMBED: sem vlož prodejní formulář / tlačítko ze SimpleShopu
-            (Produkt „Dopaminový detox: 7denní plán“ → vložení do webu). Tlačítko níže je vizuální předloha.
-          -->
           <a
-            href="#"
+            href="#objednavka"
             class="bg-ink py-4 text-center font-mono text-sm font-semibold tracking-[0.04em] text-paper hover:bg-accent"
-            >KOUPIT PLÁN</a
+            >KOUPIT PLÁN →</a
           >
           <div class="flex flex-col gap-2 font-mono text-[11px] leading-relaxed text-ink-soft">
             <div>Tracker a přílohy jsou v ceně. Žádné přikupování.</div>
@@ -264,6 +260,59 @@ const schema = {
               </details>
             ))
           }
+        </div>
+      </div>
+    </section>
+
+    <!-- OBJEDNÁVKA -->
+    <section id="objednavka" class="scroll-mt-4 border-b-[3px] border-ink bg-paper-dark">
+      <div class="mx-auto flex max-w-3xl flex-col gap-4 px-5 py-10 sm:px-8">
+        <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">
+          OBJEDNÁVKA
+        </div>
+        <h2 class="text-2xl font-bold sm:text-[32px]">Dopaminový detox: 7denní plán</h2>
+        <p class="font-mono text-[13px] leading-relaxed text-ink-soft">
+          {cena} Kč · PDF ihned do e-mailu · tracker a přílohy v ceně · do 14 dnů vrátíme peníze
+          bez ptaní (<a href="/obchodni-podminky/" class="underline hover:text-accent"
+            >obchodní podmínky</a
+          >).
+        </p>
+
+        <div class="overflow-x-auto border-[3px] border-ink bg-paper p-5 sm:p-6">
+          <!-- www.SimpleShop.cz form#154814 start -->
+          <div data-SimpleShopForm="0MYKV">
+            <div>
+              Prodejní formulář je vytvořen v systému <a
+                href="https://www.simpleshop.cz/?utm_source=simpleshop&utm_medium=form&utm_campaign=103788"
+                target="_blank"
+                rel="noopener">SimpleShop.cz</a
+              >.
+            </div>
+          </div>
+          <script is:inline>
+            (function (i, s, o, g, r, a, m) {
+              i[r] =
+                i[r] ||
+                function () {
+                  (i[r].q = i[r].q || []).push(arguments);
+                };
+              i[r].l = 1 * new Date();
+              a = s.createElement(o);
+              m = s.getElementsByTagName(o)[0];
+              a.async = 1;
+              a.src = g;
+              m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 'https://form.simpleshop.cz/prj/js/SimpleShopService.js', 'sss');
+            sss('createForm', '0MYKV');
+          </script>
+          <!-- www.SimpleShop.cz form#154814 end -->
+        </div>
+
+        <div class="font-mono text-[11px] leading-relaxed text-muted">
+          Objednávku zpracovává SimpleShop (Redbit s.r.o.). Zadané údaje jdou přímo jemu — viz
+          <a href="/ochrana-osobnich-udaju/" class="underline hover:text-accent"
+            >ochrana osobních údajů</a
+          >.
         </div>
       </div>
     </section>
