@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# PDF za e-mail — nemají se dát najít ve vyhledávání ani stáhnout mimo e-mail.
+Disallow: /soubory/
+
 Sitemap: https://budujsamsebe.cz/sitemap-index.xml

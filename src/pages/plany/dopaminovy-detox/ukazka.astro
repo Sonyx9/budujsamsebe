@@ -1,5 +1,6 @@
 ---
 import Base from '../../../layouts/Base.astro';
+import EcomailForm from '../../../components/EcomailForm.astro';
 ---
 
 <Base
@@ -29,17 +30,7 @@ import Base from '../../../layouts/Base.astro';
         <div class="mb-4 font-mono text-[12px] tracking-[0.1em] text-muted">
           PDF ZDARMA DO E-MAILU
         </div>
-        <!--
-          SIMPLESHOP EMBED: sem vlož kód tlačítka produktu zdarma „Den 0 zdarma — Dopaminový detox“
-          (produkt za 0 Kč, u produktu → Vložení do webu → tlačítko). Odkaz níže je
-          vizuální předloha — třídy nech, ať tlačítko vypadá stejně.
-          Varianta s Ecomailem (vlastní formulář) je v components/EcomailForm.astro.
-        -->
-        <a
-          href="#"
-          class="inline-block bg-ink px-6 py-4 font-mono text-sm font-semibold tracking-[0.04em] text-paper hover:bg-accent"
-          >CHCI DEN 0 ZDARMA →</a
-        >
+        <EcomailForm magnet="ukazka-detox" cta="CHCI DEN 0 ZDARMA →" />
         <div class="mt-3 font-mono text-[11px] leading-relaxed text-muted">
           Zadáš jméno a e-mail, PDF přijde do minuty. Nic jiného ti posílat nebudeme.
         </div>

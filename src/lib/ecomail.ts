@@ -1,8 +1,9 @@
 // Ecomail — vlastní formulář (webhook seznamu).
 // URL najdeš v Ecomailu: Kontakty → seznam `budujsamsebe` → Formuláře → „Vlastní formulář“
 // (tvar https://UCET.ecomailapp.cz/public/subscribe/ID/HASH). Dokud je prázdná, formuláře jen
-// vizuálně stojí a nic neodesílají.
-export const ECOMAIL_FORM_URL = '';
+// vizuálně stojí a nic neodesílají. Není to tajný údaj — endpoint je veřejný a stojí v HTML stránky.
+export const ECOMAIL_FORM_URL =
+  'https://budujsamsebe.ecomailapp.cz/public/subscribe/1/43c2cd496486bcc27217c3e790fb4088';
 
 // Vlastní pole seznamu (Kontakty → seznam → Vlastní pole): název MAGNET, typ text.
 // Podle jeho hodnoty se v Ecomailu větví automatizace (tracker-75 → tracker, ukazka-detox → Den 0).
