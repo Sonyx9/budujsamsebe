@@ -14,10 +14,10 @@ Výzva 75 Hard má jen pět pravidel — ale žádné výjimky a žádné dny vo
 
 ## 5 pravidel — každý den, 75 dní
 
-1. **Jídelníček dle výběru, žádný alkohol, žádné podvádění.** Dietu si volíš sám — počítá se jakákoliv strukturovaná (vyvážený jídelníček, deficit, low-carb…), ale musíš ji dodržet beze zbytku.
+1. **Jídelníček podle vlastního výběru, žádný alkohol, žádné podvádění.** Způsob stravování si volíš sám — počítá se jakýkoli strukturovaný režim (vyvážený jídelníček, kalorický deficit, nízkosacharidová strava…), ale musíš ho dodržet beze zbytku.
 2. **2× 45 minut tréninku, jeden venku — za každého počasí.** Chůze se počítá. Listopadový déšť taky.
 3. **4 litry vody.** Čistá voda; káva a čaj se nepočítají.
-4. **10 stran knihy.** Papírové nebo e-book, ne audio. Naučná literatura nebo rozvoj.
+4. **10 stran knihy.** Papírová nebo elektronická kniha, ne audiokniha. Naučná literatura nebo osobní rozvoj.
 5. **Progresová fotka.** Každý den, stejné místo, stejné světlo.
 
 ## Co se počítá a co ne
