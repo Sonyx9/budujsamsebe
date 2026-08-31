@@ -20,7 +20,7 @@ const {
   noindex = false,
 } = Astro.props;
 
-const ogImage = image ? new URL(image, Astro.site).toString() : undefined;
+const ogImage = new URL(image ?? '/og.png', Astro.site).toString();
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 
@@ -81,8 +81,6 @@ const jsonLd = {
         <meta name="twitter:card" content="summary" />
       )
     }
-    <!-- TODO výchozí og:image pro celý web: vyrob /public/og.png (1200×630) a dej `image="/og.png"` jako default výše. -->
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

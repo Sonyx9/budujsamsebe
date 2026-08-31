@@ -1,68 +1,267 @@
 ---
 import Base from '../../layouts/Base.astro';
 
-const plany = [
+const faq = [
   {
-    title: 'Dopaminový detox: 7denní plán',
-    desc: 'Sedm dní, sedm pravidel, jeden tracker. Přestaň sahat po telefonu automaticky.',
-    href: '/plany/dopaminovy-detox/',
-    stav: '149 Kč',
-    pripravujeme: false,
+    q: 'Co jsou plány Buduj sám sebe?',
+    a: 'Praktické e-knihy s jasným postupem, úkoly a tisknutelnými trackery. Nečteš je jen pro inspiraci. Každý den otevřeš konkrétní část, uděláš jeden krok a zaznamenáš ho.',
   },
   {
-    title: '75 DNÍ po česku',
-    desc: 'Kompletní plán na 75 dní: pravidla, jídelníčky, tréninky a tracker. Zatím ho píšeme.',
-    href: '/plany/75-dni/',
-    stav: 'PŘIPRAVUJEME',
-    pripravujeme: true,
+    q: 'Který plán je nejlepší pro začátek?',
+    a: 'Pokud chceš začít hned a vadí ti automatické sahání po telefonu, zvol 7denní Dopaminový detox. Jestli hledáš delší výzvu zaměřenou na disciplínu, stáhni si zatím tracker 75 Hard zdarma; kompletní plán 75 DNÍ připravujeme.',
+  },
+  {
+    q: 'Je dopaminový detox skutečný detox?',
+    a: 'Ne. Dopamin z těla neodstraňuješ a mozek se za sedm dní „neresetuje“. Název označuje praktický plán omezení rušivých podnětů a změny digitálních návyků. V e-knize přesně oddělujeme užitečné postupy od marketingových zkratek.',
+  },
+  {
+    q: 'V jakém formátu plán dostanu?',
+    a: 'Dopaminový detox přijde po zaplacení e-mailem jako PDF čitelné na telefonu i vhodné k tisku. Tracker a další přílohy dostaneš zvlášť, aby se daly snadno vytisknout.',
+  },
+  {
+    q: 'Co když mi placený plán nesedne?',
+    a: 'Do 14 dnů od nákupu můžeš požádat o vrácení peněz. Stačí napsat e-mail; podrobnosti jsou v obchodních podmínkách.',
+  },
+  {
+    q: 'Musím si koupit plán, abych mohl začít?',
+    a: 'Nemusíš. Pravidla 75 Hard i tracker na 75 dní najdeš na webu zdarma. Placený plán dává smysl ve chvíli, kdy nechceš skládat postup z desítek článků a chceš mít úkoly, vysvětlení a přílohy pohromadě.',
   },
 ];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      name: 'Plány osobního rozvoje — Buduj sám sebe',
+      description:
+        'Praktické plány osobního rozvoje den po dni: dopaminový detox, výzva 75 Hard, e-knihy a tisknutelné trackery.',
+      url: 'https://budujsamsebe.cz/plany/',
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Dopaminový detox: 7denní plán',
+            url: 'https://budujsamsebe.cz/plany/dopaminovy-detox/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: '75 DNÍ po česku',
+            url: 'https://budujsamsebe.cz/plany/75-dni/',
+          },
+        ],
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faq.map((polozka) => ({
+        '@type': 'Question',
+        name: polozka.q,
+        acceptedAnswer: { '@type': 'Answer', text: polozka.a },
+      })),
+    },
+  ],
+};
 ---
 
 <Base
-  title="Plány — Buduj sám sebe"
-  description="Placené plány: rozpis na každý den, tisknutelné trackery a garance vrácení peněz."
+  title="Plány osobního rozvoje: dopaminový detox a 75 Hard"
+  description="Praktické plány osobního rozvoje den po dni. Dopaminový detox na 7 dní, plán k výzvě 75 Hard a tisknutelné trackery. Bez motivační vaty."
 >
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} slot="head" />
+
   <main>
     <section class="border-b-[3px] border-ink">
-      <div class="mx-auto flex max-w-5xl flex-col gap-3 px-5 py-10 sm:px-8">
-        <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">OBCHOD</div>
-        <h1 class="text-3xl font-bold sm:text-[40px]">Plány</h1>
-        <p class="max-w-xl font-mono text-sm leading-relaxed text-muted">
-          Kompletní plány den po dni. Každý má tisknutelný tracker a 14denní garanci vrácení
-          peněz. Hotový je zatím jeden — u druhého říkáme dopředu, co v něm bude.
+      <div class="mx-auto flex max-w-5xl flex-col gap-5 px-5 py-12 sm:px-8 sm:py-16">
+        <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">
+          PRAKTICKÉ E-KNIHY A TRACKERY
+        </div>
+        <h1 class="max-w-3xl text-4xl font-bold leading-[1.05] tracking-tight sm:text-[52px]">
+          Plány osobního rozvoje, které tě provedou den po dni.
+        </h1>
+        <p class="max-w-2xl font-mono text-sm leading-relaxed text-ink-soft">
+          Rozhodnout se je snadné. Těžší je vědět, co udělat zítra ráno a co ve chvíli, kdy se
+          ti nechce. Proto každý plán rozepisujeme na konkrétní kroky, přidáváme tracker a
+          vynecháváme motivační vatu.
         </p>
+        <div class="mt-1 flex flex-col items-start gap-2">
+          <a href="#vyber-plan" class="bg-ink px-6 py-4 font-mono text-sm font-semibold tracking-[0.04em] text-paper hover:bg-accent">
+            VYBRAT PLÁN →
+          </a>
+          <div class="font-mono text-[12px] text-muted">
+            Jeden plán je hotový. Druhý připravujeme a nic za něj zatím neúčtujeme.
+          </div>
+        </div>
       </div>
     </section>
-    <section class="mx-auto flex max-w-5xl flex-col px-5 sm:px-8">
-      {
-        plany.map((e) => (
-          <a
-            href={e.href}
-            class="group flex flex-col gap-1.5 border-b border-line py-6 hover:bg-paper-dark sm:flex-row sm:items-center sm:justify-between"
-          >
-            <div class="flex flex-col gap-1.5">
-              <div
-                class:list={[
-                  'text-xl font-bold group-hover:text-accent',
-                  e.pripravujeme && 'text-ink-soft',
-                ]}
-              >
-                {e.title}
-              </div>
-              <div class="font-mono text-[13px] text-muted">{e.desc}</div>
+
+    <section id="vyber-plan" class="scroll-mt-4 border-b-[3px] border-ink">
+      <div class="mx-auto grid max-w-5xl grid-cols-1 sm:grid-cols-[1fr_1.1fr]">
+        <div class="border-b-[3px] border-ink bg-paper-dark p-5 sm:border-b-0 sm:border-r-[3px] sm:p-8">
+          <img
+            src="/plany/dopaminovy-detox/mockup.png"
+            alt="E-kniha Dopaminový detox a ukázka denního plánu s trackerem"
+            width="1600"
+            height="1200"
+            loading="eager"
+            class="h-full w-full border-[3px] border-ink object-cover"
+          />
+        </div>
+        <article class="flex flex-col gap-5 p-6 sm:p-10">
+          <div class="flex flex-wrap items-center gap-3">
+            <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">HOTOVO · PDF IHNED</div>
+            <div class="border border-ink px-2 py-1 font-mono text-[11px] font-semibold">7 DNÍ</div>
+          </div>
+          <div>
+            <h2 class="text-3xl font-bold leading-tight">Dopaminový detox: 7denní plán</h2>
+            <p class="mt-3 max-w-xl text-[16px] leading-relaxed text-ink-soft">
+              Pro chvíli, kdy bereš telefon do ruky dřív, než víš proč. Sedm dní, sedm
+              pravidel a jeden tracker. Každý den upravíš jednu část prostředí a večer si
+              zapíšeš, co se skutečně změnilo.
+            </p>
+          </div>
+          <ul class="flex flex-col gap-3 font-mono text-[13px] leading-relaxed text-ink-soft">
+            <li class="flex items-start gap-3"><span class="font-bold text-accent">01</span><span>Tvrdá i Měkká verze podle práce, rodiny a času.</span></li>
+            <li class="flex items-start gap-3"><span class="font-bold text-accent">02</span><span>Úkol na každý den, tracker, karta pravidel a 30 náhrad za scrollování.</span></li>
+            <li class="flex items-start gap-3"><span class="font-bold text-accent">03</span><span>Den 0 zdarma, abys před nákupem viděl způsob práce i sazbu.</span></li>
+          </ul>
+          <div class="mt-auto flex flex-col gap-3 border-t-[3px] border-ink pt-5 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <div class="text-[30px] font-bold">149 Kč</div>
+              <div class="font-mono text-[11px] text-muted">PDF + tisknutelné přílohy</div>
             </div>
-            <div
-              class:list={[
-                'font-mono text-sm font-semibold',
-                e.pripravujeme ? 'tracking-[0.1em] text-muted' : 'text-accent',
-              ]}
-            >
-              {e.stav} →
-            </div>
+            <a href="/plany/dopaminovy-detox/" class="bg-ink px-5 py-4 text-center font-mono text-[13px] font-semibold tracking-[0.04em] text-paper hover:bg-accent">
+              PROHLÉDNOUT 7DENNÍ PLÁN →
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="border-b-[3px] border-ink bg-ink text-paper">
+      <div class="mx-auto grid max-w-5xl grid-cols-1 sm:grid-cols-[1fr_280px]">
+        <article class="flex flex-col gap-4 border-b border-paper/30 px-5 py-10 sm:border-b-0 sm:border-r sm:px-8">
+          <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent-soft">PŘIPRAVUJEME · 75 HARD ČESKY</div>
+          <h2 class="text-3xl font-bold leading-tight">75 DNÍ po česku</h2>
+          <p class="max-w-2xl text-[16px] leading-relaxed text-paper-dark">
+            Dlouhá výzva nepotřebuje další velký slib. Potřebuje plán pro obyčejné úterý,
+            propršený venkovní trénink a den, kdy chuť skončí dřív než úkoly. Připravujeme
+            českého průvodce výzvou 75 Hard: pravidla, jídelníček z běžných potravin,
+            tréninkový rozpis a krizové týdny.
+          </p>
+          <a href="/plany/75-dni/" class="self-start font-mono text-[13px] font-semibold underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-soft">
+            CO BUDE V PLÁNU 75 DNÍ →
           </a>
-        ))
-      }
+        </article>
+        <div class="flex flex-col justify-center gap-4 bg-paper-dark p-6 text-ink sm:p-8">
+          <div class="font-mono text-[12px] tracking-[0.1em] text-muted">ZAČÍT MŮŽEŠ UŽ TEĎ</div>
+          <div class="text-xl font-bold">75 Hard tracker zdarma</div>
+          <p class="font-mono text-[12px] leading-relaxed text-ink-soft">
+            Čtyři strany A4, pět denních pravidel a 75 řádků k odškrtnutí. Za e-mail, bez dalších podmínek.
+          </p>
+          <a href="/tracker/" class="bg-ink px-5 py-4 text-center font-mono text-[12px] font-semibold tracking-[0.04em] text-paper hover:bg-accent">
+            STÁHNOUT TRACKER ZDARMA →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto max-w-5xl px-5 py-10 sm:px-8">
+        <div class="font-mono text-[12px] tracking-[0.12em] text-muted">ROZHODNI SE PODLE CÍLE</div>
+        <h2 class="mt-2 text-2xl font-bold leading-tight sm:text-[32px]">Který plán si vybrat?</h2>
+        <div class="mt-7 grid grid-cols-1 border-[3px] border-ink sm:grid-cols-2">
+          <div class="flex flex-col gap-3 border-b-[3px] border-ink p-6 sm:border-b-0 sm:border-r-[3px]">
+            <div class="font-mono text-[12px] font-semibold text-accent">CHCI ZAČÍT MENŠÍM KROKEM</div>
+            <h3 class="text-xl font-bold">Vyber Dopaminový detox</h3>
+            <p class="font-mono text-[12px] leading-relaxed text-ink-soft">
+              Když chceš během jednoho týdne otestovat práci s pravidly, omezit automatické
+              scrollování a získat prostor pro soustředění. Plán je hotový a přijde ihned.
+            </p>
+          </div>
+          <div class="flex flex-col gap-3 p-6">
+            <div class="font-mono text-[12px] font-semibold text-accent">CHCI DLOUHOU VÝZVU</div>
+            <h3 class="text-xl font-bold">Začni trackerem 75 Hard</h3>
+            <p class="font-mono text-[12px] leading-relaxed text-ink-soft">
+              Když hledáš 75 dní pevné disciplíny a počítáš se dvěma tréninky denně.
+              Kompletní český plán se ještě píše; pravidla a tracker už jsou zdarma.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b-[3px] border-ink bg-paper-dark">
+      <div class="mx-auto max-w-5xl px-5 py-10 sm:px-8">
+        <div class="font-mono text-[12px] tracking-[0.12em] text-muted">UVNITŘ KAŽDÉHO PLÁNU</div>
+        <h2 class="mt-2 max-w-2xl text-2xl font-bold leading-tight sm:text-[32px]">Ne další kniha do složky. Pracovní postup.</h2>
+        <div class="mt-7 grid grid-cols-1 gap-6 sm:grid-cols-3">
+          <div class="border-t-[3px] border-ink pt-4">
+            <div class="font-mono text-[12px] font-semibold text-accent">01 · JASNÝ DALŠÍ KROK</div>
+            <p class="mt-2 text-[15px] leading-relaxed text-ink-soft">Víš, co udělat dnes. Nemusíš znovu hledat návod ani skládat pravidla z videí.</p>
+          </div>
+          <div class="border-t-[3px] border-ink pt-4">
+            <div class="font-mono text-[12px] font-semibold text-accent">02 · TRACKER K VYTIŠTĚNÍ</div>
+            <p class="mt-2 text-[15px] leading-relaxed text-ink-soft">Pokrok není pocit. Každý splněný den dostane vlastní políčko a viditelnou čárku.</p>
+          </div>
+          <div class="border-t-[3px] border-ink pt-4">
+            <div class="font-mono text-[12px] font-semibold text-accent">03 · POCTIVÉ LIMITY</div>
+            <p class="mt-2 text-[15px] leading-relaxed text-ink-soft">Říkáme, co je ověřené, co je jen trend a kdy obecný plán nestačí.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-5xl flex-col gap-5 px-5 py-10 sm:flex-row sm:items-start sm:justify-between sm:px-8">
+        <div class="max-w-xl">
+          <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">NÁKUP BEZ HÁDÁNÍ</div>
+          <h2 class="mt-2 text-2xl font-bold">14 dní na klidné rozhodnutí</h2>
+          <p class="mt-3 text-[15px] leading-relaxed text-ink-soft">
+            U placeného plánu si nejdřív můžeš zdarma prohlédnout ukázku. Pokud ti po nákupu
+            způsob práce nesedne, do 14 dnů napiš a peníze vrátíme. Bez přesvědčování.
+          </p>
+        </div>
+        <a href="/obchodni-podminky/" class="shrink-0 border-2 border-ink px-5 py-3 font-mono text-[12px] font-semibold tracking-[0.04em] hover:border-accent hover:text-accent">
+          OBCHODNÍ PODMÍNKY →
+        </a>
+      </div>
+    </section>
+
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-3xl flex-col gap-4 px-5 py-10 sm:px-8">
+        <div class="font-mono text-[12px] tracking-[0.12em] text-muted">PŘED NÁKUPEM</div>
+        <h2 class="text-2xl font-bold leading-tight sm:text-[32px]">Časté otázky o plánech osobního rozvoje</h2>
+        <div class="border-t-[3px] border-ink">
+          {
+            faq.map((polozka) => (
+              <details class="group border-b border-line">
+                <summary class="flex cursor-pointer list-none items-start justify-between gap-4 py-4 text-[17px] font-bold hover:text-accent">
+                  <span>{polozka.q}</span>
+                  <span class="font-mono text-xl leading-none text-accent group-open:hidden">+</span>
+                  <span class="hidden font-mono text-xl leading-none text-accent group-open:inline">−</span>
+                </summary>
+                <p class="pb-5 text-[15px] leading-relaxed text-ink-soft">{polozka.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="mx-auto flex max-w-5xl flex-col gap-5 px-5 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+        <div class="max-w-xl">
+          <div class="text-xl font-bold">Nemusíš měnit všechno najednou.</div>
+          <p class="mt-2 font-mono text-[12px] leading-relaxed text-muted">Vyber jeden plán, jeden dnešní krok a jedno políčko, které večer odškrtneš.</p>
+        </div>
+        <a href="/plany/dopaminovy-detox/" class="shrink-0 bg-ink px-6 py-4 text-center font-mono text-[13px] font-semibold tracking-[0.04em] text-paper hover:bg-accent">
+          ZAČÍT 7DENNÍM PLÁNEM →
+        </a>
+      </div>
     </section>
   </main>
 </Base>
