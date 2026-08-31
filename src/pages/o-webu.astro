@@ -1,37 +1,231 @@
 ---
 import Base from '../layouts/Base.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'O projektu Buduj sám sebe',
+  description:
+    'Proč vznikl projekt Buduj sám sebe, jak připravuje české návody k výzvám a jak pracuje se zdroji a AI.',
+  url: 'https://budujsamsebe.cz/o-webu/',
+  mainEntity: {
+    '@type': 'Organization',
+    '@id': 'https://budujsamsebe.cz/#organization',
+    name: 'Buduj sám sebe',
+    legalName: 'Digitance CZ s. r. o.',
+    url: 'https://budujsamsebe.cz/',
+    email: 'plan@budujsamsebe.cz',
+    knowsAbout: ['75 Hard', 'dopaminový detox', 'osobní výzvy', 'trackery návyků'],
+  },
+};
 ---
 
-<Base title="O webu — Buduj sám sebe" description="Kdo za webem stojí, jak vzniká obsah a s jakými zdroji pracujeme.">
+<Base
+  title="O Buduj sám sebe: jak vznikají výzvy a plány"
+  description="Proč vznikl projekt Buduj sám sebe, kdo za ním stojí a jak připravujeme české návody, plány a trackery ke světovým výzvám."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} slot="head" />
+
   <main>
     <section class="border-b-[3px] border-ink">
-      <div class="mx-auto flex max-w-3xl flex-col gap-3 px-5 py-10 sm:px-8">
-        <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">O WEBU</div>
-        <h1 class="text-3xl font-bold sm:text-[40px]">Poctivě na rovinu</h1>
+      <div class="mx-auto grid max-w-5xl grid-cols-1 sm:grid-cols-[1fr_220px]">
+        <div class="flex flex-col gap-5 border-b-[3px] border-ink px-5 py-12 sm:border-b-0 sm:border-r-[3px] sm:px-8 sm:py-16">
+          <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">
+            O BUDUJ SÁM SEBE
+          </div>
+          <h1 class="max-w-3xl text-4xl font-bold leading-[1.05] tracking-tight sm:text-[48px]">
+            Z trendů děláme plány, které se dají skutečně plnit.
+          </h1>
+          <p class="max-w-2xl font-mono text-sm leading-relaxed text-ink-soft">
+            Světové výzvy se na český internet často dostanou jako krátké video, seznam
+            pravidel bez souvislostí nebo velký slib. My je rozebíráme, ověřujeme a skládáme
+            zpátky do srozumitelných českých návodů, plánů a trackerů.
+          </p>
+        </div>
+        <div class="flex items-center justify-center bg-paper-dark p-8">
+          <div class="flex aspect-square w-full max-w-[150px] items-center justify-center border-[3px] border-ink bg-paper p-5">
+            <img src="/logo.png" alt="Buduj sám sebe" width="256" height="256" class="h-auto w-full" />
+          </div>
+        </div>
       </div>
     </section>
-    <section class="mx-auto max-w-3xl px-5 py-8 sm:px-8">
-      <div class="clanek">
-        <p>
-          Buduj sám sebe je malá redakce, která překládá světové výzvy do češtiny —
-          s pravidly bez nejasností, plány na každý den a trackery k vytištění.
-        </p>
-        <p>
-          <strong>Nejsme lékaři ani trenéři a netvrdíme to.</strong> U témat, která se týkají
-          jídla, pohybu nebo zdraví, vycházíme z veřejně dostupných doporučení (WHO, NHS a
-          další) a zdroje uvádíme pod každým článkem. Před zásadní změnou jídelníčku nebo
-          tréninku se poraď s lékařem.
-        </p>
-        <p>
-          Obsah tvoříme s pomocí AI nástrojů a ručně ho procházíme a doplňujeme o českou
-          praxi. Placené plány mají 14denní garanci vrácení peněz bez ptaní.
-        </p>
-        <p>
-          Web provozuje Digitance CZ s. r. o., Uralská 689/7, 160 00 Praha 6, IČO 24892581.
-          Napsat nám můžeš na <a href="mailto:plan@budujsamsebe.cz">plan@budujsamsebe.cz</a>.
-          Podrobnosti v <a href="/obchodni-podminky/">obchodních podmínkách</a> a
-          <a href="/ochrana-osobnich-udaju/">ochraně osobních údajů</a>.
-        </p>
+
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto grid max-w-5xl grid-cols-1 sm:grid-cols-[240px_1fr]">
+        <div class="border-b-[3px] border-ink bg-ink px-5 py-8 text-paper sm:border-b-0 sm:border-r-[3px] sm:px-8 sm:py-10">
+          <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent-soft">PROČ TENHLE WEB</div>
+          <div class="mt-4 text-2xl font-bold leading-tight">Motivace je začátek. Systém rozhoduje, co bude dál.</div>
+        </div>
+        <div class="flex flex-col gap-5 px-5 py-8 sm:px-8 sm:py-10">
+          <p class="text-[17px] leading-relaxed text-ink-soft">
+            Buduj sám sebe vznikl pro lidi, kteří nepotřebují další citát ani video o tom, že
+            mají začít. Potřebují vědět, <strong class="text-ink">co přesně udělat dnes</strong>,
+            co si připravit na zítra a jak poznat, že se opravdu posouvají.
+          </p>
+          <p class="text-[17px] leading-relaxed text-ink-soft">
+            Proto dáváme přednost konkrétním pravidlům, denním krokům a papírovým trackerům.
+            Čárka v tabulce není zázrak. Je to jednoduchý důkaz, že jeden domluvený krok proběhl.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b-[3px] border-ink bg-paper-dark">
+      <div class="mx-auto max-w-5xl px-5 py-10 sm:px-8">
+        <div class="font-mono text-[12px] tracking-[0.12em] text-muted">CO TU NAJDEŠ</div>
+        <h2 class="mt-2 max-w-2xl text-2xl font-bold leading-tight sm:text-[32px]">
+          Méně inspirace do záložek. Více věcí k použití.
+        </h2>
+        <div class="mt-7 grid grid-cols-1 gap-6 sm:grid-cols-3">
+          <div class="border-t-[3px] border-ink pt-4">
+            <div class="font-mono text-[12px] font-semibold text-accent">01 · NÁVODY K VÝZVÁM</div>
+            <p class="mt-3 text-[15px] leading-relaxed text-ink-soft">
+              Pravidla 75 Hard, dopaminového detoxu, ruckingu a dalších trendů vysvětlená
+              česky, bez zbytečných nejasností.
+            </p>
+          </div>
+          <div class="border-t-[3px] border-ink pt-4">
+            <div class="font-mono text-[12px] font-semibold text-accent">02 · PLÁNY DEN PO DNI</div>
+            <p class="mt-3 text-[15px] leading-relaxed text-ink-soft">
+              Placené e-knihy pro chvíli, kdy nechceš skládat postup z desítek článků a videí.
+              Jeden dokument, jasné kroky a přílohy.
+            </p>
+          </div>
+          <div class="border-t-[3px] border-ink pt-4">
+            <div class="font-mono text-[12px] font-semibold text-accent">03 · TRACKERY A NÁSTROJE</div>
+            <p class="mt-3 text-[15px] leading-relaxed text-ink-soft">
+              Tisknutelné tabulky, checklisty a jednoduché kalkulačky. Část je zdarma a můžeš
+              s ní začít bez nákupu.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto max-w-5xl px-5 py-10 sm:px-8">
+        <div class="font-mono text-[12px] tracking-[0.12em] text-muted">JAK VZNIKÁ OBSAH</div>
+        <h2 class="mt-2 max-w-2xl text-2xl font-bold leading-tight sm:text-[32px]">
+          Trend není důkaz. Proto začínáme u zdrojů.
+        </h2>
+        <div class="mt-7 border-t-[3px] border-ink">
+          <div class="grid grid-cols-[52px_1fr] gap-4 border-b border-line py-5 sm:grid-cols-[80px_220px_1fr]">
+            <div class="font-mono text-[12px] font-semibold text-accent">01</div>
+            <h3 class="text-[18px] font-bold">Najdeme původní pravidla</h3>
+            <p class="col-span-2 text-[15px] leading-relaxed text-ink-soft sm:col-span-1">
+              U výzev hledáme autora nebo původní zdroj. Neopisujeme pátou kopii článku, která
+              už změnila čísla, podmínky nebo význam.
+            </p>
+          </div>
+          <div class="grid grid-cols-[52px_1fr] gap-4 border-b border-line py-5 sm:grid-cols-[80px_220px_1fr]">
+            <div class="font-mono text-[12px] font-semibold text-accent">02</div>
+            <h3 class="text-[18px] font-bold">Oddělíme pravidlo od slibu</h3>
+            <p class="col-span-2 text-[15px] leading-relaxed text-ink-soft sm:col-span-1">
+              Popíšeme, jak výzva funguje, ale nepřebíráme automaticky tvrzení o hubnutí,
+              zdraví, produktivitě nebo „resetu mozku“.
+            </p>
+          </div>
+          <div class="grid grid-cols-[52px_1fr] gap-4 border-b border-line py-5 sm:grid-cols-[80px_220px_1fr]">
+            <div class="font-mono text-[12px] font-semibold text-accent">03</div>
+            <h3 class="text-[18px] font-bold">Doplníme českou realitu</h3>
+            <p class="col-span-2 text-[15px] leading-relaxed text-ink-soft sm:col-span-1">
+              Galony převádíme na litry, suroviny hledáme v běžných českých obchodech a plán
+              skládáme tak, aby dával smysl vedle práce, rodiny a místního počasí.
+            </p>
+          </div>
+          <div class="grid grid-cols-[52px_1fr] gap-4 border-b border-line py-5 sm:grid-cols-[80px_220px_1fr]">
+            <div class="font-mono text-[12px] font-semibold text-accent">04</div>
+            <h3 class="text-[18px] font-bold">Přiznáme hranice</h3>
+            <p class="col-span-2 text-[15px] leading-relaxed text-ink-soft sm:col-span-1">
+              Když obecná výzva nemusí být vhodná pro každého, napíšeme to. U témat pohybu,
+              jídla a zdraví uvádíme zdroje a připomínáme, kdy je potřeba odborník.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b-[3px] border-ink bg-ink text-paper">
+      <div class="mx-auto grid max-w-5xl grid-cols-1 sm:grid-cols-[1fr_1fr]">
+        <div class="border-b border-paper/30 px-5 py-10 sm:border-b-0 sm:border-r sm:px-8">
+          <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent-soft">AI OTEVŘENĚ</div>
+          <h2 class="mt-3 text-2xl font-bold leading-tight">AI je pracovní nástroj. Ne zdroj pravdy.</h2>
+        </div>
+        <div class="flex flex-col gap-4 px-5 py-10 sm:px-8">
+          <p class="text-[15px] leading-relaxed text-paper-dark">
+            Při rešerši, stavbě osnov a jazykové redakci používáme nástroje umělé inteligence.
+            Pomáhají porovnat více podkladů a rychleji dostat text do použitelné podoby.
+          </p>
+          <p class="text-[15px] leading-relaxed text-paper-dark">
+            AI ale není odborný zdroj a sama nerozhoduje, co publikujeme. Za výběr témat,
+            výsledný text, odkazy i prodávané materiály odpovídá provozovatel projektu.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto grid max-w-5xl grid-cols-1 sm:grid-cols-[1fr_320px]">
+        <div class="flex flex-col gap-4 border-b-[3px] border-ink px-5 py-10 sm:border-b-0 sm:border-r-[3px] sm:px-8">
+          <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">KDO ZA WEBEM STOJÍ</div>
+          <h2 class="text-2xl font-bold">Malý český projekt s dohledatelným provozovatelem</h2>
+          <p class="max-w-2xl text-[15px] leading-relaxed text-ink-soft">
+            Buduj sám sebe není zdravotnické zařízení, trenérská služba ani anonymní obchod.
+            Je to obsahový projekt provozovaný českou společností Digitance CZ s. r. o.
+          </p>
+          <p class="font-mono text-[12px] leading-relaxed text-muted">
+            Digitance CZ s. r. o. · Uralská 689/7, 160 00 Praha 6 · IČO 24892581
+          </p>
+        </div>
+        <div class="flex flex-col justify-center gap-4 bg-paper-dark p-6 sm:p-8">
+          <div class="font-mono text-[12px] tracking-[0.1em] text-muted">NAPIŠ NÁM</div>
+          <a href="mailto:plan@budujsamsebe.cz" class="break-all text-xl font-bold underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">
+            plan@budujsamsebe.cz
+          </a>
+          <p class="font-mono text-[11px] leading-relaxed text-muted">Dotazy k objednávkám, opravy v článcích i věcnou připomínku čteme na stejné adrese.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto max-w-5xl px-5 py-10 sm:px-8">
+        <div class="font-mono text-[12px] tracking-[0.12em] text-muted">CO SLIBUJEME</div>
+        <h2 class="mt-2 text-2xl font-bold leading-tight sm:text-[32px]">Jednoduchá pravidla i pro nás</h2>
+        <div class="mt-7 grid grid-cols-1 border-[3px] border-ink sm:grid-cols-3">
+          <div class="border-b-[3px] border-ink p-6 sm:border-b-0 sm:border-r-[3px]">
+            <div class="text-xl font-bold">Nevymýšlíme výsledky</div>
+            <p class="mt-3 font-mono text-[12px] leading-relaxed text-ink-soft">Žádné falešné recenze, počty stažení ani proměny, které se nestaly.</p>
+          </div>
+          <div class="border-b-[3px] border-ink p-6 sm:border-b-0 sm:border-r-[3px]">
+            <div class="text-xl font-bold">Zdarma znamená zdarma</div>
+            <p class="mt-3 font-mono text-[12px] leading-relaxed text-ink-soft">U trackeru předem říkáme, že přijde za e-mail. Placený produkt poznáš podle ceny.</p>
+          </div>
+          <div class="p-6">
+            <div class="text-xl font-bold">Chybu opravíme</div>
+            <p class="mt-3 font-mono text-[12px] leading-relaxed text-ink-soft">Když najdeš věcnou chybu nebo nefunkční odkaz, napiš. Oprava má přednost před obhajobou.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="mx-auto flex max-w-5xl flex-col gap-6 px-5 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+        <div class="max-w-xl">
+          <div class="text-xl font-bold">Začni tím, co můžeš opravdu použít.</div>
+          <p class="mt-2 font-mono text-[12px] leading-relaxed text-muted">Projdi pravidla výzev, vyber jeden plán nebo si zdarma vytiskni první tracker.</p>
+        </div>
+        <div class="flex flex-col gap-3 sm:flex-row">
+          <a href="/vyzvy/" class="border-2 border-ink px-5 py-3 text-center font-mono text-[12px] font-semibold tracking-[0.04em] hover:border-accent hover:text-accent">PROJÍT VÝZVY →</a>
+          <a href="/plany/" class="bg-ink px-5 py-3 text-center font-mono text-[12px] font-semibold tracking-[0.04em] text-paper hover:bg-accent">PROJÍT PLÁNY →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t border-line">
+      <div class="mx-auto flex max-w-5xl flex-wrap gap-x-6 gap-y-3 px-5 py-6 font-mono text-[11px] text-muted sm:px-8">
+        <a href="/obchodni-podminky/" class="underline underline-offset-4 hover:text-accent">Obchodní podmínky</a>
+        <a href="/ochrana-osobnich-udaju/" class="underline underline-offset-4 hover:text-accent">Ochrana osobních údajů</a>
+        <span>Obsah má informační charakter a nenahrazuje odbornou radu.</span>
       </div>
     </section>
   </main>
