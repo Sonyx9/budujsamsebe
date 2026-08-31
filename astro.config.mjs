@@ -5,9 +5,11 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://budujsamsebe.cz',
+  // Staré adresy — ať nikomu neumře odkaz z e-mailu, PDF nebo vyhledávače.
   redirects: {
     '/plany/75-hard/': '/plany/75-dni/',
     '/tracker/dekujeme/': '/dekujeme/',
+    '/o-webu/': '/o-nas/',
   },
   integrations: [
     sitemap({
