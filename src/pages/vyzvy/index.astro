@@ -1,30 +1,269 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import { serazenePodleData } from '../../lib/vyzvy';
 
-const posts = await getCollection('vyzvy');
+const posts = serazenePodleData(await getCollection('vyzvy'));
+
+const faq = [
+  {
+    q: 'Jakou výzvu si mám vybrat?',
+    a: 'Vyber podle toho, co chceš opravdu změnit a kolik prostoru máš v běžném týdnu. 75 Hard je náročná 75denní zkouška disciplíny. Dopaminový detox je kratší sedmidenní práce s telefonem a pozorností. Rucking je průběžný pohybový návyk založený na chůzi se zátěží.',
+  },
+  {
+    q: 'Co je výzva 75 Hard?',
+    a: '75 Hard je výzva mentální odolnosti od Andyho Friselly. Po dobu 75 dní každý den dodržuješ zvolený jídelníček bez alkoholu, absolvuješ dva 45minutové tréninky, vypiješ jeden galon vody, přečteš 10 stran naučné knihy a pořídíš progresovou fotografii.',
+  },
+  {
+    q: 'Co když během 75 Hard jeden den vynechám?',
+    a: 'Podle oficiálních pravidel začínáš znovu od dne 1. Právě nulový prostor pro výjimky dělá z 75 Hard velmi náročnou výzvu. Pokud ti tento přístup nesedí, zvaž kratší plán nebo volnější alternativu 75 Soft.',
+  },
+  {
+    q: 'Je dopaminový detox vhodný pro začátečníka?',
+    a: 'Sedmidenní dopaminový detox je kratší a lépe se vejde do běžného týdne. Nejde o odstranění dopaminu z těla, ale o omezení automatického scrollování, notifikací a dalších rušivých podnětů. Je vhodný, pokud si chceš nejdřív vyzkoušet práci s každodenními pravidly.',
+  },
+  {
+    q: 'Co je rucking?',
+    a: 'Rucking je svižná chůze se zátěží v batohu. Začíná se lehkým nákladem a pohodlnou vzdáleností; čas, trasu nebo váhu zvyšuješ postupně. Českého průvodce pro začátečníky připravujeme.',
+  },
+  {
+    q: 'Jsou výzvy zdarma?',
+    a: 'Články s pravidly a základní tracker 75 Hard jsou zdarma. Placené jsou pouze kompletní plány, které spojují denní postup, vysvětlení a tisknutelné přílohy. K zahájení 75 Hard placený plán nepotřebuješ.',
+  },
+  {
+    q: 'Jsou tyto výzvy bezpečné pro každého?',
+    a: 'Ne. Dva tréninky denně, vysoký příjem vody ani chůze se zátěží nemusí být vhodné pro každého. Pokud máš zdravotní omezení, bereš léky nebo se vracíš po zranění, prober začátek s lékařem či fyzioterapeutem. Obsah webu nenahrazuje individuální zdravotní doporučení.',
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      name: 'Výzvy pro osobní rozvoj — Buduj sám sebe',
+      description:
+        'České návody pro výzvu 75 Hard, dopaminový detox a rucking. Pravidla, trackery a plány pro disciplínu a každodenní návyky.',
+      url: 'https://budujsamsebe.cz/vyzvy/',
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: posts.map((post, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: post.data.title,
+          url: `https://budujsamsebe.cz/vyzvy/${post.id}/`,
+        })),
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faq.map((polozka) => ({
+        '@type': 'Question',
+        name: polozka.q,
+        acceptedAnswer: { '@type': 'Answer', text: polozka.a },
+      })),
+    },
+  ],
+};
 ---
 
-<Base title="Výzvy — Buduj sám sebe" description="Všechny výzvy a plány: 75 Hard, dopaminový detox, rucking a další.">
+<Base
+  title="Výzvy pro osobní rozvoj: 75 Hard, detox a rucking"
+  description="České návody pro 75 Hard, dopaminový detox a rucking. Vyber si výzvu, projdi pravidla a stáhni tracker pro každodenní disciplínu."
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} slot="head" />
+
   <main>
     <section class="border-b-[3px] border-ink">
-      <div class="mx-auto flex max-w-5xl flex-col gap-3 px-5 py-10 sm:px-8">
-        <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">REJSTŘÍK</div>
-        <h1 class="text-3xl font-bold sm:text-[40px]">Výzvy</h1>
+      <div class="mx-auto flex max-w-5xl flex-col gap-5 px-5 py-12 sm:px-8 sm:py-16">
+        <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">
+          REJSTŘÍK VÝZEV
+        </div>
+        <h1 class="max-w-3xl text-4xl font-bold leading-[1.05] tracking-tight sm:text-[52px]">
+          Výzvy pro disciplínu, pozornost a silnější návyky.
+        </h1>
+        <p class="max-w-2xl font-mono text-sm leading-relaxed text-ink-soft">
+          Výzva není nový život od pondělí. Je to předem dané období, jasná pravidla a jeden
+          splněný den za druhým. Vyber si podle cíle a času, ne podle toho, co právě vypadá
+          nejtěžší na internetu.
+        </p>
+        <div class="mt-1 flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-5">
+          <a href="#vyber-vyzvu" class="bg-ink px-6 py-4 font-mono text-sm font-semibold tracking-[0.04em] text-paper hover:bg-accent">
+            VYBRAT VÝZVU →
+          </a>
+          <a href="/tracker/" class="font-mono text-[12px] font-semibold underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">
+            NEBO STÁHNOUT 75 HARD TRACKER ZDARMA
+          </a>
+        </div>
       </div>
     </section>
-    <section class="mx-auto flex max-w-5xl flex-col px-5 sm:px-8">
-      {
-        posts.map((post) => (
-          <a
-            href={`/vyzvy/${post.id}/`}
-            class="group flex flex-col gap-1.5 border-b border-line py-6 hover:bg-paper-dark"
-          >
-            <div class="text-xl font-bold group-hover:text-accent">{post.data.title}</div>
-            <div class="font-mono text-[13px] text-muted">{post.data.description}</div>
-          </a>
-        ))
-      }
+
+    <section id="vyber-vyzvu" class="scroll-mt-4 border-b-[3px] border-ink">
+      <div class="mx-auto grid max-w-5xl grid-cols-1 sm:grid-cols-3">
+        <article class="flex flex-col gap-4 border-b-[3px] border-ink p-6 sm:border-b-0 sm:border-r-[3px] sm:p-8">
+          <div class="flex items-center justify-between gap-3">
+            <div class="font-mono text-[28px] font-semibold text-accent">01</div>
+            <div class="border border-ink px-2 py-1 font-mono text-[10px] font-semibold tracking-[0.08em]">75 DNÍ</div>
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold">Výzva 75 Hard</h2>
+            <p class="mt-3 font-mono text-[12px] leading-relaxed text-ink-soft">
+              Pět každodenních pravidel bez volného dne. Jídelníček, dva tréninky, voda,
+              čtení a progresová fotka. Když jeden úkol chybí, vracíš se na začátek.
+            </p>
+          </div>
+          <div class="mt-auto flex flex-col items-start gap-2 border-t border-line pt-4 font-mono text-[12px] font-semibold">
+            <a href="/vyzvy/75-hard-pravidla/" class="underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">PRAVIDLA 75 HARD ČESKY →</a>
+            <a href="/tracker/" class="underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">TRACKER NA 75 DNÍ →</a>
+          </div>
+        </article>
+
+        <article class="flex flex-col gap-4 border-b-[3px] border-ink p-6 sm:border-b-0 sm:border-r-[3px] sm:p-8">
+          <div class="flex items-center justify-between gap-3">
+            <div class="font-mono text-[28px] font-semibold text-accent">02</div>
+            <div class="border border-ink px-2 py-1 font-mono text-[10px] font-semibold tracking-[0.08em]">7 DNÍ</div>
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold">Dopaminový detox</h2>
+            <p class="mt-3 font-mono text-[12px] leading-relaxed text-ink-soft">
+              Kratší výzva pro telefon, notifikace a automatické scrollování. Nečistí mozek
+              od dopaminu. Pomáhá všimnout si digitálních návyků a změnit prostředí kolem nich.
+            </p>
+          </div>
+          <div class="mt-auto flex flex-col items-start gap-2 border-t border-line pt-4 font-mono text-[12px] font-semibold">
+            <a href="/plany/dopaminovy-detox/" class="underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">7DENNÍ PLÁN DEN PO DNI →</a>
+            <a href="/nastroje/dopaminovy-rozpocet/" class="underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">DOPAMINOVÝ ROZPOČET →</a>
+          </div>
+        </article>
+
+        <article class="flex flex-col gap-4 p-6 sm:p-8">
+          <div class="flex items-center justify-between gap-3">
+            <div class="font-mono text-[28px] font-semibold text-accent">03</div>
+            <div class="border border-line px-2 py-1 font-mono text-[10px] font-semibold tracking-[0.08em] text-muted">PŘIPRAVUJEME</div>
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold">Rucking</h2>
+            <p class="mt-3 font-mono text-[12px] leading-relaxed text-ink-soft">
+              Svižná chůze se zátěží v batohu. Jednoduchý pohybový návyk, u kterého můžeš
+              postupně přidávat čas, vzdálenost nebo váhu bez složitého vybavení.
+            </p>
+          </div>
+          <div class="mt-auto border-t border-line pt-4 font-mono text-[12px] leading-relaxed text-muted">
+            Český návod pro začátečníky a 12týdenní plán připravujeme.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="border-b-[3px] border-ink bg-paper-dark">
+      <div class="mx-auto max-w-5xl px-5 py-10 sm:px-8">
+        <div class="font-mono text-[12px] tracking-[0.12em] text-muted">RYCHLÉ ROZHODNUTÍ</div>
+        <h2 class="mt-2 max-w-2xl text-2xl font-bold leading-tight sm:text-[32px]">Vyber podle cíle, ne podle obtížnosti</h2>
+        <div class="mt-7 grid grid-cols-1 gap-6 sm:grid-cols-3">
+          <div class="border-t-[3px] border-ink pt-4">
+            <div class="font-mono text-[12px] font-semibold text-accent">CHCI TRÉNOVAT DISCIPLÍNU</div>
+            <h3 class="mt-2 text-xl font-bold">75 Hard</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-ink-soft">Pro zkušenějšího člověka, který má prostor na dva tréninky denně a přijímá pravidlo návratu na den 1.</p>
+          </div>
+          <div class="border-t-[3px] border-ink pt-4">
+            <div class="font-mono text-[12px] font-semibold text-accent">CHCI MÉNĚ SAHAT PO TELEFONU</div>
+            <h3 class="mt-2 text-xl font-bold">Dopaminový detox</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-ink-soft">Pro kratší start, během kterého postupně omezíš rušivé podněty a otestuješ nová digitální pravidla.</p>
+          </div>
+          <div class="border-t-[3px] border-ink pt-4">
+            <div class="font-mono text-[12px] font-semibold text-accent">CHCI VÍC CHODIT A ZESÍLIT</div>
+            <h3 class="mt-2 text-xl font-bold">Rucking</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-ink-soft">Pro postupný pohybový návyk venku. Začíná lehkým batohem, ne rekordem v prvním týdnu.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto max-w-5xl px-5 py-10 sm:px-8">
+        <div class="font-mono text-[12px] tracking-[0.12em] text-muted">JAK ZAČÍT VÝZVU</div>
+        <h2 class="mt-2 text-2xl font-bold leading-tight sm:text-[32px]">Nejdřív pravidla. Potom první čárka.</h2>
+        <div class="mt-7 grid grid-cols-1 border-[3px] border-ink sm:grid-cols-3">
+          <div class="border-b-[3px] border-ink p-6 sm:border-b-0 sm:border-r-[3px]">
+            <div class="font-mono text-[12px] font-semibold text-accent">01 · PŘEČTI</div>
+            <p class="mt-3 font-mono text-[12px] leading-relaxed text-ink-soft">Projdi všechna pravidla včetně situací, které vypadají jako drobná výjimka. Rozhodnutí se dělají před startem.</p>
+          </div>
+          <div class="border-b-[3px] border-ink p-6 sm:border-b-0 sm:border-r-[3px]">
+            <div class="font-mono text-[12px] font-semibold text-accent">02 · PŘIPRAV</div>
+            <p class="mt-3 font-mono text-[12px] leading-relaxed text-ink-soft">Zapiš datum začátku, připrav pomůcky a vytiskni tracker. Co nemá místo v kalendáři, snadno zmizí.</p>
+          </div>
+          <div class="p-6">
+            <div class="font-mono text-[12px] font-semibold text-accent">03 · ODŠKRTNI</div>
+            <p class="mt-3 font-mono text-[12px] leading-relaxed text-ink-soft">Soustřeď se na dnešní úkoly. Sedmý ani sedmdesátý pátý den se neplní dnes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-5xl flex-col gap-2 px-5 pt-10 sm:px-8">
+        <div class="font-mono text-[12px] tracking-[0.12em] text-muted">OVĚŘENÉ NÁVODY</div>
+        <h2 class="text-2xl font-bold leading-tight sm:text-[32px]">Články o výzvách</h2>
+      </div>
+      <div class="mx-auto flex max-w-5xl flex-col px-5 pb-10 pt-4 sm:px-8">
+        {
+          posts.length > 0 ? (
+            posts.map((post) => (
+              <a href={`/vyzvy/${post.id}/`} class="group flex flex-col gap-2 border-b border-line py-5 hover:bg-paper-dark sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                <div>
+                  <div class="text-[18px] font-bold leading-snug group-hover:text-accent">{post.data.title}</div>
+                  <div class="mt-1 max-w-2xl font-mono text-[12px] leading-relaxed text-muted">{post.data.description}</div>
+                </div>
+                <div class="shrink-0 font-mono text-[11px] tracking-[0.08em] text-muted">{post.data.kategorie.toUpperCase()} · {post.data.datum}</div>
+              </a>
+            ))
+          ) : (
+            <div class="border-t border-line py-6 font-mono text-[13px] text-muted">První návody právě připravujeme.</div>
+          )
+        }
+      </div>
+    </section>
+
+    <section class="border-b-[3px] border-ink bg-ink text-paper">
+      <div class="mx-auto flex max-w-5xl flex-col gap-5 px-5 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+        <div class="max-w-2xl">
+          <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent-soft">PRVNÍ NÁSTROJ ZDARMA</div>
+          <h2 class="mt-2 text-2xl font-bold">Tracker na 75 dní</h2>
+          <p class="mt-3 font-mono text-[12px] leading-relaxed text-paper-dark">Pět pravidel, týdenní přehled, milníky a 75 řádků k odškrtnutí. Čtyři strany A4 pošleme na e-mail.</p>
+        </div>
+        <a href="/tracker/" class="shrink-0 bg-paper px-6 py-4 text-center font-mono text-[13px] font-semibold tracking-[0.04em] text-ink hover:bg-accent hover:text-paper">STÁHNOUT TRACKER →</a>
+      </div>
+    </section>
+
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto flex max-w-3xl flex-col gap-4 px-5 py-10 sm:px-8">
+        <div class="font-mono text-[12px] tracking-[0.12em] text-muted">PŘED STARTEM</div>
+        <h2 class="text-2xl font-bold leading-tight sm:text-[32px]">Časté otázky o výzvách</h2>
+        <div class="border-t-[3px] border-ink">
+          {
+            faq.map((polozka) => (
+              <details class="group border-b border-line">
+                <summary class="flex cursor-pointer list-none items-start justify-between gap-4 py-4 text-[17px] font-bold hover:text-accent">
+                  <span>{polozka.q}</span>
+                  <span class="font-mono text-xl leading-none text-accent group-open:hidden">+</span>
+                  <span class="hidden font-mono text-xl leading-none text-accent group-open:inline">−</span>
+                </summary>
+                <p class="pb-5 text-[15px] leading-relaxed text-ink-soft">{polozka.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="mx-auto flex max-w-5xl flex-col gap-5 px-5 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+        <div class="max-w-xl">
+          <div class="text-xl font-bold">Nevybírej výzvu, která vypadá nejtvrději.</div>
+          <p class="mt-2 font-mono text-[12px] leading-relaxed text-muted">Vyber tu, jejíž pravidla dokážeš dnes přesně popsat a zítra začít plnit.</p>
+        </div>
+        <a href="/vyzvy/75-hard-pravidla/" class="shrink-0 border-2 border-ink px-5 py-3 text-center font-mono text-[12px] font-semibold tracking-[0.04em] hover:border-accent hover:text-accent">ZAČÍT PRAVIDLY 75 HARD →</a>
+      </div>
     </section>
   </main>
 </Base>
