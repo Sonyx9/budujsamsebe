@@ -65,11 +65,15 @@ const kroky = [
 const faq = [
   {
     q: 'Co je výzva 75 Hard?',
-    a: '75denní výzva mentální odolnosti od Andyho Friselly: pět pravidel, která plníš každý den 75 dní v kuse — jídelníček, 2× 45 minut pohybu, 4 litry vody, 10 stran knihy a progresová fotka. Není to fitness program, ale trénink disciplíny.',
+    a: '75 Hard je 75denní výzva mentální odolnosti od Andyho Friselly. Každý den držíš zvolený jídelníček bez alkoholu, absolvuješ dva 45minutové tréninky, vypiješ přibližně 3,8 litru vody, přečteš 10 stran naučné knihy a pořídíš progresovou fotku. Autor ji popisuje jako trénink disciplíny, ne jako běžný fitness program.',
+  },
+  {
+    q: 'Jaká jsou pravidla 75 Hard?',
+    a: 'Pět denních úkolů je pevně daných: zvolený jídelníček bez alkoholu a volných jídel, 2× 45 minut pohybu s jedním tréninkem venku, jeden galon vody, 10 stran naučné knihy a progresová fotka. Podrobný český přehled vysvětluje i sporné situace a to, co se do výzvy počítá.',
   },
   {
     q: 'Je 75 Hard zdarma?',
-    a: 'Ano, pravidla jsou veřejná a náš tracker dostaneš zdarma. Kompletní plán s jídelníčky a rozpisem teprve píšeme — až vyjde, bude placený, ale k dokončení výzvy ho nepotřebuješ.',
+    a: 'Ano. Pravidla 75 Hard jsou veřejná a náš český tracker si stáhneš zdarma. Placený kompletní plán může přípravu usnadnit, ale k zahájení ani dokončení výzvy ho nepotřebuješ.',
   },
   {
     q: 'Co když jeden den vynechám?',
@@ -77,15 +81,55 @@ const faq = [
   },
   {
     q: 'Co je 75 Soft?',
-    a: 'Měkčí verze: jídelníček s možností jedné volnější porce, jeden trénink denně, 3 litry vody. Pro lidi s rodinou, směnami nebo prvním pokusem.',
+    a: '75 Soft je volnější alternativa inspirovaná výzvou 75 Hard. Běžně pracuje s vyváženým jídelníčkem, jedním 45minutovým tréninkem denně, třemi litry vody a každodenním čtením. Na internetu existuje více variant, proto je dobré si předem zapsat přesná pravidla, která budeš držet.',
   },
   {
-    q: 'Potřebuju nějaké vybavení?',
-    a: 'Na 75 Hard ne — stačí boty a kniha. Na rucking batoh a zátěž (klidně pytle rýže). Vše ostatní je marketing.',
+    q: 'Jak si vybrat jídelníček pro 75 Hard?',
+    a: 'Oficiální pravidla nepředepisují konkrétní dietu. Vyber si předem jasný a realistický způsob stravování odpovídající tvému cíli a zdravotnímu stavu. Pravidla si napiš tak, aby během výzvy nevznikaly výjimky podle nálady. Extrémní dietu nebo velký kalorický deficit konzultuj s odborníkem.',
+  },
+  {
+    q: 'Co je dopaminový detox a funguje?',
+    a: 'Dopaminový detox neodstraňuje dopamin z těla ani „neresetuje“ mozek. Je to nepřesný, ale rozšířený název pro dočasné omezení rychlých podnětů, jako jsou notifikace, sociální sítě nebo krátká videa. Smyslem je všimnout si automatických návyků a znovu získat kontrolu nad pozorností.',
+  },
+  {
+    q: 'Jak dlouho má dopaminový detox trvat?',
+    a: 'Začít můžeš několika hodinami bez rušivých aplikací nebo jedním klidnějším večerem. Náš 7denní plán přidává změny postupně, aby z něj nebyl extrémní zákaz všeho příjemného, ale praktický test digitálních návyků.',
+  },
+  {
+    q: 'Co je rucking a jak začít?',
+    a: 'Rucking je svižná chůze se zátěží v batohu. Začni pohodlnou trasou a lehkým nákladem, který v batohu pevně zajistíš. Nejdřív přidávej čas nebo vzdálenost a teprve potom váhu. Potřebuješ hlavně pevný batoh, pohodlné boty a postupný začátek.',
+  },
+  {
+    q: 'Potřebuju speciální vybavení?',
+    a: 'Na 75 Hard většinou stačí vhodné boty, kniha a způsob, jak si vést tracker. Pro první rucking nepotřebuješ speciální zátěžový batoh: použít lze pevný turistický batoh a dobře zajištěné lahve s vodou nebo jinou lehkou zátěž.',
   },
   {
     q: 'Je to bezpečné?',
-    a: 'Záleží na tvém zdraví. Čtyři litry vody ani dva tréninky denně nemusí vyhovovat každému — pokud máš zdravotní omezení, prober to s lékařem, než začneš. Nejsme lékaři a náš obsah není lékařskou radou.',
+    a: 'Záleží na tvém zdraví a výchozí kondici. Vysoký příjem vody, dva tréninky denně ani chůze se zátěží nemusí vyhovovat každému. Pokud máš zdravotní omezení, bereš léky nebo se vracíš po zranění, prober začátek s lékařem či fyzioterapeutem. Náš obsah není lékařská rada.',
+  },
+];
+
+const porovnani = [
+  {
+    nazev: '75 Hard',
+    delka: '75 dní',
+    zamer: 'Disciplína a důslednost',
+    start: 'Pravidla + tracker',
+    href: '/vyzvy/75-hard-pravidla/',
+  },
+  {
+    nazev: 'Dopaminový detox',
+    delka: '7 dní',
+    zamer: 'Pozornost a digitální návyky',
+    start: 'Postupné omezení podnětů',
+    href: '/plany/dopaminovy-detox/',
+  },
+  {
+    nazev: 'Rucking',
+    delka: 'Průběžně',
+    zamer: 'Kondice při chůzi',
+    start: 'Pevný batoh + lehká zátěž',
+    href: undefined,
   },
 ];
 
@@ -101,8 +145,8 @@ const faqSchema = {
 ---
 
 <Base
-  title="Buduj sám sebe — výzvy a plány česky: 75 Hard, dopaminový detox, rucking"
-  description="Motivace vydrží tři dny, plán tě dovede do konce. Pravidla výzev bez nejasností, rozpis na každý den a tracker k vytištění. Česky a zdarma."
+  title="75 Hard, dopaminový detox a rucking | Buduj sám sebe"
+  description="České návody pro 75 Hard, dopaminový detox a rucking. Přehledná pravidla, plány den po dni a 75 Hard tracker v PDF zdarma."
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} slot="head" />
 
@@ -113,25 +157,74 @@ const faqSchema = {
         <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">
           ZÁZNAM 001 — ZAČNI DNES
         </div>
-        <h1 class="text-4xl font-bold leading-[1.05] tracking-tight sm:text-[52px]">
-          Vyber si výzvu.<br />Dostaneš plán na každý den.
+        <h1 class="max-w-3xl text-4xl font-bold leading-[1.05] tracking-tight sm:text-[52px]">
+          75 Hard, dopaminový detox a další výzvy s jasným plánem.
         </h1>
         <p class="max-w-xl font-mono text-sm leading-relaxed">
-          Motivace vydrží tři dny. Plán tě dovede do konce. Pravidla bez nejasností, rozpis na
-          každý den a tracker, který si vytiskneš a odškrtáváš.
+          Žádné motivační řeči. Jen pravidla bez nejasností, české návody, rozpis na každý den
+          a tracker, který si vytiskneš a odškrtáváš.
         </p>
         <div class="mt-2 flex flex-col gap-2">
           <a
             href="/tracker/"
             class="self-start bg-ink px-6 py-4 font-mono text-sm font-semibold tracking-[0.04em] text-paper hover:bg-accent"
-            >STÁHNOUT TRACKER NA 75 DNÍ →</a
+            >STÁHNOUT 75 HARD TRACKER →</a
           >
           <div class="font-mono text-[12px] text-muted">PDF zdarma za e-mail. Žádný spam.</div>
         </div>
       </div>
     </section>
 
-    <!-- 2 · CHECKLIST -->
+    <!-- 2 · ZAČNI TADY -->
+    <section class="border-b-[3px] border-ink">
+      <div class="mx-auto max-w-5xl px-5 py-10 sm:px-8">
+        <div class="font-mono text-[12px] tracking-[0.12em] text-muted">ZAČNI TADY</div>
+        <h2 class="mt-2 max-w-2xl text-2xl font-bold leading-tight sm:text-[32px]">
+          Vyber výzvu podle toho, co chceš právě teď změnit
+        </h2>
+        <p class="mt-4 max-w-3xl font-mono text-[13px] leading-relaxed text-ink-soft">
+          Každá výzva řeší něco jiného. 75 Hard staví na pevných denních pravidlech.
+          Dopaminový detox pracuje s telefonem, notifikacemi a rychlými odměnami. Rucking
+          mění obyčejnou chůzi v trénink se zátěží. Začni jednou věcí, nastav měřitelný plán
+          a teprve potom přidávej další.
+        </p>
+
+        <div class="mt-7 overflow-x-auto border-[3px] border-ink">
+          <table class="w-full min-w-[680px] border-collapse text-left">
+            <thead class="bg-ink font-mono text-[12px] tracking-[0.08em] text-paper">
+              <tr>
+                <th class="px-4 py-3">VÝZVA</th>
+                <th class="px-4 py-3">DÉLKA</th>
+                <th class="px-4 py-3">HLAVNÍ ZAMĚŘENÍ</th>
+                <th class="px-4 py-3">CO POTŘEBUJEŠ NA START</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                porovnani.map((polozka) => (
+                  <tr class="border-b border-line last:border-b-0">
+                    <td class="px-4 py-4 text-[16px] font-bold">
+                      {polozka.href ? (
+                        <a href={polozka.href} class="underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">
+                          {polozka.nazev}
+                        </a>
+                      ) : (
+                        polozka.nazev
+                      )}
+                    </td>
+                    <td class="px-4 py-4 font-mono text-[12px] text-ink-soft">{polozka.delka}</td>
+                    <td class="px-4 py-4 font-mono text-[12px] text-ink-soft">{polozka.zamer}</td>
+                    <td class="px-4 py-4 font-mono text-[12px] text-ink-soft">{polozka.start}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · CHECKLIST -->
     <section class="border-b-[3px] border-ink">
       <div class="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-8 sm:px-8">
         <div class="font-mono text-[12px] tracking-[0.12em] text-muted">
@@ -140,7 +233,7 @@ const faqSchema = {
         <div class="flex flex-col gap-2.5">
           <CheckItem checked>Drž zvolený jídelníček, bez alkoholu</CheckItem>
           <CheckItem checked>2× 45 minut pohybu, jednou venku</CheckItem>
-          <CheckItem>Vypij 4 litry vody</CheckItem>
+          <CheckItem>Vypij přibližně 3,8 litru vody</CheckItem>
           <CheckItem>Přečti 10 stran knihy</CheckItem>
           <CheckItem>Vyfoť progresovku</CheckItem>
         </div>
@@ -150,11 +243,13 @@ const faqSchema = {
       </div>
     </section>
 
-    <!-- 3 · MINI-HUBY -->
+    <!-- 4 · MINI-HUBY -->
     <section class="border-b-[3px] border-ink">
       <div class="mx-auto flex max-w-5xl flex-col gap-2 px-5 pt-10 sm:px-8">
         <div class="font-mono text-[12px] tracking-[0.12em] text-muted">REJSTŘÍK VÝZEV</div>
-        <h2 class="text-2xl font-bold leading-tight sm:text-[32px]">Výzvy, které právě vedeme</h2>
+        <h2 class="text-2xl font-bold leading-tight sm:text-[32px]">
+          Návody pro 75 Hard, dopaminový detox a rucking
+        </h2>
       </div>
       <div class="mx-auto grid max-w-5xl grid-cols-1 pt-6 sm:grid-cols-3">
         {
@@ -192,7 +287,50 @@ const faqSchema = {
       </div>
     </section>
 
-    <!-- 4 · JAK TO FUNGUJE -->
+    <!-- 5 · TEMATICKÉ VSTUPY -->
+    <section class="border-b-[3px] border-ink bg-paper-dark">
+      <div class="mx-auto grid max-w-5xl grid-cols-1 sm:grid-cols-3">
+        <article class="flex flex-col gap-3 border-b-[3px] border-ink px-5 py-8 sm:border-b-0 sm:border-r-[3px] sm:px-8">
+          <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">75 HARD ČESKY</div>
+          <h2 class="text-[22px] font-bold leading-tight">Pravidla 75 Hard a tracker zdarma</h2>
+          <p class="font-mono text-[12px] leading-relaxed text-ink-soft">
+            Než začneš, projdi si všech pět denních úkolů, pitný režim, pravidla tréninku a
+            situace, kvůli kterým se začíná znovu od dne 1.
+          </p>
+          <div class="mt-auto flex flex-col items-start gap-2 pt-2 font-mono text-[12px] font-semibold">
+            <a href="/vyzvy/75-hard-pravidla/" class="underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">PRAVIDLA 75 HARD →</a>
+            <a href="/tracker/" class="underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">TRACKER 75 HARD V PDF →</a>
+          </div>
+        </article>
+
+        <article class="flex flex-col gap-3 border-b-[3px] border-ink px-5 py-8 sm:border-b-0 sm:border-r-[3px] sm:px-8">
+          <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">DIGITÁLNÍ NÁVYKY</div>
+          <h2 class="text-[22px] font-bold leading-tight">Jak na dopaminový detox bez extrémů</h2>
+          <p class="font-mono text-[12px] leading-relaxed text-ink-soft">
+            Nejde o odstranění dopaminu. Jde o týden, během kterého omezíš automatické
+            scrollování, zmapuješ rychlé odměny a nastavíš si udržitelnější digitální návyky.
+          </p>
+          <div class="mt-auto flex flex-col items-start gap-2 pt-2 font-mono text-[12px] font-semibold">
+            <a href="/plany/dopaminovy-detox/" class="underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">7DENNÍ PLÁN DOPAMINOVÉHO DETOXU →</a>
+            <a href="/nastroje/dopaminovy-rozpocet/" class="underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">SPOČÍTAT DOPAMINOVÝ ROZPOČET →</a>
+          </div>
+        </article>
+
+        <article class="flex flex-col gap-3 px-5 py-8 sm:px-8">
+          <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">CHŮZE SE ZÁTĚŽÍ</div>
+          <h2 class="text-[22px] font-bold leading-tight">Rucking: jak začít s batohem</h2>
+          <p class="font-mono text-[12px] leading-relaxed text-ink-soft">
+            Rucking je svižná chůze se zátěží v batohu. Začni lehce, náklad zajisti blízko
+            zad a postupně přidávej čas, vzdálenost nebo váhu — vždy jen jednu věc.
+          </p>
+          <div class="mt-auto border-t border-line pt-3 font-mono text-[12px] text-muted">
+            Český průvodce a 12týdenní plán připravujeme.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 6 · JAK TO FUNGUJE -->
     <section class="border-b-[3px] border-ink">
       <div class="mx-auto flex max-w-5xl flex-col gap-2 px-5 pt-10 sm:px-8">
         <div class="font-mono text-[12px] tracking-[0.12em] text-muted">JAK TO FUNGUJE</div>
@@ -213,7 +351,7 @@ const faqSchema = {
       </div>
     </section>
 
-    <!-- 5 · MANIFEST -->
+    <!-- 7 · MANIFEST -->
     <section class="border-b-[3px] border-ink bg-ink text-paper">
       <div class="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-12 sm:px-8">
         <div class="font-mono text-[12px] tracking-[0.12em] text-accent-soft">PROČ TENHLE WEB</div>
@@ -234,7 +372,7 @@ const faqSchema = {
       </div>
     </section>
 
-    <!-- 6 · NEJNOVĚJŠÍ ZÁZNAMY -->
+    <!-- 8 · NEJNOVĚJŠÍ ZÁZNAMY -->
     <section class="border-b-[3px] border-ink">
       <div class="mx-auto flex max-w-5xl flex-col gap-2 px-5 pt-10 sm:px-8">
         <div class="font-mono text-[12px] tracking-[0.12em] text-muted">
@@ -266,10 +404,13 @@ const faqSchema = {
       </div>
     </section>
 
-    <!-- 7 · FAQ -->
+    <!-- 9 · FAQ -->
     <section class="border-b-[3px] border-ink">
       <div class="mx-auto flex max-w-3xl flex-col gap-4 px-5 py-10 sm:px-8">
-        <h2 class="text-2xl font-bold leading-tight sm:text-[32px]">Časté otázky</h2>
+        <div class="font-mono text-[12px] tracking-[0.12em] text-muted">RYCHLÉ ODPOVĚDI</div>
+        <h2 class="text-2xl font-bold leading-tight sm:text-[32px]">
+          Časté otázky o 75 Hard, dopaminovém detoxu a ruckingu
+        </h2>
         <div class="flex flex-col">
           {
             faq.map((polozka) => (
