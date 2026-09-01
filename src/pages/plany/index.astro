@@ -141,42 +141,44 @@ const schema = {
       </div>
     </section>
 
-    <section class="border-b-[3px] border-ink">
+    <!-- Druhý produkt je záměrně na tmavém podkladu, ať se bloky opticky oddělí.
+         Stavba zůstává stejná jako u prvního, mění se jen barvy. -->
+    <section class="border-b-[3px] border-ink bg-ink text-paper">
       <div class="mx-auto grid max-w-5xl grid-cols-1 sm:grid-cols-[1.1fr_1fr]">
-        <div class="border-b-[3px] border-ink bg-paper-dark p-5 sm:order-2 sm:border-b-0 sm:border-l-[3px] sm:p-8">
+        <div class="border-b-[3px] border-paper p-5 sm:order-2 sm:border-b-0 sm:border-l-[3px] sm:p-8">
           <img
             src="/plany/75-dni/obalka.png"
             alt="Přední strana e-knihy 75 DNÍ po česku"
             width="1167"
             height="1653"
             loading="lazy"
-            class="mx-auto max-h-[460px] w-full border-[3px] border-ink object-contain"
+            class="mx-auto max-h-[460px] w-full object-contain"
           />
         </div>
         <article class="flex flex-col gap-5 p-6 sm:order-1 sm:p-10">
           <div class="flex flex-wrap items-center gap-3">
-            <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">HOTOVO · PDF IHNED</div>
-            <div class="border border-ink px-2 py-1 font-mono text-[11px] font-semibold">75 DNÍ</div>
+            <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent-soft">HOTOVO · PDF IHNED</div>
+            <div class="border border-paper/40 px-2 py-1 font-mono text-[11px] font-semibold">75 DNÍ</div>
           </div>
           <div>
             <h2 class="text-3xl font-bold leading-tight">75 DNÍ po česku</h2>
-            <p class="mt-3 max-w-xl text-[16px] leading-relaxed text-ink-soft">
+            <p class="mt-3 max-w-xl text-[16px] leading-relaxed text-paper-dark">
               Dlouhá výzva nepotřebuje další velký slib. Potřebuje plán pro obyčejné úterý,
               propršený venkovní trénink a den, kdy chuť skončí dřív než úkoly. Český průvodce
               výzvou známou jako 75 Hard.
             </p>
           </div>
-          <ul class="flex flex-col gap-3 font-mono text-[13px] leading-relaxed text-ink-soft">
-            <li class="flex items-start gap-3"><span class="font-bold text-accent">01</span><span>Jedenáct týdenních kapitol včetně krizových dnů 10–20.</span></li>
-            <li class="flex items-start gap-3"><span class="font-bold text-accent">02</span><span>Tři jídelníčky z běžného supermarketu a čtyři tréninkové plány.</span></li>
-            <li class="flex items-start gap-3"><span class="font-bold text-accent">03</span><span><a href="/tracker/" class="underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">Tracker na 75 dní zdarma</a>, abys mohl začít i bez nákupu.</span></li>
+          <ul class="flex flex-col gap-3 font-mono text-[13px] leading-relaxed text-paper-dark">
+            <li class="flex items-start gap-3"><span class="font-bold text-accent-soft">01</span><span>Jedenáct týdenních kapitol včetně krizových dnů 10–20.</span></li>
+            <li class="flex items-start gap-3"><span class="font-bold text-accent-soft">02</span><span>Tři jídelníčky z běžného supermarketu a čtyři tréninkové plány.</span></li>
+            <li class="flex items-start gap-3"><span class="font-bold text-accent-soft">03</span><span><a href="/tracker/" class="underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-soft">Tracker na 75 dní zdarma</a>, abys mohl začít i bez nákupu.</span></li>
           </ul>
-          <div class="mt-auto flex flex-col gap-3 border-t-[3px] border-ink pt-5 sm:flex-row sm:items-center sm:justify-between">
+          <div class="mt-auto flex flex-col gap-3 border-t-[3px] border-paper pt-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <div class="text-[30px] font-bold">249 Kč</div>
-              <div class="font-mono text-[11px] text-muted">PDF A5 · 128 stran + přílohy</div>
+              <div class="font-mono text-[11px] text-paper-dark">PDF A5 · 128 stran + přílohy</div>
             </div>
-            <a href="/plany/75-dni/" class="bg-ink px-5 py-4 text-center font-mono text-[13px] font-semibold tracking-[0.04em] text-paper hover:bg-accent">
+            <a href="/plany/75-dni/" class="bg-accent px-5 py-4 text-center font-mono text-[13px] font-semibold tracking-[0.04em] text-paper hover:bg-paper hover:text-ink">
               PROHLÉDNOUT PLÁN 75 DNÍ →
             </a>
           </div>
