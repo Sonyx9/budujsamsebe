@@ -1,0 +1,31 @@
+---
+/**
+ * Známková doložka k označení „75 HARD“.
+ *
+ * Proč: 75 HARD je v USA registrovaná ochranná známka (reg. č. 6176864) společnosti
+ * 44Seven Media, LLC. Na webu ho používáme jen popisně — když vysvětlujeme, odkud výzva
+ * pochází a jaká má pravidla. Naše vlastní věci se jmenují „75 DNÍ po česku“ a „tracker
+ * na 75 dní“; jako značku produktu, do loga ani na obálku označení nedáváme.
+ *
+ * Doložka je v patičce, tedy na všech stránkách — ať se na ni nezapomene tam, kde
+ * označení padne.
+ */
+interface Props {
+  /** true = samostatný odstavec na stránce, false = drobný řádek v patičce */
+  vyrazne?: boolean;
+}
+const { vyrazne = false } = Astro.props;
+
+const text =
+  '75 HARD je ochranná známka společnosti 44Seven Media, LLC. Tento web není společností 44Seven Media, LLC schválen, sponzorován ani s ní jinak spojen. Označení používáme pouze popisně při odkazu na původní výzvu.';
+---
+
+{
+  vyrazne ? (
+    <div class="border-t border-line pt-4 font-mono text-[11px] leading-relaxed text-muted">
+      {text}
+    </div>
+  ) : (
+    <div class="font-mono text-[11px] leading-relaxed text-muted">{text}</div>
+  )
+}

@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import ZnamkovaDolozka from './ZnamkovaDolozka.astro';
 import { serazenePodleData } from '../lib/vyzvy';
 
 const year = new Date().getFullYear();
@@ -64,6 +65,9 @@ const sloupce = [
     <div class="mx-auto flex max-w-5xl flex-col gap-2 px-5 py-6 font-mono text-[12px] leading-relaxed text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8">
       <div>© {year} budujsamsebe.cz — výzvy a plány</div>
       <div>Obsah není lékařská rada; zdroje uvádíme u článků.</div>
+    </div>
+    <div class="mx-auto max-w-5xl px-5 pb-6 sm:px-8">
+      <ZnamkovaDolozka />
     </div>
   </div>
 </footer>
