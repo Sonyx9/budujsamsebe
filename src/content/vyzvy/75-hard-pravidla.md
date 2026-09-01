@@ -1,5 +1,5 @@
 ---
-title: "Pravidla 75 Hard přehledně: 5 úkolů denně + checklist"
+title: "Pravidla 75 Hard: 5 úkolů denně + checklist"
 description: "Všech 5 pravidel výzvy 75 Hard česky — co se počítá, co ne, a proč se při porušení začíná od nuly."
 kategorie: "75 Hard"
 datum: "09/2026"

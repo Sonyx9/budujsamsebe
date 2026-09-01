@@ -33,9 +33,26 @@ interface Props {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const plan = planKeKategorii[post.data.kategorie];
+
+/** Drobečky jsou na stránce vidět (VÝZVY / KATEGORIE), schema je tedy popisuje pravdivě. */
+const drobecky = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Výzvy', item: 'https://budujsamsebe.cz/vyzvy/' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: post.data.title,
+      item: `https://budujsamsebe.cz/vyzvy/${post.id}/`,
+    },
+  ],
+};
 ---
 
 <Base title={`${post.data.title} — Buduj sám sebe`} description={post.data.description}>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(drobecky)} slot="head" />
+
   <main>
     <section class="border-b-[3px] border-ink">
       <div class="mx-auto flex max-w-3xl flex-col gap-4 px-5 py-10 sm:px-8">

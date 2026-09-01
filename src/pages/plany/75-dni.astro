@@ -11,6 +11,23 @@ const recenze: { text: string; jmeno: string }[] = [];
  */
 const cena = 249;
 
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: '75 DNÍ po česku',
+  description:
+    'Kompletní český plán k výzvě známé jako 75 Hard: jedenáct týdenních kapitol, tři jídelníčky z běžného supermarketu, čtyři tréninkové plány, krizové dny 10–20 a tracker na 75 dní. PDF A5, 128 stran.',
+  image: 'https://budujsamsebe.cz/plany/75-dni/obalka.png',
+  brand: { '@type': 'Brand', name: 'Buduj sám sebe' },
+  offers: {
+    '@type': 'Offer',
+    price: cena,
+    priceCurrency: 'CZK',
+    availability: 'https://schema.org/InStock',
+    url: 'https://budujsamsebe.cz/plany/75-dni/',
+  },
+};
+
 const obsah = [
   '75 dní rozepsaných po týdnech, ne po dnech — co se mění a na co se připravit',
   'Jídelníčky z toho, co se prodává v Kauflandu a Lidlu, s nákupním seznamem na týden',
@@ -25,6 +42,7 @@ const obsah = [
   description="Kompletní plán k výzvě známé jako 75 Hard: jedenáct týdenních kapitol, jídelníčky z běžných českých potravin, čtyři tréninkové plány a krizový plán. PDF ihned do e-mailu, 249 Kč."
 >
   <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
     <!-- Předehřátí spojení na SimpleShop: ušetří DNS + TCP + TLS před načtením formuláře. -->
     <link rel="preconnect" href="https://form.simpleshop.cz" />
     <link rel="dns-prefetch" href="https://form.simpleshop.cz" />
