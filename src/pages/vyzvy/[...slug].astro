@@ -3,6 +3,22 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import TrackerCta from '../../components/TrackerCta.astro';
 
+/** Ke kterému placenému plánu článek patří. Klíč = `kategorie` z frontmatteru. */
+const planKeKategorii: Record<string, { label: string; title: string; href: string; cta: string }> = {
+  '75 Hard': {
+    label: 'KOMPLETNÍ PLÁN · 249 KČ',
+    title: '75 DNÍ po česku — jedenáct týdnů rozepsaných do konkrétních dnů',
+    href: '/plany/75-dni/',
+    cta: 'PROHLÉDNOUT PLÁN →',
+  },
+  'Dopaminový detox': {
+    label: 'KOMPLETNÍ PLÁN · 149 KČ',
+    title: 'Dopaminový detox: 7denní plán s trackerem a 30 náhradami',
+    href: '/plany/dopaminovy-detox/',
+    cta: 'PROHLÉDNOUT PLÁN →',
+  },
+};
+
 export async function getStaticPaths() {
   const posts = await getCollection('vyzvy');
   return posts.map((post) => ({
@@ -16,6 +32,7 @@ interface Props {
 }
 const { post } = Astro.props;
 const { Content } = await render(post);
+const plan = planKeKategorii[post.data.kategorie];
 ---
 
 <Base title={`${post.data.title} — Buduj sám sebe`} description={post.data.description}>
@@ -41,6 +58,23 @@ const { Content } = await render(post);
 
       <div class="mt-10">
         <TrackerCta />
+
+        {
+          plan && (
+            <div class="mt-4 flex flex-col gap-4 border-[3px] border-ink p-6 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <div class="font-mono text-[12px] tracking-[0.1em] text-muted">{plan.label}</div>
+                <div class="mt-1 text-lg font-bold">{plan.title}</div>
+              </div>
+              <a
+                href={plan.href}
+                class="inline-block shrink-0 whitespace-nowrap bg-ink px-5 py-3.5 font-mono text-[13px] font-semibold tracking-[0.04em] text-paper hover:bg-accent"
+              >
+                {plan.cta}
+              </a>
+            </div>
+          )
+        }
       </div>
 
       {

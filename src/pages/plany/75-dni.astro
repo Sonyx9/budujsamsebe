@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import DalsiPlan from '../../components/DalsiPlan.astro';
 
 /** Reálné recenze zákazníků — nikdy vymyšlené. Sekce se zobrazí až s první recenzí. */
 const recenze: { text: string; jmeno: string }[] = [];
@@ -214,6 +215,14 @@ const obsah = [
         </div>
       </div>
     </section>
+
+    <DalsiPlan
+      label="DRUHÝ PLÁN"
+      title="Dopaminový detox: 7denní plán — kratší začátek"
+      text="Jedenáct týdnů je dlouhá trať. Jestli chceš nejdřív zjistit, jestli udržíš pravidla sedm dní v kuse, začni tímhle. Kompletní plán za 149 Kč."
+      href="/plany/dopaminovy-detox/"
+      cta="PROHLÉDNOUT 7DENNÍ PLÁN →"
+    />
 
     <section>
       <div

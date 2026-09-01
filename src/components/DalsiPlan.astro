@@ -1,0 +1,29 @@
+---
+/**
+ * Křížový odkaz mezi plány. Kdo dočte jeden, má vidět i druhý — jinak se obě
+ * prodejní stránky tváří, jako by ta druhá neexistovala.
+ */
+interface Props {
+  label: string;
+  title: string;
+  text: string;
+  href: string;
+  cta: string;
+}
+const { label, title, text, href, cta } = Astro.props;
+---
+
+<section class="border-b-[3px] border-ink bg-paper-dark">
+  <div class="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+    <div class="max-w-xl">
+      <div class="font-mono text-[12px] tracking-[0.1em] text-muted">{label}</div>
+      <div class="mt-1 text-lg font-bold">{title}</div>
+      <p class="mt-2 font-mono text-[12px] leading-relaxed text-ink-soft">{text}</p>
+    </div>
+    <a
+      href={href}
+      class="shrink-0 border-2 border-ink px-5 py-3.5 text-center font-mono text-[12px] font-semibold tracking-[0.04em] hover:border-accent hover:text-accent"
+      >{cta}</a
+    >
+  </div>
+</section>
