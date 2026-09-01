@@ -5,10 +5,11 @@ import Base from '../../layouts/Base.astro';
 const recenze: { text: string; jmeno: string }[] = [];
 
 /**
- * STAV: PŘIPRAVUJEME. Ebook ještě není napsaný — stránka nic neprodává, jen říká, co bude,
- * a sbírá zájemce přes tracker zdarma. Prodejní verze (cena, SimpleShop tlačítko, recenze)
- * se vrátí, až bude soubor hotový. URL zůstává, odkazuje na ni Den 8 v Dopaminovém detoxu.
+ * Prodejní stránka. Formulář SimpleShopu ODo3X (form#155206) je v sekci #objednavka.
+ * Označení „75 Hard“ se používá jen popisně — náš produkt se jmenuje 75 DNÍ po česku.
  */
+const cena = 249;
+
 const obsah = [
   '75 dní rozepsaných po týdnech, ne po dnech — co se mění a na co se připravit',
   'Jídelníčky z toho, co se prodává v Kauflandu a Lidlu, s nákupním seznamem na týden',
@@ -19,21 +20,28 @@ const obsah = [
 ---
 
 <Base
-  title="75 DNÍ po česku — kompletní plán (připravujeme) — Buduj sám sebe"
-  description="Připravujeme kompletní plán na 75 dní: pravidla, jídelníčky z běžných českých potravin, tréninky a krizový plán. Zatím tracker zdarma."
+  title="75 DNÍ po česku — kompletní plán na 75 dní — Buduj sám sebe"
+  description="Kompletní plán k výzvě známé jako 75 Hard: jedenáct týdenních kapitol, jídelníčky z běžných českých potravin, čtyři tréninkové plány a krizový plán. PDF ihned do e-mailu, 249 Kč."
 >
+  <Fragment slot="head">
+    <!-- Předehřátí spojení na SimpleShop: ušetří DNS + TCP + TLS před načtením formuláře. -->
+    <link rel="preconnect" href="https://form.simpleshop.cz" />
+    <link rel="dns-prefetch" href="https://form.simpleshop.cz" />
+    <link rel="preload" as="script" href="https://form.simpleshop.cz/prj/js/SimpleShopService.js" />
+  </Fragment>
+
   <main>
     <section class="border-b-[3px] border-ink">
       <div class="mx-auto grid max-w-5xl grid-cols-1 sm:grid-cols-[1fr_280px]">
         <div class="flex flex-col gap-4 border-b-[3px] border-ink p-6 sm:border-b-0 sm:border-r-[3px] sm:p-10">
           <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">
-            PLÁN Č. 2 · PŘIPRAVUJEME
+            PLÁN Č. 2 · 75 DNÍ
           </div>
           <h1 class="text-4xl font-bold leading-[1.05] sm:text-[44px]">75 DNÍ<br />po česku</h1>
           <p class="max-w-md text-base leading-relaxed text-ink-soft">
             Česká adaptace výzvy známé jako 75 Hard. Kompletní plán na 75 dní: pravidla bez
             nejasností, jídelníčky z běžných českých potravin, tréninky na 2× 45 minut i plán pro
-            dny, kdy to chceš vzdát. Píšeme ho. Co v něm bude:
+            dny, kdy to chceš vzdát. Co je uvnitř:
           </p>
           <ul class="mt-1 flex flex-col gap-2">
             {
@@ -51,19 +59,21 @@ const obsah = [
 
         <div class="flex flex-col gap-4 bg-paper-dark p-6 sm:p-8">
           <div class="flex flex-col items-center gap-1 border-[3px] border-ink bg-paper p-5">
-            <div class="font-mono text-[12px] tracking-[0.08em] text-muted">STAV</div>
-            <div class="text-[28px] font-bold">Píše se</div>
-            <div class="font-mono text-[11px] text-muted">PDF + EPUB · cena: připravujeme</div>
+            <div class="font-mono text-[12px] tracking-[0.08em] text-muted">CENA</div>
+            <div class="text-[40px] font-bold">{cena} Kč</div>
+            <div class="text-center font-mono text-[11px] text-muted">
+              PDF A5 · 128 stran + přílohy · ihned do e-mailu
+            </div>
           </div>
           <a
-            href="/tracker/"
+            href="#objednavka"
             class="bg-ink py-4 text-center font-mono text-sm font-semibold tracking-[0.04em] text-paper hover:bg-accent"
-            >ZATÍM TRACKER ZDARMA</a
+            >KOUPIT PLÁN →</a
           >
           <div class="flex flex-col gap-2 font-mono text-[11px] leading-relaxed text-ink-soft">
-            <div>Tracker na 75 dní, čtyři strany A4. Kdo si ho vezme, dozví se o plánu první.</div>
+            <div>Tracker, karty pravidel a plánovač jsou v ceně. Verzi pro čtečku (EPUB) pošleme na vyžádání.</div>
             <div class="border-t border-line pt-2">
-              Mezitím: <a href="/plany/dopaminovy-detox/" class="underline hover:text-accent">Dopaminový detox: 7denní plán</a> — trénink v tom, jak něco dodržet sedm dní v kuse.
+              Garance: do 14 dnů vrátíme peníze bez ptaní. <a href="/obchodni-podminky/" class="underline hover:text-accent">Podmínky</a>
             </div>
           </div>
         </div>
@@ -89,6 +99,121 @@ const obsah = [
         </section>
       )
     }
+
+    <!-- OBJEDNÁVKA -->
+    <section id="objednavka" class="scroll-mt-4 border-b-[3px] border-ink bg-paper-dark">
+      <div class="mx-auto flex max-w-3xl flex-col gap-4 px-5 py-10 sm:px-8">
+        <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">
+          OBJEDNÁVKA
+        </div>
+        <h2 class="text-2xl font-bold sm:text-[32px]">75 DNÍ po česku</h2>
+        <p class="font-mono text-[13px] leading-relaxed text-ink-soft">
+          {cena} Kč · PDF A5 se 128 stranami a tisknutelnými přílohami · odkaz přijde e-mailem do
+          minuty · do 14 dnů vrátíme peníze bez ptaní (<a
+            href="/obchodni-podminky/"
+            class="underline hover:text-accent">obchodní podmínky</a
+          >).
+        </p>
+
+        <div class="relative overflow-x-auto border-[3px] border-ink bg-paper p-5 sm:p-6">
+          <!-- Překryv na dobu, než se načte iframe SimpleShopu. Skript ho sundá. -->
+          <div
+            id="ss-loader"
+            class="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-paper px-5 text-center"
+          >
+            <div
+              class="size-7 animate-spin border-[3px] border-line border-t-accent motion-reduce:animate-none"
+              aria-hidden="true"
+            >
+            </div>
+            <div class="font-mono text-[12px] tracking-[0.1em] text-muted">
+              NAČÍTÁM OBJEDNÁVKOVÝ FORMULÁŘ…
+            </div>
+          </div>
+          <!-- www.SimpleShop.cz form#155206 start -->
+          <div data-SimpleShopForm="ODo3X" class="min-h-[380px]">
+            <div>
+              Prodejní formulář je vytvořen v systému <a
+                href="https://www.simpleshop.cz/?utm_source=simpleshop&utm_medium=form&utm_campaign=103788"
+                target="_blank"
+                rel="noopener">SimpleShop.cz</a
+              >.
+            </div>
+          </div>
+          <script is:inline>
+            (function (i, s, o, g, r, a, m) {
+              i[r] =
+                i[r] ||
+                function () {
+                  (i[r].q = i[r].q || []).push(arguments);
+                };
+              i[r].l = 1 * new Date();
+              a = s.createElement(o);
+              m = s.getElementsByTagName(o)[0];
+              a.async = 1;
+              a.src = g;
+              m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 'https://form.simpleshop.cz/prj/js/SimpleShopService.js', 'sss');
+            sss('createForm', 'ODo3X');
+          </script>
+          <!-- www.SimpleShop.cz form#155206 end -->
+          <script is:inline>
+            (function () {
+              var box = document.querySelector('[data-SimpleShopForm]');
+              var loader = document.getElementById('ss-loader');
+              if (!box || !loader) return;
+
+              var hotovo = false;
+              function schovej() {
+                if (hotovo) return;
+                hotovo = true;
+                clearTimeout(zaloha);
+                loader.remove();
+              }
+
+              // SimpleShop vkládá iframe s loading="lazy" — ten by se začal stahovat
+              // až po doscrollování. Přepneme ho na eager, ať načítání běží hned.
+              function popozeni(iframe) {
+                if (iframe.loading === 'lazy') iframe.loading = 'eager';
+                iframe.setAttribute('fetchpriority', 'high');
+                iframe.addEventListener('load', schovej, { once: true });
+              }
+
+              var uz = box.querySelector('iframe');
+              if (uz) popozeni(uz);
+
+              var pozorovatel = new MutationObserver(function () {
+                var iframe = box.querySelector('iframe');
+                if (iframe) {
+                  pozorovatel.disconnect();
+                  popozeni(iframe);
+                }
+              });
+              pozorovatel.observe(box, { childList: true, subtree: true });
+
+              window.addEventListener('message', function (e) {
+                if (e.data && e.data.action === 'SimpleShop-setHeight') schovej();
+              });
+
+              // Když se do 12 s nenačte, nabídneme formulář přímo u SimpleShopu.
+              var zaloha = setTimeout(function () {
+                if (hotovo) return;
+                loader.innerHTML =
+                  '<div class="font-mono text-[12px] leading-relaxed text-muted">Formulář se nenačetl.<br />Objednat jde i přímo u SimpleShopu:</div>' +
+                  '<a href="https://form.simpleshop.cz/ODo3X/" class="bg-ink px-5 py-3 font-mono text-[12px] font-semibold tracking-[0.04em] text-paper hover:bg-accent">OTEVŘÍT OBJEDNÁVKU →</a>';
+              }, 12000);
+            })();
+          </script>
+        </div>
+
+        <div class="font-mono text-[11px] leading-relaxed text-muted">
+          Objednávku zpracovává SimpleShop (Redbit s.r.o.). Zadané údaje jdou přímo jemu — viz
+          <a href="/ochrana-osobnich-udaju/" class="underline hover:text-accent"
+            >ochrana osobních údajů</a
+          >.
+        </div>
+      </div>
+    </section>
 
     <section>
       <div
