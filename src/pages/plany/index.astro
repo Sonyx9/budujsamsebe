@@ -142,7 +142,7 @@ const schema = {
     </section>
 
     <section class="border-b-[3px] border-ink bg-ink text-paper">
-      <div class="mx-auto grid max-w-5xl grid-cols-1 sm:grid-cols-[1fr_280px]">
+      <div class="mx-auto grid max-w-5xl grid-cols-1 sm:grid-cols-[1.1fr_1fr]">
         <article class="flex flex-col gap-5 border-b border-paper/30 px-5 py-10 sm:border-b-0 sm:border-r sm:px-8">
           <div class="flex flex-wrap items-center gap-3">
             <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent-soft">HOTOVO · PDF IHNED</div>
@@ -170,17 +170,19 @@ const schema = {
               PROHLÉDNOUT PLÁN 75 DNÍ →
             </a>
           </div>
-        </article>
-        <div class="flex flex-col justify-center gap-4 bg-paper-dark p-6 text-ink sm:p-8">
-          <div class="font-mono text-[12px] tracking-[0.1em] text-muted">NEJDŘÍV ZDARMA</div>
-          <div class="text-xl font-bold">Tracker na 75 dní</div>
-          <p class="font-mono text-[12px] leading-relaxed text-ink-soft">
-            Čtyři strany A4, pět denních pravidel a 75 řádků k odškrtnutí. Za e-mail, bez dalších
-            podmínek — vyzkoušet výzvu jde i bez plánu.
-          </p>
-          <a href="/tracker/" class="border-2 border-ink px-5 py-3.5 text-center font-mono text-[12px] font-semibold tracking-[0.04em] hover:border-accent hover:text-accent">
-            STÁHNOUT TRACKER ZDARMA →
+          <a href="/tracker/" class="self-start font-mono text-[12px] text-paper-dark underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-soft">
+            Nebo si nejdřív zdarma stáhni tracker na 75 dní →
           </a>
+        </article>
+        <div class="flex items-center justify-center bg-paper-dark p-5 text-ink sm:p-8">
+          <img
+            src="/plany/75-dni/obalka.png"
+            alt="Přední strana e-knihy 75 DNÍ po česku"
+            width="1167"
+            height="1653"
+            loading="lazy"
+            class="mx-auto max-h-[460px] w-full border-[3px] border-ink object-contain"
+          />
         </div>
       </div>
     </section>
