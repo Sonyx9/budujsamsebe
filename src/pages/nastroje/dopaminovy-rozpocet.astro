@@ -27,11 +27,15 @@ const cinnosti = [
 const faq = [
   {
     q: 'Počítá se i práce?',
-    a: 'Ne. Do rozpočtu patří jen volný čas — to, co děláš, když nemusíš. Práce na telefonu je práce, ne zloděj.',
+    a: 'Do kalkulačky zapisuj hlavně čas mimo práci. Pokud je ale součástí problému bezcílné kontrolování pracovního e-mailu večer nebo o víkendu, můžeš ho přidat jako vlastní činnost.',
   },
   {
     q: 'Jsou 2 hodiny denně hodně?',
-    a: 'Dvě hodiny denně je 730 hodin za rok, tedy 30 dní. Jestli je to hodně, rozhodni sám — proto je tu to číslo, ne hodnocení.',
+    a: 'Dvě hodiny denně jsou 730 hodin, tedy přibližně 30 celých dnů za rok. Samotné číslo ale nerozhoduje, zda je čas dobře nebo špatně využitý. Důležité je, jestli ti daná činnost něco dává a zda jí věnuješ tolik času, kolik opravdu chceš.',
+  },
+  {
+    q: 'Proč jsou v seznamu i knihy, sport nebo čas s lidmi?',
+    a: 'Protože kalkulačka nemá předem rozhodovat, co je správné. Stejná činnost může být vědomý odpočinek, užitečný návyk nebo automatická výplň času. Označení „chci omezit“ vybíráš ty.',
   },
   {
     q: 'Ukládáte moje data?',
@@ -64,8 +68,8 @@ const schema = {
 ---
 
 <Base
-  title="Dopaminový rozpočet: kolik dní v roce ti vezme telefon — kalkulačka"
-  description="Zadej minuty denně u 20 činností, zaškrtni, které ti čas kradou, a zjisti, kolik dní v roce pro-scrolluješ. Zdarma, bez registrace."
+  title="Dopaminový rozpočet: kalkulačka času na telefonu"
+  description="Spočítej, kolik hodin a dní ročně věnuješ telefonu, sociálním sítím a dalším návykům. Kalkulačka zdarma, bez registrace a odesílání dat."
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} slot="head" />
 
@@ -75,11 +79,19 @@ const schema = {
         <div class="font-mono text-[12px] font-semibold tracking-[0.12em] text-accent">
           NÁSTROJ ZDARMA
         </div>
-        <h1 class="text-3xl font-bold leading-[1.1] sm:text-[44px]">Dopaminový rozpočet</h1>
-        <p class="max-w-lg text-base leading-relaxed text-ink-soft">
-          Dvacet činností. Ke každé napiš, kolik minut denně jí dáváš — poctivě. Zaškrtni ty, po
-          kterých ti není líp, a přesto se k nim vracíš. Dole uvidíš, kolik dní v roce to dělá.
+        <h1 class="max-w-2xl text-3xl font-bold leading-[1.1] sm:text-[44px]">
+          Kolik času ročně dáváš telefonu a rychlým odměnám?
+        </h1>
+        <p class="max-w-2xl text-base leading-relaxed text-ink-soft">
+          Odhadni minuty u jednotlivých činností a označ ty, kterým chceš věnovat méně času.
+          Kalkulačka je převede na hodiny a celé dny za rok. Bez hodnocení, bez registrace a
+          bez odesílání dat.
         </p>
+        <div class="grid max-w-2xl grid-cols-1 gap-3 border-t border-line pt-4 font-mono text-[12px] leading-relaxed text-muted sm:grid-cols-3">
+          <div><strong class="text-ink">01</strong> · Zkontroluj skutečný čas v telefonu.</div>
+          <div><strong class="text-ink">02</strong> · Zapiš průměrné minuty za den.</div>
+          <div><strong class="text-ink">03</strong> · Označ jen to, co chceš omezit.</div>
+        </div>
       </div>
     </section>
 
@@ -98,7 +110,7 @@ const schema = {
               MIN/DEN
             </th>
             <th class="w-[70px] border-b-[3px] border-ink bg-ink px-3 py-2 text-center font-mono text-[12px] tracking-widest text-paper">
-              KRADE
+              OMEZIT
             </th>
             <th class="w-[90px] border-b-[3px] border-ink bg-ink px-3 py-2 text-right font-mono text-[12px] tracking-widest text-paper">
               H/ROK
@@ -125,10 +137,10 @@ const schema = {
                     data-i={i}
                   />
                 </td>
-                <td class="border-b border-line px-3 py-2 text-center" data-label="Krade">
+                <td class="border-b border-line px-3 py-2 text-center" data-label="Omezit">
                   <input
                     type="checkbox"
-                    aria-label={`Krade čas: ${c}`}
+                    aria-label={`Chci omezit: ${c}`}
                     class="dr-krade h-5 w-5 cursor-pointer appearance-none border-2 border-ink bg-paper align-middle checked:border-accent checked:bg-accent"
                     data-i={i}
                   />
@@ -165,10 +177,10 @@ const schema = {
                 data-i="19"
               />
             </td>
-            <td class="border-b border-line px-3 py-2 text-center" data-label="Krade">
+            <td class="border-b border-line px-3 py-2 text-center" data-label="Omezit">
               <input
                 type="checkbox"
-                aria-label="Krade čas: vlastní činnost"
+                aria-label="Chci omezit: vlastní činnost"
                 class="dr-krade h-5 w-5 cursor-pointer appearance-none border-2 border-ink bg-paper align-middle checked:border-accent checked:bg-accent"
                 data-i="19"
               />
@@ -190,14 +202,14 @@ const schema = {
         aria-live="polite"
       >
         <div>
-          <div class="font-mono text-[12px] tracking-[0.1em] text-muted">UKRADENO ZA ROK</div>
+          <div class="font-mono text-[12px] tracking-[0.1em] text-muted">ČAS, KTERÝ CHCI ZÍSKAT ZPĚT</div>
           <div class="mt-1 flex items-baseline gap-3">
             <span id="dr-hodiny" class="text-[44px] font-bold leading-none tabular-nums text-accent">0 h</span>
             <span id="dr-dni" class="font-mono text-base text-ink-soft">= 0 dní v roce</span>
           </div>
         </div>
         <div id="dr-veta" class="max-w-xs font-mono text-[13px] leading-relaxed text-ink-soft">
-          Vyplň minuty a zaškrtni, co ti čas krade.
+          Vyplň minuty a označ činnosti, kterým chceš věnovat méně času.
         </div>
       </div>
 
@@ -232,7 +244,7 @@ const schema = {
     <section class="mx-auto max-w-3xl px-5 py-4 sm:px-8 print:hidden">
       <TrackerCta
         label="7DENNÍ PLÁN · 149 KČ"
-        title="Dopaminový detox: sedm dní, po kterých přestaneš sahat po telefonu automaticky"
+        title="Dopaminový detox: 7 dní pro méně automatického scrollování"
         href="/plany/dopaminovy-detox/"
         cta="KOUPIT PLÁN →"
       />
@@ -240,43 +252,42 @@ const schema = {
 
     <article class="mx-auto max-w-3xl px-5 py-8 sm:px-8 print:hidden">
       <div class="clanek">
-        <h2>Jak číst výsledek</h2>
+        <h2>Co přesně výsledek znamená</h2>
         <p>
-          Číslo nahoře není hodnocení. Je to součet řádků, které jsi sám zaškrtl jako „krade“, a to
-          je důležitý rozdíl. Rozpočet neříká, že Instagram je špatný a knížka dobrá. Ptá se na
-          jednu věc: je ti po tom líp, nebo se k tomu jen vracíš? Hodina seriálu, na kterou se
-          těšíš, je odpočinek. Hodina seriálu, který pouštíš, protože ruka jela sama, je
-          zloděj. Stejná činnost, jiný řádek. Proto si zaškrtávání nenech vzít nikým, ani touhle
-          stránkou.
+          Výsledek je součet činností, které jsi označil jako ty, kterým chceš věnovat méně času.
+          Není to skóre závislosti ani hodnocení dobře a špatně prožitého dne. Kalkulačka pouze
+          převádí každodenní minuty do ročního měřítka, které se představuje snáz.
         </p>
         <p>
-          Vyděl hodiny čtyřiadvaceti a dostaneš dny. Většině lidí, kteří tuhle tabulku vyplní
-          poctivě, vyjde mezi třiceti a šedesáti dny v roce. To není důvod k panice, ale je to
-          důvod se na to číslo podívat dvakrát: tolik dní jsi letos strávil něčím, po čem ti podle
-          tebe samého nebylo líp.
+          Hodina seriálu, na který ses těšil, může být dobrý odpočinek. Stejná hodina puštěná jen
+          proto, že se ti nechce rozhodnout, co dělat dál, může být čas, který chceš využít jinak.
+          Rozdíl neurčuje aplikace ani tahle stránka. Určuješ ho ty označením „omezit“.
         </p>
 
-        <h2>Proč to podstřeluješ</h2>
+        <h2>Začni skutečným číslem, ne odhadem</h2>
         <p>
-          Odhad času u obrazovky bývá podstřelený. Na iPhonu si otevři <strong>Nastavení → Čas u
-          obrazovky</strong>, na Androidu <strong>Nastavení → Digitální rovnováha</strong> a srovnej
-          průměr za poslední týden s tím, co jsi napsal do tabulky. Telefon má lepší paměť než ty.
-          Pokud se čísla liší, oprav tabulku podle telefonu, ne naopak.
+          Paměť není přesný měřicí nástroj. Na iPhonu otevři <strong>Nastavení → Čas u
+          obrazovky</strong>, na Androidu <strong>Nastavení → Digitální rovnováha</strong> a podívej
+          se na průměr posledních sedmi dnů. Do tabulky pak rozděl čas mezi sítě, video, zprávy,
+          hry a další činnosti.
         </p>
         <p>
-          Jedna věc, na kterou telefon nestačí: neřekne ti, které minuty kradou a které dávají.
-          Hodina navigace v autě a hodina scrollování v posteli jsou pro Screen Time totéž. Proto
-          je tu ten třetí sloupec.
+          Telefon ukáže délku používání, ale nezná záměr. Navigace, videohovor s rodinou a
+          bezcílné scrollování jsou v přehledu jen minuty u obrazovky. Třetí sloupec proto nechává
+          rozhodnutí na tobě.
         </p>
 
-        <h2>Co s tím za týden</h2>
+        <h2>Co udělat s výsledkem dnes</h2>
         <p>
-          Rozpočet je Den 0 sedmidenního plánu, který na téhle stránce prodáváme. Neříkáme to,
-          abychom tě k něčemu tlačili; říkáme to, protože samotné číslo ti nic nezmění. Změní ti
-          to telefon, který se ráno neozve, večer, který nekončí obrazovkou, a pět náhrad, které
-          máš po ruce, když ruka jede sama. K tomu slouží ta pravidla. Když si chceš nejdřív jen
-          přestavět telefon, stačí ti k tomu <a href="/plany/dopaminovy-detox/ukazka/">Den 0
-          zdarma</a>.
+          Nezkoušej získat zpět celý vypočtený čas najednou. Vyber jeden řádek a jednu konkrétní
+          změnu: vypnout zbytečné notifikace, přesunout sociální sítě z úvodní obrazovky nebo
+          nechat telefon první půlhodinu ráno mimo dosah. Po týdnu kalkulačku vyplň znovu a
+          porovnej čísla.
+        </p>
+        <p>
+          Tato kalkulačka tvoří Den 0 našeho sedmidenního plánu. Pokud chceš pokračovat bez
+          nákupu, stáhni si <a href="/plany/dopaminovy-detox/ukazka/">Den 0 zdarma</a>. Dostaneš
+          audit telefonu a postup, jak si připravit prostředí před prvními sedmi dny.
         </p>
 
         <h2>Časté otázky</h2>
@@ -389,10 +400,10 @@ const schema = {
   const fmt = (n: number) => n.toLocaleString('cs-CZ');
 
   function veta(h: number): string {
-    if (h === 0) return 'Vyplň minuty a zaškrtni, co ti čas krade.';
-    if (h < 200) return 'Míň než většina. Tenhle nástroj tě moc nepotřebuje — ale zkus ho za měsíc znovu.';
-    if (h <= 730) return 'Zhruba měsíc v roce. Tolik jsi letos pro-scrolloval. Dá se s tím něco dělat za týden.';
-    return 'Přes měsíc v roce. Nejsi výjimka, jsi průměr — a přesně pro tenhle průměr je sedmidenní plán.';
+    if (h === 0) return 'Vyplň minuty a označ činnosti, kterým chceš věnovat méně času.';
+    if (h < 200) return 'Vyber jeden řádek, který chceš tento týden změnit. Není potřeba řešit všechno najednou.';
+    if (h <= 730) return 'Tohle je prostor pro jiná rozhodnutí, ne důvod k výčitkám. Začni jedinou činností.';
+    return 'Velké roční číslo vzniká z malých denních opakování. První změna může být stejně malá.';
   }
 
   function prepocitej() {
@@ -473,7 +484,7 @@ const schema = {
     ctx.fillRect(60, 60, W - 120, 4);
     ctx.font = '600 22px "IBM Plex Mono", Menlo, monospace';
     ctx.fillStyle = '#6b6a64';
-    ctx.fillText('DOPAMINOVÝ ROZPOČET · UKRADENO ZA ROK', 60, 120);
+    ctx.fillText('DOPAMINOVÝ ROZPOČET · ČAS, KTERÝ CHCI ZÍSKAT ZPĚT', 60, 120);
     ctx.font = '700 180px "Space Grotesk", Arial, sans-serif';
     ctx.fillStyle = '#d43518';
     ctx.fillText(`${fmt(soucet)} h`, 52, 330);
