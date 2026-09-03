@@ -1,10 +1,11 @@
 ---
 /**
  * Cookie lišta + načtení Google Analytics 4 až po souhlasu.
- * GA4_ID doplň, až založíš property (Admin → Datové streamy → ID měření, tvar G-XXXXXXXXXX).
- * Dokud je prázdné, lišta se zobrazuje, ale nic se neměří.
+ * GA4_ID: Admin → Datové streamy → ID měření (tvar G-XXXXXXXXXX).
+ * Skript se načítá až po kliknutí na SOUHLASÍM, ne při načtení stránky — lišta i stránka
+ * o ochraně údajů slibují, že bez souhlasu se neměří nic.
  */
-const GA4_ID = '';
+const GA4_ID = 'G-0VVWEC29X1';
 ---
 
 <div
